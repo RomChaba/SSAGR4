@@ -16,7 +16,10 @@ Un fois que Wamp est installé il faut :
 * Aller dans le dossier : C:\wamp64\www
 * Clic droit et cliquer sur "git Bash here"
 
-    > ![GitHub Logo](/_img_tuto/git_bash.png)
+    > ![git_bash](/_img_tuto/git_bash.png)
 * Copie du projet symfony vierge : https://github.com/RomChaba/SSAGR4.git
 
-    > ![GitHub Logo](/_img_tuto/git_clone.png)
+    > ![git_clone](/_img_tuto/git_clone.png)
+* Résultat :
+    
+    > ![home_symfony](/_img_tuto/home_symfony.png)
