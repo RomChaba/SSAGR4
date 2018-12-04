@@ -23,3 +23,20 @@ Un fois que Wamp est installé il faut :
 * Résultat :
     
     > ![home_symfony](/_img_tuto/home_symfony.png)
+
+### Pour l'instalation de phpstorm
+
+[Lien Download](https://www.jetbrains.com/phpstorm/download/#section=windows)
+
+Pendant le téléchargement:  
+Créer un compte avec le mail de l'ENI : [Lien](https://account.jetbrains.com/login)
+Dans le mail reçu cliquer sur le lien de confirmation  
+
+Connecter vous sur votre compte de phpstorm  
+Allez dans l'onglet "Licenses" puis télécharger la version offline de votre license.  
+Une fois le fichier téléchargé copier son contenu, et lancé phpstorm.  
+Lors de l'installation de phpstorm il faut cocher "Dowload and install JRE x86 by JetBrains"
+
+Un fois installé choisir l'interface que vous préferez, ensuite pour l'activation choisisez "Activation code" puis copier coller la version offline dans la zone puis Ok
+
+
