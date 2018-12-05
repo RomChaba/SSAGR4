@@ -67,3 +67,66 @@
 * Comment mettre en oeuvre les moyennes nécessaires?
 * Avec quelles procédures?
 ### Pourquoi
+
+
+
+Indicateur d'utilisation/Qualité (Kmage) → Stat
+    Rémonter les anomalies (comparaison des km) 
+
+
+
+
+
+Véhicule Loué ?
+Délit de marchandage ?
+Véhicule géolocalisé ?
+
+
+déclaration à la cnil
+
+Manque de visibilité 
+
+reformuler 
+
+
+EME (element milieu exterieur)
+
+1. Milieu Physique  
+    * Ordinateur
+    * téléphone portable
+2. Milieu Technique
+    * Les navigateurs 
+        * Firefox (versions 40 et supérieures)
+        * Chrome
+        * Internet Explorer (versions 10 et supérieures)
+    * Windows
+    * Web
+    * Authentification
+3. Milieu économique 
+    * Support
+    * Maintenance
+        * entretien du véhicule
+        * CT
+    * Inscription
+4. Milieu humain
+    * Personne qui reserve
+    * Covoitureur
+    * Conducteur
+    * Administrateur
+    * Gestionnaire de session
+    * Cellule de recrutement
+    * Responsable de formation
+5. Milieu sécurité
+
+
+
+
+
+
+
+
+
+
+
+
+
