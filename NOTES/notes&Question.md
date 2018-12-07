@@ -88,12 +88,16 @@ Manque de visibilité
 
 reformuler 
 
+API : Navitia.io
+
 
 EME (element milieu exterieur)
 
 1. Milieu Physique  
-    * Ordinateur
-    * téléphone portable
+    * Terminal
+        * Ordinateur
+        * téléphone portable
+    * Voiture
 2. Milieu Technique
     * Les navigateurs 
         * Firefox (versions 40 et supérieures)
@@ -112,11 +116,8 @@ EME (element milieu exterieur)
     * Personne qui reserve
     * Covoitureur
     * Conducteur
-    * Administrateur
-    * Gestionnaire de session
-    * Cellule de recrutement
-    * Responsable de formation
-5. Milieu sécurité
+    * Administrateur(gere les comptes)
+5. Milieu Naturel
 
 
 
