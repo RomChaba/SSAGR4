@@ -1,0 +1,119 @@
+Fleet Notes :
+Back office:
+    - Dashboard avec la visualisation du parc
+    - outil pour suivre la consommation de carburant
+        - pour reduire la consommation
+        - Et avoir le profil du conducteur ( conduite : sportive, neutre ou économique)
+    - Indicateur d'évolution du parc
+        - In/Out
+        - Évolution de la consomation
+        - Évolution du loyer moyen
+    - Alerte sur la l'utilisation de la flotte
+        - Surconsomation
+        - Sous-roulage
+    - Information sur un vehicule
+        - Contrat associé
+        - Conso carburant
+        - Motorisation
+        - Finition
+        - ...
+    - État du parc en un tableau
+        - Retrouver toutes vos informations facilement grâce aux filtres et aux critères de tri puis, exportez-les en Excel ou csv en un clic
+    - Importation de fichier 
+        - fichier carburant
+        - cartes
+        - ...
+    - Tableau de modification des données
+        - Composant de la flotte
+            - Véhicule,Collaborteurs,...
+    - Orienter vos conducteurs vers les bons prestataires
+        - Sélectionner vos partenaires favoris (carburants, pneus, concessionnaires…) au sein de FleetNote. Vos conducteurs auront ainsi automatiquement accès à leurs localisations
+    - Faciliter le renouvellement des véhicules
+        - Règles d'affectation
+        - Conducteurs de choisir à distance le véhicule adapté à leurs besoins dans leur catégorie.
+    - Charte de conducteur en ligne
+        - Lancement de campagne de comm aux conducteur
+    - Guide pour les conducteur
+        - Accéder aux garanties 
+        - Numéros utiles liés à leur contrat de location et d’assurance
+    - Multi Organisation
+        - un suivi de parc différent pour les comptables et pour les managers
+Front office :
+- Dashboard conducteur
+    - Chiffres clés de leur activité
+        - kilométrage moyen parcouru
+        - consommation moyenne
+        - ...
+    - Évaluation de son style de conduite
+- Information sur le véhicule
+    - fiche détaillée de son véhicule
+        - caractéristiques techniques
+        - prestations
+        - loueur
+        - garanties
+        - ... 
+        - Il peut mettre à jour ses coordonnées.
+
+- Maîtriser leur consommation de carburant
+    - Suivi de sa consommation 
+    - Profil de conduite
+    - Les leviers impactant sur les coûts induits par son activité
+- Renouvellement des véhicules
+    - visualiser les véhicules accessibles pour son prochain renouvellement
+    - Demande directement depuis son accès personnalisé
+- Affichage des partenaires
+    - une carte des partenaires référencés par son entreprise à proximité
+        - station-service
+        - concessionnaire de la marque
+        - centre pneumatique
+        - bris de glace…
+- Aide au conducteur
+    - Garanties
+    - Numéros utiles liés à son contrat de location et d’assurance
+    - D’un clic le téléphone compose directement le numéro souhaité
+- Avertir le conducteur en cas d’incohérence et d’échéance
+    - mail des anomalies
+        - kilométrage
+        - consommation carburant
+        - ...
+    - Mail pour les échéances importante
+        - Contrôle technique
+        - ...
+- Acces à la charte conducteur
+    - Il la valide à distance 
+    - Averti à chaque modification
+
+########## FIN FLEETNOTE ############
+
+Appli Gestion de par c automobile
+Onglet Production :
+    - Définir les parcs des sociétés
+    - Plannifier les opérations de maintenance et les suivre
+    - Éditer les documents liés
+Back office
+    - Définir un Parc
+        - Nom
+        - Client
+        - Tiers payeur
+        - Liste de matériels du parc
+    - Définir un véhicule
+        - Ref vehicule = immatriculation
+        - Type de véhicule  : Ex. Camion Volvo 
+        - Site géographique : choix d'une adresse du tiers
+        - Numéro de série
+        - Date de fabrication
+        - Intervenant recommandé
+        - Etat (dans le parc, hors du parc)
+        - Date d'entrée et de sortie du parc
+        - Kilométrage
+        * Importation en masse de véhicule
+    - Equipement embarqué (Ex : Climatisation, Hayon etc)
+        - lChaque équipement peut avoir un numéro de série, date de fabrication, etc. 
+        - Chaque équipement peut faire l'objet de son propre planning de maintenance
+
+
+
+
+
+
+
