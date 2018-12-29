@@ -46,10 +46,10 @@ Télécharger SQL Server développeur depuis le site de logiciel pour l'eni :
 [Lien](https://e5.onthehub.com/WebStore/Security/SignIn.aspx?rurl=%2fWebStore%2fSecurity%2fSignIn.aspx%3frurl%3d%252fWebStore%252fProductsByMajorVersionList.aspx%253fcmi_cs%253d1%2526cmi_mnuMain%253d6cce831e-9ca9-e511-9413-b8ca3a5db7a1%2526ws%253d1652a816-050d-e811-80fe-000d3af41938%2526vsro%253d8%26ws%3d1652a816-050d-e811-80fe-000d3af41938%26vsro%3d8&ws=1652a816-050d-e811-80fe-000d3af41938&vsro=8)
 
 En vous connectant avec vos identifiants de l'ENI. Puis faire une recherche pour "sql server" et télécharger la version "SQL Server 2017 Developer" en french :
-> [Img](_img_tuto\sqlserv_download.png) 
+> ![Img](/_img_tuto/sqlserv_download.png) 
 
 Executer l'iso, choisir "Instalation" puis le premier "Nouvelle instalation ..."
-> [Img](_img_tuto\sqlserv_install.png) 
+> ![Img](/_img_tuto/sqlserv_install.png) 
 
 Faire "Suivant, Suivant, Suivant, ..."
 
