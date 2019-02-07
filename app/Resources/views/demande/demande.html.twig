@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Partir en covoiturage{% endblock %}
+
+{% block body %}
+    <h1> Faire une demande de covoiturage </h1>
+
+  <!--  <form action="{{ path("Demande") }}">
+        <table>
+            <tr>
+                <td> Modèle de voiture : </td>
+                <td><input type="text" /></td>
+            </tr>
+            <tr>
+                <td> Conducteur : </td>
+                <td><input type="text"></td>
+                <td> Insérer photo si photo il y a ?</td>
+            </tr>
+            <tr>
+                <td> Date de départ : </td>
+                <td><input type="date" value="dd/MM/AAAA" /></td>
+                <td>Insérer un datepicker</td>
+            </tr>
+            <tr>
+                <td> Site de départ : </td>
+                <td><input type="text" /></td>
+                <td><input type="button" value="Sites" /></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="right"><input type="submit" value="Enregistrer" /></td>
+            </tr>
+        </table>
+    </form> -->
+
+    {{ form(formulaireAjout) }}
+
+
+
+{% endblock %}

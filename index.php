@@ -96,12 +96,13 @@ function _DECRYPTE_DATA($string) {
     return openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
 }
 
-
-
-
 //web/app_dev.php
 
 ?>
 <a href="web/app_dev.php">Lien vers le DEV</a>
 <br>
 <a href="web/">Lien vers le PROD</a>
+
+<?php
+
+phpinfo();
