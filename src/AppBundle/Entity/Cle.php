@@ -24,7 +24,7 @@ class Cle
     /**
      * @var int
      *
-     * @ORM\Column(name="idVehicule", type="integer")
+     * @ORM\ManyToOne(targetEntity="Vehicule")
      */
     private $idVehicule;
 

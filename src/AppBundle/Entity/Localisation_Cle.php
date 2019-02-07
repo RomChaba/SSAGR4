@@ -21,6 +21,13 @@ class Localisation_Cle
      */
     private $id;
 
+
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="Site")
+     */
+    private $sites;
+
     /**
      * @var string
      *

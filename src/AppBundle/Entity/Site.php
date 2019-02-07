@@ -22,6 +22,12 @@ class Site
     private $id;
 
     /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="Emprunt")
+     */
+    private $emprunts;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="coordGPS", type="string", length=255)
@@ -124,5 +130,12 @@ class Site
     {
         return $this->boolSiteOfficiel;
     }
+
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+
+
 }
 

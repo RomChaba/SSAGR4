@@ -3,7 +3,7 @@
 {% block title %}Partir en covoiturage{% endblock %}
 
 {% block body %}
-    <h1> Faire une demande de covoiturage </h1>
+
 
   <!--  <form action="{{ path("Demande") }}">
         <table>
@@ -31,9 +31,19 @@
             </tr>
         </table>
     </form> -->
-
+<div class="col-xs-6 col-xs-offset-3">
+    <h1> Faire une demande de covoiturage </h1>
     {{ form(formulaireAjout) }}
+</div>
 
 
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $("#form_newSite").click(function () {
+            window.location = "{{ path("homepage") }}";
+        })
+    </script>
 {% endblock %}

@@ -18,6 +18,7 @@ class Vehicule
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+
      */
     private $id;
 
@@ -34,6 +35,12 @@ class Vehicule
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
+
+    /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="Emprunt")
+     */
+    private $emprunts;
 
 
     /**
@@ -93,5 +100,12 @@ class Vehicule
     {
         return $this->libelle;
     }
+
+    public function __toString()
+    {
+        return $this->getLibelle(). " ". $this->getCouleur();
+    }
+
+
 }
 

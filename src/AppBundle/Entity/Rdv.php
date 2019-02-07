@@ -24,7 +24,7 @@ class Rdv
     /**
      * @var int
      *
-     * @ORM\Column(name="idEmprunt", type="integer")
+     * @ORM\ManyToOne(targetEntity="Emprunt")
      */
     private $idEmprunt;
 

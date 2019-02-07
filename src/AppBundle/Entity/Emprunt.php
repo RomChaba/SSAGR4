@@ -52,10 +52,15 @@ class Emprunt
     /**
      * @var string
      *
-     * @ORM\Column(name="dureeLocation", type="string", length=255)
+     * @ORM\Column(name="dureeLocation", type="integer", length=255)
      */
-    private $dureeLocation;
+    private $nbJourLocation;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Personne", inversedBy="emprunt")
+     * @ORM\JoinTable(name="emprunt__personne")
+     */
+    private $listePersonne;
 
     /**
      * Get id
@@ -166,13 +171,13 @@ class Emprunt
     /**
      * Set dureeLocation
      *
-     * @param string $dureeLocation
+     * @param string $nbJourLocation
      *
      * @return Emprunt
      */
-    public function setDureeLocation($dureeLocation)
+    public function setNbJourLocation($nbJourLocation)
     {
-        $this->dureeLocation = $dureeLocation;
+        $this->nbJourLocation = $nbJourLocation;
 
         return $this;
     }
@@ -182,9 +187,28 @@ class Emprunt
      *
      * @return string
      */
-    public function getDureeLocation()
+    public function getNbJourLocation()
     {
-        return $this->dureeLocation;
+        return $this->nbJourLocation;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getListePersonne()
+    {
+        return $this->listePersonne;
+    }
+
+    /**
+     * @param mixed $listePersonne
+     */
+    public function setListePersonne($listePersonne)
+    {
+        $this->listePersonne = $listePersonne;
+    }
+
+
+
 }
 

@@ -77,6 +77,13 @@ class Personne
      */
     private $boolPermis;
 
+    /**
+     * @var bool
+     *
+     * @ORM\ManyToMany(targetEntity="Emprunt", mappedBy="listePersonne")
+     */
+    private $emprunt;
+
 
     /**
      * Get id
@@ -278,6 +285,27 @@ class Personne
     public function getBoolPermis()
     {
         return $this->boolPermis;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmprunt()
+    {
+        return $this->emprunt;
+    }
+
+    /**
+     * @param bool $emprunt
+     */
+    public function setEmprunt($emprunt)
+    {
+        $this->emprunt = $emprunt;
+    }
+
+    public function __toString()
+    {
+        return $this->getPrenom() . " " . $this->getNom();
     }
 
 
