@@ -14,23 +14,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-////        $tmp = new Personne();
-////        $tmp->setNom("toto");
-////        $tmp->setPrenom("toto");
-////        $tmp->setMail("toto");
-////        $tmp->setMotDePasse("toto");
-////        $tmp->setPhoto("toto");
-////        $tmp->setTelephone("0213252415");
-////        $tmp->setAdresse("0213252415");
-////        $tmp->setBoolPermis(true);
-////
-////        $em->persist($tmp);
-////        $em->flush();
-//        $comptes = $em->getRepository('AppBundle:Personne')->findOneById(3);
-//
-//        dump($comptes);
-
         $em = $this->getDoctrine()->getManager();
 
         $listeEmprunt = $em->getRepository('AppBundle:Personne')->findAll();
