@@ -1,4 +1,4 @@
-{% set online = true %}
+{% set online = false %}
 
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 </head>
 <body>
 <style>
-    .glyphicon-flag {
+    .glyphicon-flag,.glyphicon-home {
         font-size: xx-large;
     }
 
@@ -30,8 +30,9 @@
 {% if online == false %}
     <div class="container-fluid">
         <div class="col-xs-12 text-center topNavBar">
-            <div class="col-xs-3"><a class="btn btn-default" href="#">Emprunt</a></div>
-            <div class="col-xs-3"><a class="btn btn-default" href="#">Passager</a></div>
+            <div class="col-xs-1"><a href="{{ path("homepage") }}"><span class="glyphicon glyphicon-home"></span></a></div>
+            <div class="col-xs-2"><a class="btn btn-default" href="{{ path("Demande") }}">Proposer un voyage</a></div>
+            <div class="col-xs-3"><a class="btn btn-default" href="#">Participer à un voyage</a></div>
             <div class="col-xs-3"><a class="btn btn-default" href="#">Connexion</a></div>
             <div class="col-xs-3"><a href="#"><span class="glyphicon glyphicon-flag"></span></a></div>
         </div>
@@ -39,8 +40,8 @@
 {% else %}
     <div class="container-fluid">
         <div class="col-xs-12 text-center topNavBar">
-            <div class="col-xs-3"><a class="btn btn-default" href="#">Emprunt</a></div>
-            <div class="col-xs-3"><a class="btn btn-default" href="#">Passager</a></div>
+            <div class="col-xs-3"><a class="btn btn-default" href="#">Proposer un voyage</a></div>
+            <div class="col-xs-3"><a class="btn btn-default" href="#">Participer à un voyage</a></div>
             <div class="col-xs-2">Bonjour <span style="color: red;">[NOM_COMPTE]</span></div>
             <div class="col-xs-1"><a class="btn btn-default" href="#">Mon Compte</a></div>
             <div class="col-xs-3"><a href="#"><span class="glyphicon glyphicon-flag"></span></a></div>
@@ -48,8 +49,12 @@
     </div>
 {% endif %}
 
-{% block body %}{% endblock %}
-<nav>
+{% block body %}
+
+
+
+{% endblock %}
+<nav style="display: none">
     <ul class="nav nav-justified navbar-fixed-bottom">
         <li class="active"><a href="#">Charte</a></li>
         <li><a href="#">Contact</a></li>
@@ -58,9 +63,9 @@
 </nav>
 
 
-{% block javascripts %}{% endblock %}
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
+{% block javascripts %}{% endblock %}
 </body>
 </html>
 
