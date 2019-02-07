@@ -7,3 +7,7 @@ gestion_form_ajout_categorie:
     defaults: { _controller: AppBundle:Demande:formAjoutCateg }
     requirements:
         _method: GET
+
+gestion_initialisation_donnee:
+    path:    /initbdd/
+    defaults: { _controller: AppBundle:GestionDonnee:initialiserBaseDeDonnee }

@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class RdvRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function deleteAllRdv()
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->delete()
+            ->getQuery()
+            ->execute();
+    }
 }

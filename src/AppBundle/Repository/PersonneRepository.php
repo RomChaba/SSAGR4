@@ -10,5 +10,11 @@ namespace AppBundle\Repository;
  */
 class PersonneRepository extends \Doctrine\ORM\EntityRepository
 {
-
+    public function deleteAllPersonne()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->delete()
+            ->getQuery()
+            ->execute();
+    }
 }
