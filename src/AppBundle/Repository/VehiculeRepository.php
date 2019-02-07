@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class VehiculeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function deleteAllVehicule()
+    {
+        $qb = $this->createQueryBuilder('v');
+        $qb->delete()
+            ->getQuery()
+            ->execute();
+    }
 }

@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class CleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function deleteAllCle()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->delete()
+            ->getQuery()
+            ->execute();
+    }
 }

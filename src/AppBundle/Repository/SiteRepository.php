@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class SiteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function deleteAllSite()
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->delete()
+            ->getQuery()
+            ->execute();
+    }
 }

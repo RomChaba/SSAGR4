@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class EmpruntRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function deleteAllEmprunt()
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->delete()
+            ->getQuery()
+            ->execute();
+    }
 }
