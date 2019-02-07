@@ -42,7 +42,7 @@ class GestionDonneeController extends Controller
         // Étape 2 : On « flush » tout ce qui a été persisté avant
         $em->flush();
 
-        return new Response("La base de sonnées à été réinitialiser !");
+        return new Response("La base de données à été réinitialiser !");
     }
 
     private function addPersonne (EntityManager $em)
