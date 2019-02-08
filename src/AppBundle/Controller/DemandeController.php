@@ -54,16 +54,38 @@ class DemandeController extends Controller
                     'label' => 'Conducteur : '
                 )
             )
-            ->add('dateEmprunt', DateTimeType::class, array('label' => 'Date de la location : '))
+            ->add(
+                'dateEmprunt',
+                DateTimeType::class,
+                array(
+                    'label' => 'Date de la location : ',
+                    'years' => range(date('Y'), date('Y') + 6),
+                    'data' => new \DateTime(),
+                    'placeholder' => [
+                        'day' => 'Jour', 'month' => 'Mois','year' => 'Année',
+                        'hour' => 'Heure', 'minute' => 'Minute'
+                    ],
+                )
+            )
             ->add('nbJourLocation', IntegerType::class, array('label' => 'Nombre de jours : '))
             ->add(
-                'idSite',
+                'idSiteDepart',
                 EntityType::class,
                 array(
                     'class' => Site::class,
                     'data' => 'libelle',
                     'required' => true,
-                    'label' => 'Site : '
+                    'label' => 'Départ : '
+                )
+            )
+            ->add(
+                'idSiteArrivee',
+                EntityType::class,
+                array(
+                    'class' => Site::class,
+                    'data' => 'libelle',
+                    'required' => true,
+                    'label' => 'Arrivée : '
                 )
             )
             ->add(
@@ -97,7 +119,11 @@ class DemandeController extends Controller
 //            $em = $this->getDoctrine()->getManager();
 //            $em->persist($lEmprunt);
 //            $em->flush();
-            array_push($_SESSION["liste_Emprunt"],$lEmprunt);
+            if (!isset($_SESSION["liste_Emprunt"])) {
+                $_SESSION["liste_Emprunt"] = [$lEmprunt];
+            } else {
+                array_push($_SESSION["liste_Emprunt"], $lEmprunt);
+            }
             return $this->redirectToRoute("homepage");
         }
 
