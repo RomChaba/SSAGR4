@@ -94,12 +94,11 @@ class DemandeController extends Controller
 
         if ($this->leFormulaire->isSubmitted() && $this->leFormulaire->isValid()) {
             dump($lEmprunt);
-            //            $em = $this->getDoctrine()->getManager();
+//            $em = $this->getDoctrine()->getManager();
 //            $em->persist($lEmprunt);
 //            $em->flush();
-            return $this->render('default/index.html.twig', [
-                'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
-            ]);
+            array_push($_SESSION["liste_Emprunt"],$lEmprunt);
+            return $this->redirectToRoute("homepage");
         }
 
         return $this->render('Demande/demande.html.twig', array('formulaireAjout' => $this->leFormulaire->createView())); //On envoie à la vue... une vue générée par le constructeur de formulaire.

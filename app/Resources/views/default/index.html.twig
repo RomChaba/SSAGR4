@@ -12,17 +12,19 @@
                     <thead>
                     <tr>
                         <th>Personne</th>
-                        <th>Lieux départ</th>
+                        {#<th>Lieux départ</th>#}
                         <th>Date</th>
-                        <th>Lieux Arrivée</th>
+                        <th>Durée</th>
+                        <th>Lieu Arrivée</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for emprunt in listeEmprunt %}
                     <tr>
-                        <td>{{ emprunt.prenom }}</td>
-                        <td>{{ emprunt.nom }}</td>
-                        <td>{{ emprunt.adresse }}</td>
+                        <td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>
+                        <td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>
+                        <td>{{ emprunt.nbJourLocation }}</td>
+                        <td></td>
                     </tr>
                     {% endfor %}
                     </tbody>
