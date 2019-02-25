@@ -15,6 +15,7 @@
                         {#<th>Lieux départ</th>#}
                         <th>Date</th>
                         <th>Durée</th>
+                        <th>Lieu Depart</th>
                         <th>Lieu Arrivée</th>
                     </tr>
                     </thead>
@@ -24,7 +25,8 @@
                         <td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>
                         <td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>
                         <td>{{ emprunt.nbJourLocation }}</td>
-                        <td></td>
+                        <td>{{ emprunt.idSiteDepart.libelle }}</td>
+                        <td>{{ emprunt.idSiteArrivee.libelle }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

@@ -31,9 +31,15 @@ class Emprunt
     /**
      * @var int
      *
-     * @ORM\Column(name="idSite", type="integer")
+     * @ORM\Column(name="idSiteDepart", type="integer")
      */
-    private $idSite;
+    private $idSiteDepart;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idSiteArrivee", type="integer")
+     */
+    private $idSiteArrivee;
 
     /**
      * @var int
@@ -99,13 +105,13 @@ class Emprunt
     /**
      * Set idSite
      *
-     * @param integer $idSite
+     * @param integer $idSiteDepart
      *
      * @return Emprunt
      */
-    public function setIdSite($idSite)
+    public function setIdSiteDepart($idSiteDepart)
     {
-        $this->idSite = $idSite;
+        $this->idSiteDepart = $idSiteDepart;
 
         return $this;
     }
@@ -115,9 +121,9 @@ class Emprunt
      *
      * @return int
      */
-    public function getIdSite()
+    public function getIdSiteDepart()
     {
-        return $this->idSite;
+        return $this->idSiteDepart;
     }
 
     /**
@@ -208,6 +214,23 @@ class Emprunt
         $this->listePersonne = $listePersonne;
     }
 
+    /**
+     * @return int
+     */
+    public function getIdSiteArrivee()
+    {
+        return $this->idSiteArrivee;
+    }
+
+    /**
+     * @param int $idSiteArrivee
+     */
+    public function setIdSiteArrivee($idSiteArrivee)
+    {
+        $this->idSiteArrivee = $idSiteArrivee;
+    }
+
+    
 
 
 }
