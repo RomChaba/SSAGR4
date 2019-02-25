@@ -22,7 +22,6 @@ class DefaultController extends Controller
         $test = new DateTime();
         dump($test);
 
-//        $_SESSION["liste_Emprunt"] = null;
         $listeEmprunt = array();
         if (!isset($_SESSION["liste_Emprunt"])) {
 //            $personne1 = new Personne();
