@@ -55,8 +55,8 @@ class GestionDonneeController extends Controller
         $personne1->setAdresse("rue de la poire");
         $personne1->setMail("dupont@gmail.com");
         $personne1->setMotDePasse("mdp1");
-        $personne1->setNom("dupont");
-        $personne1->setPrenom("jean");
+        $personne1->setNom("Dupont");
+        $personne1->setPrenom("Jean");
         $personne1->setTelephone("0980473828");
         $personne1->setBoolPermis(true);
         $personne1->setPhoto("photoTemp");
@@ -69,8 +69,8 @@ class GestionDonneeController extends Controller
         $personne2->setAdresse("rue de tartenpion");
         $personne2->setMail("partula@gmail.com");
         $personne2->setMotDePasse("mdp1");
-        $personne2->setNom("partula");
-        $personne2->setPrenom("marie");
+        $personne2->setNom("Partula");
+        $personne2->setPrenom("Marie");
         $personne2->setTelephone("0980984206");
         $personne2->setBoolPermis(true);
         $personne2->setPhoto("photoTemp");
@@ -83,8 +83,8 @@ class GestionDonneeController extends Controller
         $personne3->setAdresse("rue de la manche");
         $personne3->setMail("bernard@gmail.com");
         $personne3->setMotDePasse("mdp1");
-        $personne3->setNom("et-bianca");
-        $personne3->setPrenom("bernard");
+        $personne3->setNom("Dupont");
+        $personne3->setPrenom("John");
         $personne3->setTelephone("0980476436");
         $personne3->setBoolPermis(false);
         $personne3->setPhoto("photoTemp");
@@ -101,7 +101,7 @@ class GestionDonneeController extends Controller
         $vehicule1 = new Vehicule();
 
         $vehicule1->setCouleur("noir");
-        $vehicule1->setLibelle("Golf4");
+        $vehicule1->setLibelle("Golf 4");
 
 
         // Étape 1 : On « persiste » l'entité
@@ -133,7 +133,7 @@ class GestionDonneeController extends Controller
 
         $site1 = new Site();
 
-        $site1->setLibelle("ENI-StHerblain");
+        $site1->setLibelle("ENI-St Herblain");
         $site1->setBoolSiteOfficiel(true);
         $site1->setCoordGPS("47.2267535,-1.6230988");
 

@@ -15,5 +15,7 @@
 /vendor/
 /.vscode/
 /web/bundles/
+.idea/
 
 https://go.microsoft.com/fwlink/?LinkId=94001 . ---------------------------OK---------------------------
+.idea/workspace.xml

@@ -1,4 +1,4 @@
-{% set online = false %}
+{% set online = true %}
 
 
 <!DOCTYPE html>
@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {#<link rel="stylesheet" href="css/bootstrap.css">#}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('js/datatables.min.css') }}"/>
 </head>
 <body>
 <style>
@@ -31,19 +32,19 @@
     <div class="container-fluid">
         <div class="col-xs-12 text-center topNavBar">
             <div class="col-xs-1"><a href="{{ path("homepage") }}"><img src="{{ asset('img/logo-horizontal.png') }}" style="height: 100%; width: 100%;"></img></a></div>
-            <div class="col-xs-2"><a class="btn btn-default" href="{{ path("Demande") }}">Proposer un voyage</a></div>
-            <div class="col-xs-3"><a class="btn btn-default disabled" href="#">Participer à un voyage</a></div>
-            <div class="col-xs-3"><a class="btn btn-default disabled" href="#">Connexion</a></div>
+            <div class="col-xs-2"><a class="btn btn-default" href="{{ path("Demande") }}">{{ "proposer_un_voyage"|trans }}</a></div>
+            <div class="col-xs-3"><a class="btn btn-default disabled" href="#">{{ "participer_voyage"|trans }}</a></div>
+            <div class="col-xs-3"><a class="btn btn-default disabled" href="#">{{ "connexion"|trans }}</a></div>
             <div class="col-xs-3"><a href="#"><span class="glyphicon glyphicon-flag"></span></a></div>
         </div>
     </div>
 {% else %}
     <div class="container-fluid">
         <div class="col-xs-12 text-center topNavBar">
-            <div class="col-xs-3"><a class="btn btn-default" href="#">Proposer un voyage</a></div>
-            <div class="col-xs-3"><a class="btn btn-default" href="#">Participer à un voyage</a></div>
-            <div class="col-xs-2">Bonjour <span style="color: red;">[NOM_COMPTE]</span></div>
-            <div class="col-xs-1"><a class="btn btn-default" href="#">Mon Compte</a></div>
+            <div class="col-xs-3"><a class="btn btn-default" href="#">{{ "proposer_un_voyage"|trans }}</a></div>
+            <div class="col-xs-3"><a class="btn btn-default" href="#">{{ "participer_voyage"|trans }}</a></div>
+            <div class="col-xs-2">{{ "bonjour"|trans }} <span style="color: red;">[NOM_COMPTE]</span></div>
+            <div class="col-xs-1"><a class="btn btn-default" href="#">{{ "mon_compte"|trans }}</a></div>
             <div class="col-xs-3"><a href="#"><span class="glyphicon glyphicon-flag"></span></a></div>
         </div>
     </div>
@@ -54,17 +55,19 @@
 
 
 {% endblock %}
-<nav style="display: none">
+<nav style="">
     <ul class="nav nav-justified navbar-fixed-bottom">
-        <li class="active"><a href="#">Charte</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Contraintes légales</a></li>
+        <li class="active"><a href="#">{{ "charte_conducteur"|trans }}</a></li>
+        <li><a href="#">{{ "contact"|trans }}</a></li>
+        <li><a href="#">{{ "contraintes_legales"|trans }}</a></li>
     </ul>
 </nav>
 
 
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/datatables.js') }}"></script>
+
 {% block javascripts %}{% endblock %}
 </body>
 </html>
