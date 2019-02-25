@@ -23,24 +23,23 @@ class Cle
 
     /**
      * @var int
-     *
      * @ORM\ManyToOne(targetEntity="Vehicule")
      */
-    private $idVehicule;
+    private $vehicule_id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255)
+     */
+    private $libelle;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="boolVehiculeDispo", type="boolean")
+     * @ORM\Column(name="perdu", type="boolean")
      */
-    private $boolVehiculeDispo;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="boolClePerdus", type="boolean")
-     */
-    private $boolClePerdus;
+    private $perdu;
 
 
     /**
@@ -54,75 +53,53 @@ class Cle
     }
 
     /**
-     * Set idVehicule
-     *
-     * @param integer $idVehicule
-     *
-     * @return Cle
-     */
-    public function setIdVehicule($idVehicule)
-    {
-        $this->idVehicule = $idVehicule;
-
-        return $this;
-    }
-
-    /**
-     * Get idVehicule
-     *
      * @return int
      */
-    public function getIdVehicule()
+    public function getVehiculeId()
     {
-        return $this->idVehicule;
+        return $this->vehicule_id;
     }
 
     /**
-     * Set boolVehiculeDispo
-     *
-     * @param boolean $boolVehiculeDispo
-     *
-     * @return Cle
+     * @param int $vehicule_id
      */
-    public function setBoolVehiculeDispo($boolVehiculeDispo)
+    public function setVehiculeId($vehicule_id)
     {
-        $this->boolVehiculeDispo = $boolVehiculeDispo;
-
-        return $this;
+        $this->vehicule_id = $vehicule_id;
     }
 
     /**
-     * Get boolVehiculeDispo
-     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * @param string $libelle
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+    }
+
+    /**
      * @return bool
      */
-    public function getBoolVehiculeDispo()
+    public function isPerdu()
     {
-        return $this->boolVehiculeDispo;
+        return $this->perdu;
     }
 
     /**
-     * Set boolClePerdus
-     *
-     * @param boolean $boolClePerdus
-     *
-     * @return Cle
+     * @param bool $perdu
      */
-    public function setBoolClePerdus($boolClePerdus)
+    public function setPerdu($perdu)
     {
-        $this->boolClePerdus = $boolClePerdus;
-
-        return $this;
+        $this->perdu = $perdu;
     }
 
-    /**
-     * Get boolClePerdus
-     *
-     * @return bool
-     */
-    public function getBoolClePerdus()
-    {
-        return $this->boolClePerdus;
-    }
+
 }
 

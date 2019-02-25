@@ -11,3 +11,7 @@ gestion_form_ajout_categorie:
 gestion_initialisation_donnee:
     path:    /initbdd/
     defaults: { _controller: AppBundle:GestionDonnee:initialiserBaseDeDonnee }
+
+login:
+    path:     /login
+    defaults: { _controller: AppBundle:Security:login }

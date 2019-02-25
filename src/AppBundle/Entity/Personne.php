@@ -38,16 +38,16 @@ class Personne
     /**
      * @var string
      *
-     * @ORM\Column(name="motDePasse", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255, unique=true)
      */
-    private $motDePasse;
+    private $mail;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255, unique=true)
+     * @ORM\Column(name="motDePasse", type="string", length=255)
      */
-    private $mail;
+    private $motDePasse;
 
     /**
      * @var string
@@ -66,23 +66,45 @@ class Personne
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="rue", type="string", length=255)
      */
-    private $adresse;
+    private $rue;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cp", type="string", length=255)
+     */
+    private $cp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255)
+     */
+    private $ville;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="boolPermis", type="boolean")
+     * @ORM\Column(name="permis", type="boolean")
      */
-    private $boolPermis;
+    private $permis;
 
     /**
      * @var bool
      *
-     * @ORM\ManyToMany(targetEntity="Emprunt", mappedBy="listePersonne")
+     * @ORM\Column(name="actif", type="boolean")
      */
-    private $emprunt;
+    private $actif;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="dt_cre", type="boolean")
+     */
+    private $dt_cre;
+
 
 
     /**
@@ -239,40 +261,17 @@ class Personne
         return $this->_DECRYPTE_DATA($this->telephone);
     }
 
+
     /**
-     * Set adresse
+     * Set permis
      *
-     * @param string $adresse
+     * @param boolean $permis
      *
      * @return Personne
      */
-    public function setAdresse($adresse)
+    public function setPermis($permis)
     {
-        $this->adresse = $this->_ENCRYPTE_DATA($adresse);
-
-        return $this;
-    }
-
-    /**
-     * Get adresse
-     *
-     * @return string
-     */
-    public function getAdresse()
-    {
-        return $this->_DECRYPTE_DATA($this->adresse);
-    }
-
-    /**
-     * Set boolPermis
-     *
-     * @param boolean $boolPermis
-     *
-     * @return Personne
-     */
-    public function setBoolPermis($boolPermis)
-    {
-        $this->boolPermis = $boolPermis;
+        $this->permis = $permis;
 
         return $this;
     }
@@ -282,18 +281,83 @@ class Personne
      *
      * @return bool
      */
-    public function getBoolPermis()
+    public function getPermis()
     {
-        return $this->boolPermis;
+        return $this->permis;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRue()
+    {
+        return $this->rue;
+    }
+
+    /**
+     * @param string $rue
+     */
+    public function setRue($rue)
+    {
+        $this->rue = $rue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCp()
+    {
+        return $this->cp;
+    }
+
+    /**
+     * @param string $cp
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param string $ville
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
     }
 
     /**
      * @return bool
      */
-    public function isEmprunt()
+    public function isActif()
     {
-        return $this->emprunt;
+        return $this->actif;
     }
+
+    /**
+     * @param bool $actif
+     */
+    public function setActif($actif)
+    {
+        $this->actif = $actif;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDtCre()
+    {
+        return $this->dt_cre;
+    }
+
 
     /**
      * @param bool $emprunt

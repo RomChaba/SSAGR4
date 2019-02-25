@@ -24,10 +24,9 @@ class Vehicule
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="couleur", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Lieu")
      */
-    private $couleur;
+    private $lieu_id;
 
     /**
      * @var string
@@ -38,14 +37,26 @@ class Vehicule
 
     /**
      * @var string
-     * @ORM\ManyToOne(targetEntity="Emprunt")
+     *
+     * @ORM\Column(name="couleur", type="string", length=255)
      */
-    private $emprunts;
+    private $couleur;
 
 
     /**
-     * Get id
+     * @var string
      *
+     * @ORM\Column(name="immatriculation", type="string", length=255)
+     */
+    private $immatriculation;
+
+    /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="Emprunt")
+     */
+    private $disponibilite;
+
+    /**
      * @return int
      */
     public function getId()
@@ -54,22 +65,46 @@ class Vehicule
     }
 
     /**
-     * Set couleur
-     *
-     * @param string $couleur
-     *
-     * @return Vehicule
+     * @param int $id
      */
-    public function setCouleur($couleur)
+    public function setId($id)
     {
-        $this->couleur = $couleur;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get couleur
-     *
+     * @return string
+     */
+    public function getLieuId()
+    {
+        return $this->lieu_id;
+    }
+
+    /**
+     * @param string $lieu_id
+     */
+    public function setLieuId($lieu_id)
+    {
+        $this->lieu_id = $lieu_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * @param string $libelle
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+    }
+
+    /**
      * @return string
      */
     public function getCouleur()
@@ -78,33 +113,47 @@ class Vehicule
     }
 
     /**
-     * Set libelle
-     *
-     * @param string $libelle
-     *
-     * @return Vehicule
+     * @param string $couleur
      */
-    public function setLibelle($libelle)
+    public function setCouleur($couleur)
     {
-        $this->libelle = $libelle;
-
-        return $this;
+        $this->couleur = $couleur;
     }
 
     /**
-     * Get libelle
-     *
      * @return string
      */
-    public function getLibelle()
+    public function getImmatriculation()
     {
-        return $this->libelle;
+        return $this->immatriculation;
     }
 
-    public function __toString()
+    /**
+     * @param string $immatriculation
+     */
+    public function setImmatriculation($immatriculation)
     {
-        return $this->getLibelle(). " ". $this->getCouleur();
+        $this->immatriculation = $immatriculation;
     }
+
+    /**
+     * @return string
+     */
+    public function getDisponibilite()
+    {
+        return $this->disponibilite;
+    }
+
+    /**
+     * @param string $disponibilite
+     */
+    public function setDisponibilite($disponibilite)
+    {
+        $this->disponibilite = $disponibilite;
+    }
+
+
+
 
 
 }

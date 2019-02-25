@@ -7,8 +7,8 @@
                 <h1>Proposition de covoiturage :</h1>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-hover">
+            <div class="table-responsive" >
+                <table class="table table-hover" id="table_home">
                     <thead>
                     <tr>
                         <th>Personne</th>
@@ -29,6 +29,13 @@
                         <td>{{ emprunt.idSiteArrivee.libelle }}</td>
                     </tr>
                     {% endfor %}
+                    <tr>
+                        <td>qsdqsd</td>
+                        <td>qsdqsd</td>
+                        <td>qsdqsd</td>
+                        <td>qsdqsd</td>
+                        <td>qsdqsd</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -64,4 +71,15 @@
         .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
     }
 </style>
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    $("#table_home").DataTable(
+
+    );
+</script>
+
+
 {% endblock %}
