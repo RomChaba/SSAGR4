@@ -20,8 +20,8 @@
                 </thead>
                 <tbody>
                 {% for emprunt in listeEmprunt %}
-                <tr onclick="window.location='{{ path("clickparticiper", {'emprunt':emprunt.id}) }}'">
-                    <td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>
+                <tr onclick="window.location='{{ path("clickparticiper", {'emprunt':emprunt}) }}'">
+                     <td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>
                     <td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>
                     <td>{{ emprunt.nbJourLocation }}</td>
                     <td></td>

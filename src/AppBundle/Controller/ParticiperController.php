@@ -37,7 +37,7 @@ class ParticiperController extends Controller
 
         foreach ($listeEmprunt as $empruntBoucle )
         {
-            if($empruntBoucle->getId() != $emprunt)
+            if($empruntBoucle->getgetNbJourLocation() != $emprunt)
             {
                array_push($listeEmprunt2,$empruntBoucle);
             }
