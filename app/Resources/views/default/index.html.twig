@@ -22,11 +22,13 @@
                     <tbody>
                     {% for emprunt in listeEmprunt %}
                     <tr>
-                        <td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>
-                        <td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>
-                        <td>{{ emprunt.nbJourLocation }}</td>
-                        <td>{{ emprunt.idSiteDepart.libelle }}</td>
-                        <td>{{ emprunt.idSiteArrivee.libelle }}</td>
+                        {{ dump(emprunt.vehicule_id) }}
+                        {#<td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>#}
+                        {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>#}
+                        <td>{{ emprunt.commentaire }}</td>
+                        <td>{{ emprunt.vehicule_id.libelle }}</td>
+                        {#<td>{{ emprunt.idSiteDepart.libelle }}</td>#}
+                        {#<td>{{ emprunt.idSiteArrivee.libelle }}</td>#}
                     </tr>
                     {% endfor %}
                     <tr>

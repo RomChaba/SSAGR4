@@ -57,6 +57,14 @@ class Lieu
     private $siteOfficiel;
 
     /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="lieuId")
+     */
+    private $listeEmprunt;
+
+
+    /**
      * @return int
      */
     public function getId()

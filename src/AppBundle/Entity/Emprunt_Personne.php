@@ -22,16 +22,16 @@ class Emprunt_Personne
     private $id;
 
     /**
-     * @var int
+     * @var Emprunt
      *
-     * @ORM\ManyToOne(targetEntity="Emprunt")
+     * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listePersonne")
      */
     private $empruntId;
 
     /**
-     * @var int
+     * @var Personne
      *
-     * @ORM\ManyToOne(targetEntity="Personne")
+     * @ORM\ManyToOne(targetEntity="Personne", inversedBy="listeEmprunt")
      */
     private $personneId;
 
@@ -41,6 +41,7 @@ class Emprunt_Personne
      * @ORM\Column(name="conducteur", type="boolean")
      */
     private $conducteur;
+
 
 
     /**

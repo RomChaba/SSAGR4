@@ -41,6 +41,13 @@ class Cle
      */
     private $perdu;
 
+    /**
+     * @var Cle
+     *
+     * @ORM\OneToMany(targetEntity="Cle_emprunt",mappedBy="cleId")
+     */
+    private $listeEmprunt;
+
 
     /**
      * Get id

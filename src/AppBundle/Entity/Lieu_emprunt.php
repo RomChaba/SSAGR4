@@ -24,21 +24,21 @@ class Lieu_emprunt
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Emprunt")
+     * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listeLieux")
      */
     private $empruntId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="lieu_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Lieu", inversedBy="listeEmprunt")
      */
     private $lieuId;
 
     /**
      * @var bool
      *
-     * @ORM\ManyToOne(targetEntity="Lieu")
+     * @ORM\Column(name="depart", type="boolean")
      */
     private $depart;
 

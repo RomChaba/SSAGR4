@@ -105,7 +105,12 @@ class Personne
      */
     private $dt_cre;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="personneId")
+     */
+    private $listeEmprunt;
 
     /**
      * Get id
@@ -407,6 +412,31 @@ class Personne
 
         return openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
     }
+
+    /**
+     * @return string
+     */
+    public function getListeEmprunt()
+    {
+        return $this->listeEmprunt;
+    }
+
+    /**
+     * @param string $listeEmprunt
+     */
+    public function setListeEmprunt($listeEmprunt)
+    {
+        $this->listeEmprunt = $listeEmprunt;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
 
 }

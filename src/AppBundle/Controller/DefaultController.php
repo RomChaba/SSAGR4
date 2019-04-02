@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emprunt;
 use AppBundle\Entity\Personne;
+use AppBundle\Entity\Vehicule;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,11 +13,58 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
 {
+
+
+
+
+
+
     /**
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
     {
+        #region Variable de test
+        $personne1 = new Personne();
+        $personne1->setId(1);
+        $personne1->setRue("rue de la poire");
+        $personne1->setMail("dupont@gmail.com");
+        $personne1->setMotDePasse("mdp1");
+        $personne1->setNom("dupont");
+        $personne1->setPrenom("jean");
+        $personne1->setTelephone("0980473828");
+        $personne1->setPermis(true);
+        $personne1->setPhoto("photoTemp");
+
+        $v1 = new Vehicule();
+        $v1->setId(1);
+        $v1->setImmatriculation("ss-522-sd");
+        $v1->setDisponibilite(true);
+        $v1->setCouleur("Rouge");
+        $v1->setLibelle("Voiture 1");
+
+        $v2 = $v1;
+        $v2->setId(2);
+        $v2->setLibelle("Voiture 2");
+
+        $emp1 = new Emprunt();
+        $emp1->setId(1);
+        $emp1->setVehiculeId($v1);
+        $emp1->setCommentaire("Commentaire 1");
+
+        $emp2 = new Emprunt();
+        $emp2->setId(2);
+        $emp2->setVehiculeId($v2);
+        $emp2->setCommentaire("Commentaire 2");
+
+        #endregion
+
+
+
+
+
+
+
         $em = $this->getDoctrine()->getManager();
 
         $test = new DateTime();
@@ -24,33 +72,13 @@ class DefaultController extends Controller
 
         $listeEmprunt = array();
         if (!isset($_SESSION["liste_Emprunt"])) {
-//            $personne1 = new Personne();
-//
-//            $personne1->setAdresse("rue de la poire");
-//            $personne1->setMail("dupont@gmail.com");
-//            $personne1->setMotDePasse("mdp1");
-//            $personne1->setNom("dupont");
-//            $personne1->setPrenom("jean");
-//            $personne1->setTelephone("0980473828");
-//            $personne1->setBoolPermis(true);
-//            $personne1->setPhoto("photoTemp");
-//
-//            $emp1 = new Emprunt();
-//            $emp1->setDateEmprunt($test);
-//            $emp1->setNbJourLocation(2);
-//            $emp1->setListePersonne($personne1);
-//
-//            $emp2 = new Emprunt();
-//            $emp2->setDateEmprunt($test);
-//            $emp2->setNbJourLocation(3);
-//            $emp2->setNbJourLocation(3);
-//            $emp2->setListePersonne($personne1);
-//            $listeEmprunt= [
-//                $emp1,
-//                $emp2
-//            ];
 
-//            $_SESSION["liste_Emprunt"] = $listeEmprunt;
+            $listeEmprunt= [
+                $emp1,
+                $emp2
+            ];
+
+            $_SESSION["liste_Emprunt"] = $listeEmprunt;
         }else{
             $listeEmprunt = $_SESSION["liste_Emprunt"];
 
