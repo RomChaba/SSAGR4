@@ -4,33 +4,26 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1>Proposition de covoiturage :</h1>
+                <h1>{{ "propositions_de_voyage"|trans }}</h1>
             </div>
 
             <div class="table-responsive" >
                 <table class="table table-hover" id="table_home">
                     <thead>
-                    <tr>
-                        <th>Personne</th>
-                        {#<th>Lieux départ</th>#}
-                        <th>Date</th>
-                        <th>Durée</th>
-                        <th>Lieu Depart</th>
-                        <th>Lieu Arrivée</th>
-                    </tr>
+                    {% for emprunt in listeEmprunt %}
+                        <tr>
+                            {{ dump(emprunt.vehicule_id) }}
+                            {#<td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>#}
+                            {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>#}
+                            <td>{{ emprunt.commentaire }}</td>
+                            <td>{{ emprunt.vehicule_id.libelle }}</td>
+                            {#<td>{{ emprunt.idSiteDepart.libelle }}</td>#}
+                            {#<td>{{ emprunt.idSiteArrivee.libelle }}</td>#}
+                        </tr>
+                    {% endfor %}
                     </thead>
                     <tbody>
-                    {% for emprunt in listeEmprunt %}
-                    <tr>
-                        {{ dump(emprunt.vehicule_id) }}
-                        {#<td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>#}
-                        {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>#}
-                        <td>{{ emprunt.commentaire }}</td>
-                        <td>{{ emprunt.vehicule_id.libelle }}</td>
-                        {#<td>{{ emprunt.idSiteDepart.libelle }}</td>#}
-                        {#<td>{{ emprunt.idSiteArrivee.libelle }}</td>#}
-                    </tr>
-                    {% endfor %}
+
                     <tr>
                         <td>qsdqsd</td>
                         <td>qsdqsd</td>
