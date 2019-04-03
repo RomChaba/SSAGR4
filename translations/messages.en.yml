@@ -1,8 +1,14 @@
 proposer_un_voyage: 'Voyage proposal'
 participer_voyage: 'Take part to a voyage'
-connexion: Connection
-bonjour: Hello
+connexion: 'Connection'
+bonjour: 'Hello'
 mon_compte: 'My account'
 charte_conducteur: 'Charter driver'
-contact: Contact
+contact: 'Contact'
 contraintes_legales: 'Legal constraints'
+propositions_de_voyage: 'Travel proposals'
+personne: 'Driver'
+date: 'Date'
+duree: 'Duration'
+lieu_depart: 'Departure place'
+lieu_arrivee: 'Arrival place'
