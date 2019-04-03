@@ -5,11 +5,13 @@ use AppBundle\Entity\Emprunt;
 use AppBundle\Entity\Personne;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Routing\Annotation\Route;
-//use Symfony\Component\Validator\Constraints\DateTime;
+
 class MonCompteController extends Controller
 {
     /**
@@ -17,8 +19,9 @@ class MonCompteController extends Controller
      */
     public function chargementMonCompteAction(Request $request)
     {
-        //$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
+        //TODO Aller chercher la personne en bdd avec son id dans la session
         $personne1 = new Personne();
 
         $personne1->setRue("rue de la poire");
@@ -27,15 +30,34 @@ class MonCompteController extends Controller
         $personne1->setNom("Dupont");
         $personne1->setPrenom("Jean");
         $personne1->setTelephone("0980473828");
-       // $personne1->setBoolPermis(true);
-        //$personne1->setPhoto("photoTemp");
+        $personne1->setMotDePasse("mdp");
+        $personne1->setPhoto("photo");
+        $personne1->setPermis(false);
+        $personne1->setActif(true);
+        $personne1->setDateCreation(new DateTime());
 
         $this->createFormulaire($personne1); //On crée le formulaire
+
+        // Si la requête est en POST
+        if ($request->isMethod('POST')) {
+            // On fait le lien Requête <-> Formulaire
+            $this->leFormulaire->handleRequest($request);
+
+            // On vérifie que les valeurs entrées sont correctes
+            if ($this->leFormulaire->isValid()) {
+                // On enregistre notre objet $advert dans la base de données, par exemple
+                //$em->persist($personne1);
+                //$em->flush();
+
+                $request->getSession()->getFlashBag()->add('compte', 'Compte bien enregistrée.');
+
+                return $this->render('moncompte/moncompte.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
+            }
+        }
 
 //      Partie gestion du formulaire
         $this->leFormulaire->handleRequest($request);
 
-        // replace this example code with whatever you need
         return $this->render('moncompte/moncompte.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
     }
 
@@ -48,12 +70,12 @@ class MonCompteController extends Controller
 
             ->add('nom', TextType::class, array('label' => 'Nom','required' => true))
             ->add('prenom', TextType::class, array('label' => 'Prénom','required' => true))
-            ->add('mail', TextType::class, array('label' => 'Mail','required' => true))
+            ->add('mail', EmailType::class, array('label' => 'Mail','required' => true))
             ->add('rue', TextType::class, array('label' => 'Adresse','required' => true))
             ->add('cp', TextType::class, array('label' => 'Code postal'))
             ->add('ville', TextType::class, array('label' => 'Ville'))
-            ->add('motDePasse', TextType::class, array('label' => 'Nouveaux Mot de passe'))
-            ->add('motDePasse', TextType::class, array('label' => 'Confirmation mot de passe'))
+            ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Nouveaux Mot de passe','required' => false))
+            ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe','required' => false))
             ->add('Enregistrer', SubmitType::class)
             ->getForm();
 

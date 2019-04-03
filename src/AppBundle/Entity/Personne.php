@@ -49,6 +49,10 @@ class Personne
      */
     private $motDePasse;
 
+    private $nouveauMotDePasse;
+
+    private $confirmationMotDePasse;
+
     /**
      * @var string
      *
@@ -99,11 +103,11 @@ class Personne
     private $actif;
 
     /**
-     * @var bool
+     * @var \DateTime
      *
-     * @ORM\Column(name="dt_cre", type="boolean")
+     * @ORM\Column(name="dateCreation", type="datetime")
      */
-    private $dt_cre;
+    private $dateCreation;
 
     /**
      * @var string
@@ -192,6 +196,38 @@ class Personne
     public function getMotDePasse()
     {
         return $this->motDePasse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNouveauMotDePasse()
+    {
+        return $this->nouveauMotDePasse;
+    }
+
+    /**
+     * @param mixed $nouveauMotDePasse
+     */
+    public function setNouveauMotDePasse($nouveauMotDePasse)
+    {
+        $this->nouveauMotDePasse = $nouveauMotDePasse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationMotDePasse()
+    {
+        return $this->confirmationMotDePasse;
+    }
+
+    /**
+     * @param mixed $confirmationMotDePasse
+     */
+    public function setConfirmationMotDePasse($confirmationMotDePasse)
+    {
+        $this->confirmationMotDePasse = $confirmationMotDePasse;
     }
 
     /**
@@ -356,11 +392,19 @@ class Personne
     }
 
     /**
-     * @return bool
+     * @return DateTime
      */
-    public function isDtCre()
+    public function getDateCreation()
     {
-        return $this->dt_cre;
+        return $this->dateCreation;
+    }
+
+    /**
+     * @param DateTime $dateCreation
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
     }
 
 
