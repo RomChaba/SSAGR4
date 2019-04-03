@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+//use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Personne
@@ -54,6 +56,21 @@ class Personne
     private $confirmationMotDePasse;
 
     /**
+     * @Assert\IsTrue(message="Les 2 mots de passe doivent être identique")
+     */
+    public function isConfirmationMotDePasse()
+    {
+        if($this->getNouveauMotDePasse() == $this->getConfirmationMotDePasse())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="photo", type="string", length=255)
@@ -78,6 +95,8 @@ class Personne
      * @var string
      *
      * @ORM\Column(name="cp", type="string", length=255)
+     * @Assert\Length(max=5, maxMessage="Le code postal doit faire maximum 5 caractères.")
+     * @Assert\Regex(pattern="/^[0-9]+$/", message="Veuillez ne rentrer que des chiffres")
      */
     private $cp;
 

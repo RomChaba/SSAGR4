@@ -38,10 +38,15 @@ class MonCompteController extends Controller
 
         $this->createFormulaire($personne1); //On crée le formulaire
 
+
+        $this->leFormulaire->handleRequest($request);
+
         // Si la requête est en POST
         if ($request->isMethod('POST')) {
             // On fait le lien Requête <-> Formulaire
-            $this->leFormulaire->handleRequest($request);
+           // $this->leFormulaire->handleRequest($request);
+//            $validator = $this->get('validator');
+//            $listeErreur = $validator->validate($personne1);
 
             // On vérifie que les valeurs entrées sont correctes
             if ($this->leFormulaire->isValid()) {
@@ -55,8 +60,7 @@ class MonCompteController extends Controller
             }
         }
 
-//      Partie gestion du formulaire
-        $this->leFormulaire->handleRequest($request);
+
 
         return $this->render('moncompte/moncompte.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
     }
@@ -71,7 +75,7 @@ class MonCompteController extends Controller
             ->add('nom', TextType::class, array('label' => 'Nom','required' => true))
             ->add('prenom', TextType::class, array('label' => 'Prénom','required' => true))
             ->add('mail', EmailType::class, array('label' => 'Mail','required' => true))
-            ->add('rue', TextType::class, array('label' => 'Adresse','required' => true))
+            ->add('rue', TextType::class, array('label' => 'Rue','required' => true))
             ->add('cp', TextType::class, array('label' => 'Code postal'))
             ->add('ville', TextType::class, array('label' => 'Ville'))
             ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Nouveaux Mot de passe','required' => false))
