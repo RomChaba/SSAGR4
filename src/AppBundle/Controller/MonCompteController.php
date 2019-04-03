@@ -78,7 +78,7 @@ class MonCompteController extends Controller
             ->add('rue', TextType::class, array('label' => 'Rue','required' => true))
             ->add('cp', TextType::class, array('label' => 'Code postal'))
             ->add('ville', TextType::class, array('label' => 'Ville'))
-            ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Nouveaux Mot de passe','required' => false))
+            ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Nouveau mot de passe','required' => false))
             ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe','required' => false))
             ->add('Enregistrer', SubmitType::class)
             ->getForm();
