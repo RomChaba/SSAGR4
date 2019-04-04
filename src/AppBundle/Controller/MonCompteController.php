@@ -80,7 +80,9 @@ class MonCompteController extends Controller
 
             ->add('nom', TextType::class, array('label' => 'Nom','required' => true))
             ->add('prenom', TextType::class, array('label' => 'Prénom','required' => true))
-            ->add('mail', EmailType::class, array('label' => 'Mail'))
+            ->add('mail', EmailType::class, array('label' => 'Mail','attr' => array(
+                'readonly' => true,
+            )))
             ->add('rue', TextType::class, array('label' => 'Rue','required' => true))
             ->add('cp', TextType::class, array('label' => 'Code postal'))
             ->add('ville', TextType::class, array('label' => 'Ville'))
