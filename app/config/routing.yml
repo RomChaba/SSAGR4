@@ -15,3 +15,11 @@ gestion_initialisation_donnee:
 login:
     path:     /login
     defaults: { _controller: AppBundle:Security:login }
+
+contact:
+    path:     /contact
+    defaults: { _controller: AppBundle:Contact:index }
+
+sendMail:
+    path:     /sendMail
+    defaults: { _controller: AppBundle:Contact:sendMail }

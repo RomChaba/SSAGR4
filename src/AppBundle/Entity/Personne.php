@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+//use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Personne
@@ -51,6 +53,33 @@ class Personne
 
     /**
      * @var string
+     * @Assert\Length(min=6, minMessage="Le mot de passe doit contenir minimum 6 caractères")
+     */
+    private $nouveauMotDePasse;
+
+    /**
+     * @var string
+     * @Assert\Length(min=6, minMessage="Le mot de passe doit contenir minimum 6 caractères")
+     */
+    private $confirmationMotDePasse;
+
+    /**
+     * @Assert\IsTrue(message="Les 2 mots de passe doivent être identique")
+     */
+    public function isConfirmationMotDePasse()
+    {
+        if($this->getNouveauMotDePasse() == $this->getConfirmationMotDePasse())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="photo", type="string", length=255)
      */
@@ -74,6 +103,8 @@ class Personne
      * @var string
      *
      * @ORM\Column(name="cp", type="string", length=255)
+     * @Assert\Length(max=5, maxMessage="Le code postal doit faire maximum 5 caractères.")
+     * @Assert\Regex(pattern="/^[0-9]+$/", message="Veuillez ne rentrer que des chiffres")
      */
     private $cp;
 
@@ -99,11 +130,11 @@ class Personne
     private $actif;
 
     /**
-     * @var bool
+     * @var \DateTime
      *
-     * @ORM\Column(name="dt_cre", type="boolean")
+     * @ORM\Column(name="dateCreation", type="datetime")
      */
-    private $dt_cre;
+    private $dateCreation;
 
     /**
      * @var string
@@ -193,6 +224,38 @@ class Personne
     public function getMotDePasse()
     {
         return $this->motDePasse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNouveauMotDePasse()
+    {
+        return $this->nouveauMotDePasse;
+    }
+
+    /**
+     * @param mixed $nouveauMotDePasse
+     */
+    public function setNouveauMotDePasse($nouveauMotDePasse)
+    {
+        $this->nouveauMotDePasse = $nouveauMotDePasse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationMotDePasse()
+    {
+        return $this->confirmationMotDePasse;
+    }
+
+    /**
+     * @param mixed $confirmationMotDePasse
+     */
+    public function setConfirmationMotDePasse($confirmationMotDePasse)
+    {
+        $this->confirmationMotDePasse = $confirmationMotDePasse;
     }
 
     /**
@@ -357,11 +420,19 @@ class Personne
     }
 
     /**
-     * @return bool
+     * @return DateTime
      */
-    public function isDtCre()
+    public function getDateCreation()
     {
-        return $this->dt_cre;
+        return $this->dateCreation;
+    }
+
+    /**
+     * @param DateTime $dateCreation
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
     }
 
 

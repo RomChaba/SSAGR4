@@ -1,11 +1,36 @@
 proposer_un_voyage: 'Voyage proposal'
 participer_voyage: 'Take part to a voyage'
-connexion: Connection
-bonjour: Hello
+connexion: 'Connection'
+bonjour: 'Hello'
 mon_compte: 'My account'
 charte_conducteur: 'Charter driver'
-contact: Contact
+contact: 'Contact'
 contraintes_legales: 'Legal constraints'
+propositions_de_voyage: 'Travel proposals'
+personne: 'Driver'
+date: 'Date'
+duree: 'Duration'
+lieu_depart: 'Departure place'
+lieu_arrivee: 'Arrival place'
+votre_nom_prenom: 'Your lastname and firstname'
+votre_mail: 'Your mail adress'
+votre_message: 'Your message'
+envoyer: 'Submit'
+contacter_le_webmaster: 'Contact the webmaster'
+nom: 'Last name'
+prenom: 'First name'
+rue: 'Street'
+ville: 'City'
+mail: 'Mail'
+code_postal: 'Area code'
+nouveau_mdp: 'New password'
+confirmer_mdp: 'Confirm password'
+compte_err_01: 'The password must contain at least 6 characters'
+compte_err_02: 'Passwords must to be identical.'
+compte_err_03: 'Area code must contains at most 5 characters.'
+compte_err_04: 'Please enter only numbers.'
+enregistrer: 'Save'
+message_envoye: "Message send !"
 demande_covoit: __demande_covoit
 conducteur: __conducteur
 lieu_depart: __lieu_depart
