@@ -1,11 +1,17 @@
 proposer_un_voyage: 'Proposer un voyage'
 participer_voyage: 'Participer à un voyage'
-connexion: 'Connexion'
-bonjour: 'Bonjour'
+connexion: Connexion
+bonjour: Bonjour
 mon_compte: 'Mon compte'
 charte_conducteur: 'Charte conducteur'
-contact: 'Contact'
+contact: Contact
 contraintes_legales: 'Contraintes légales'
+propositions_de_voyage: 'Propositions de voyage'
+personne: 'Conducteur'
+date: 'Date'
+duree: 'Durée'
+lieu_depart: 'Lieu de départ'
+lieu_arrivee: "Lieu d'arrivée"
 nom: 'Nom'
 prenom: 'Prénom'
 rue: 'Rue'
