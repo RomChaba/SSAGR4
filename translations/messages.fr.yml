@@ -31,3 +31,6 @@ votre_message: 'Votre message'
 envoyer: 'Envoyer'
 contacter_le_webmaster: 'Contacter le webmaster'
 message_envoye: "Message envoyé !"
+creation_personne: 'Ajouter un utilisateur'
+creation_voiture: 'Ajouter une voiture'
+administration: 'Administration'

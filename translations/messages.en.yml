@@ -31,3 +31,6 @@ compte_err_03: 'Area code must contains at most 5 characters.'
 compte_err_04: 'Please enter only numbers.'
 enregistrer: 'Save'
 message_envoye: "Message send !"
+creation_personne: 'Ajouter un utilisateur'
+creation_voiture: 'Ajouter une voiture'
+administration: 'Administration'
