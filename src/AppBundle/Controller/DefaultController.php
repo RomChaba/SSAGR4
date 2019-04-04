@@ -94,14 +94,19 @@ class DefaultController extends Controller
         dump($lieu_emprunt);
 //        die();
 
-//        $listeEmprunt = $em->getRepository('AppBundle:Personne')->findAll();
-//        dump($listeEmprunt);
+        $listeLieu = $em->getRepository('AppBundle:Lieu')->findAll();
+
+
+        //Recuperation de la liste des villes
+
+
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'listeEmprunt'=> $listeEmprunt,
             'lieu_emprunt'=> $lieu_emprunt,
+            'listeLieu'=> $listeLieu,
         ]);
     }
 
