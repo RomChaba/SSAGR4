@@ -51,10 +51,28 @@ class Vehicule
     private $immatriculation;
 
     /**
-     * @var string
+     * @var boolean
      * @ORM\ManyToOne(targetEntity="Emprunt")
      */
     private $disponibilite;
+
+    /**
+     * Vehicule constructor.
+     * @param string $lieu_id
+     * @param string $libelle
+     * @param string $couleur
+     * @param string $immatriculation
+     * @param string $disponibilite
+     */
+    public function __construct($lieu_id, $libelle, $couleur, $immatriculation)
+    {
+        $this->lieu_id = $lieu_id;
+        $this->libelle = $libelle;
+        $this->couleur = $couleur;
+        $this->immatriculation = $immatriculation;
+//        $this->disponibilite = $disponibilite;
+    }
+
 
     /**
      * @return int
@@ -152,8 +170,10 @@ class Vehicule
         $this->disponibilite = $disponibilite;
     }
 
-
-
+    public function __toString()
+    {
+        return ucfirst(strtolower($this->getLibelle())).' | '. $this->getImmatriculation();
+    }
 
 
 }

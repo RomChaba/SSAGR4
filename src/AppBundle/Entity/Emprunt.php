@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,14 +44,14 @@ class Emprunt
     private $listePersonne;
 
     /**
-     * @var Lieu
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="empruntId")
      */
     private $listeLieux;
 
     /**
-     * @var Cle
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Cle_emprunt",mappedBy="empruntId")
      */
@@ -75,7 +76,14 @@ class Emprunt
     /**
      * @return Vehicule
      */
-    public function getVehicule_Id()
+    public function getVehiculeId()
+    {
+        return $this->vehicule_id;
+    }
+    /**
+     * @return Vehicule
+     */
+    public function getvehicule_id()
     {
         return $this->vehicule_id;
     }
@@ -103,6 +111,56 @@ class Emprunt
     {
         $this->commentaire = $commentaire;
     }
+
+    /**
+     * @return Personne
+     */
+    public function getListePersonne()
+    {
+        return $this->listePersonne;
+    }
+
+    /**
+     * @param ArrayCollection $listePersonne
+     */
+    public function setListePersonne($listePersonne)
+    {
+        $this->listePersonne = $listePersonne;
+    }
+
+    /**
+     * @return Lieu
+     */
+    public function getListeLieux()
+    {
+        return $this->listeLieux;
+    }
+
+    /**
+     * @param ArrayCollection $listeLieux
+     */
+    public function setListeLieux($listeLieux)
+    {
+        $this->listeLieux = $listeLieux;
+    }
+
+    /**
+     * @return Cle
+     */
+    public function getListeCle()
+    {
+        return $this->listeCle;
+    }
+
+    /**
+     * @param Cle $listeCle
+     */
+    public function setListeCle($listeCle)
+    {
+        $this->listeCle = $listeCle;
+    }
+
+
 
 
 

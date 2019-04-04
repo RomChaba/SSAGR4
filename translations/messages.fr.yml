@@ -1,8 +1,16 @@
 proposer_un_voyage: 'Proposer un voyage'
 participer_voyage: 'Participer à un voyage'
-connexion: 'Connexion'
-bonjour: 'Bonjour'
+connexion: Connexion
+bonjour: Bonjour
 mon_compte: 'Mon compte'
 charte_conducteur: 'Charte conducteur'
-contact: 'Contact'
+contact: Contact
 contraintes_legales: 'Contraintes légales'
+conducteur: Conducteur
+demande_covoit: 'Faire une demande de covoiturage'
+lieu_depart: 'Lieu départ'
+lieu_arrive: 'Lieu arrivé'
+vehicule: 'Véhicule'
+aller_retour: 'Aller Retour'
+commentaire: 'Commentaire'
+valider: 'Valider'

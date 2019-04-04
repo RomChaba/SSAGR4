@@ -12,9 +12,8 @@
                     <thead>
                     <tr>
                         <th>Personne</th>
-                        {#<th>Lieux départ</th>#}
-                        <th>Date</th>
-                        <th>Durée</th>
+                        <th>Départ</th>
+                        <th>Arrivé</th>
                         <th>Lieu Depart</th>
                         <th>Lieu Arrivée</th>
                     </tr>
@@ -22,22 +21,28 @@
                     <tbody>
                     {% for emprunt in listeEmprunt %}
                     <tr>
-                        {{ dump(emprunt.vehicule_id) }}
-                        {#<td>{{ emprunt.listePersonne.prenom }} {{ emprunt.listePersonne.nom }}</td>#}
-                        {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false) }}  </td>#}
-                        <td>{{ emprunt.commentaire }}</td>
-                        <td>{{ emprunt.vehicule_id.libelle }}</td>
-                        {#<td>{{ emprunt.idSiteDepart.libelle }}</td>#}
-                        {#<td>{{ emprunt.idSiteArrivee.libelle }}</td>#}
+                        <td>{{ emprunt.listePersonne[0].prenom|default('Pierre') }} {{ emprunt.listePersonne[0].nom|default('Marc') }}</td>
+                        {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
+
+                        {% for data in lieu_emprunt %}
+                            {% if data.depart == true %}
+                                <td>{{ data.dateEtHeure|date("d/m/Y h:i", false) }}</td>
+                            {% else %}
+                                <td>{{ data.dateEtHeure|date("d/m/Y h:i", false) }}</td>
+                            {% endif %}
+                        {% endfor %}
+
+                        <td>{{ emprunt.listeLieux[0].libelle }}</td>
+                        <td>{{ emprunt.listeLieux[1].libelle }}</td>
                     </tr>
                     {% endfor %}
-                    <tr>
-                        <td>qsdqsd</td>
-                        <td>qsdqsd</td>
-                        <td>qsdqsd</td>
-                        <td>qsdqsd</td>
-                        <td>qsdqsd</td>
-                    </tr>
+                    {#<tr>#}
+                        {#<td>qsdqsd</td>#}
+                        {#<td>qsdqsd</td>#}
+                        {#<td>qsdqsd</td>#}
+                        {#<td>qsdqsd</td>#}
+                        {#<td>qsdqsd</td>#}
+                    {#</tr>#}
                     </tbody>
                 </table>
             </div>

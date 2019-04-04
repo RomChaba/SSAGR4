@@ -5,45 +5,384 @@
 {% block body %}
 
 
-  <!--  <form action="{{ path("Demande") }}">
-        <table>
-            <tr>
-                <td> Modèle de voiture : </td>
-                <td><input type="text" /></td>
-            </tr>
-            <tr>
-                <td> Conducteur : </td>
-                <td><input type="text"></td>
-                <td> Insérer photo si photo il y a ?</td>
-            </tr>
-            <tr>
-                <td> Date de départ : </td>
-                <td><input type="date" value="dd/MM/AAAA" /></td>
-                <td>Insérer un datepicker</td>
-            </tr>
-            <tr>
-                <td> Site de départ : </td>
-                <td><input type="text" /></td>
-                <td><input type="button" value="Sites" /></td>
-            </tr>
-            <tr>
-                <td colspan="3" align="right"><input type="submit" value="Enregistrer" /></td>
-            </tr>
-        </table>
-    </form> -->
-<div class="col-xs-6 col-xs-offset-3">
-    <h1> Faire une demande de covoiturage </h1>
-    {{ form(formulaireAjout) }}
-</div>
+    <link href="{{ asset("css/datepicker.css") }}" rel="stylesheet" type="text/css">
+
+    <style>
+        option:checked {
+            background-color: lightgrey;
+        }
+    </style>
+
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <form action="{{ path("DemandeForm") }}" method="post" role="form">
+            <legend>{{ "demande_covoit"|trans }} </legend>
+
+            <div class="form-group col-xs-12">
+                <label for="inputID" class="col-xs-12">{{ "conducteur"|trans }}</label>
+
+                <div class="col-xs-10 col-sm-6">
+                    <select name="personne" id="personne" class="form-control">
+                        {% for personne in listePersonne %}
+                            <option value="{{ personne.id }}">{{ personne.nom }} {{ personne.prenom }}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="" class="col-xs-12">{{ "lieu_depart"|trans }}* :</label>
+                <div class="col-xs-12 col-sm-6">
+                    <select name="lieu_depart_1" id="lieu_depart_1" class="form-control">
+                        <option value="" selected> --Choisir--</option>
+                        {% for lieu in listeLieu %}
+                            <option value="{{ lieu.id }}"> {{ lieu.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" name="date_depart_1" id="date_depart_1" class="datepicker-here form-control"
+                               value=""/>
+                        <span class="input-group-addon" onclick="showDtPicker(1);"><span
+                                    class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <div class="col-xs-6 col-sm-6 pull-right">
+                    <div class="input-group">
+                        <select name="h_depart_1" id="h_depart_1" class="form-control">
+                            <option value=""> H</option>
+                            {% for i in 0..23 %}
+                                {% if i == dateDuJour.hours %}
+                                    <option value="{{ i }}" selected>{{ "%02d"|format(i) }}</option>
+                                {% else %}
+                                    <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <span class="input-group-addon"> : </span>
+                        <select name="min_depart_1" id="min_depart_1" class="form-control">
+                            <option value=""> min</option>
+                            {% for i in 0..59 %}
+                                {% if i == dateDuJour.minutes %}
+                                    <option value="{{ i }}" selected>{{ "%02d"|format(i) }}</option>
+                                {% else %}
+                                    <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="" class="col-xs-12">{{ "lieu_arrive"|trans }}* :</label>
+                <div class="col-xs-12 col-sm-6">
+                    <select name="lieu_arrive_1" id="lieu_arrive_1" class="form-control">
+                        <option value="" selected> --Choisir--</option>
+                        {% for lieu in listeLieu %}
+                            <option value="{{ lieu.id }}"> {{ lieu.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" id="date_arrive_1" name="date_arrive_1" class="datepicker-here form-control"
+                        />
+                        <span class="input-group-addon" onclick="showDtPicker(2);"><span
+                                    class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <div class="col-xs-6 col-sm-6 pull-right">
+                    <div class="input-group">
+                        <select name="h_arrive_1" id="h_arrive_1" class="form-control">
+                            <option value=""> H</option>
+                            {% for i in 0..23 %}
+                                <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                            {% endfor %}
+                        </select>
+                        <span class="input-group-addon"> : </span>
+                        <select name="min_arrive_1" id="min_arrive_1" class="form-control">
+                            <option value=""> min</option>
+                            {% for i in 0..59 %}
+                                <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="vehicule" class="col-xs-12">{{ "vehicule"|trans }}* :</label>
+                <div class="col-xs-8 col-sm-6">
+                    <select name="vehicule" id="vehicule" class="form-control">
+                        {% for vehicule in listeVehicule %}
+                            <option value="{{ vehicule.id }}"> {{ vehicule.libelle|capitalize }}
+                                | {{ vehicule.immatriculation }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <div class="col-xs-offset-1 col-xs-12">
+                    <div class="checkbox">
+                        <label>
+                            <input id="aller_ret" name="aller_ret" type="checkbox"> {{ "aller_retour"|trans }} ? :
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="part_retour" style="display: none">
+                <hr class="col-xs-12">
+                <div class="form-group col-xs-12">
+                    <label for="" class="col-xs-12">{{ "lieu_depart"|trans }}* :</label>
+                    <div class="col-xs-6">
+                        <select name="name" id="lieu_depart_2" class="form-control">
+                            {% for lieu in listeLieu %}
+                                <option value="{{ lieu.id }}"> {{ lieu.libelle }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group">
+                            <input type="text" id="date_depart_2" class="datepicker-here form-control"/>
+                            <span class="input-group-addon" onclick="showDtPicker(3);">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="col-xs-6 col-sm-6 pull-right">
+                        <div class="input-group">
+                            <select name="h_depart_2" id="h_depart_2" class="form-control">
+                                <option value=""> H</option>
+                                {% for i in 0..23 %}
+                                    {% if i == dateDuJour.hours %}
+                                        <option value="{{ i }}" selected>{{ "%02d"|format(i) }}</option>
+                                    {% else %}
+                                        <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <span class="input-group-addon"> : </span>
+                            <select name="min_depart_2" id="min_depart_2" class="form-control">
+                                <option value=""> min</option>
+                                {% for i in 0..59 %}
+                                    {% if i == dateDuJour.minutes %}
+                                        <option value="{{ i }}" selected>{{ "%02d"|format(i) }}</option>
+                                    {% else %}
+                                        <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group col-xs-12">
+                    <label for="" class="col-xs-12">{{ "lieu_arrive"|trans }}* :</label>
+                    <div class="col-xs-6">
+                        <select name="name" id="lieu_arrive_2" class="form-control">
+                            {% for lieu in listeLieu %}
+                                <option value="{{ lieu.id }}"> {{ lieu.libelle }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group">
+                            <input type="text" id="date_arrive_2" class="datepicker-here form-control"/>
+                            <span class="input-group-addon" onclick="showDtPicker(4);">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="col-xs-6 col-sm-6 pull-right">
+                        <div class="input-group">
+                            <select name="h_arrive_2" id="h_arrive_2" class="form-control">
+                                <option value=""> H</option>
+                                {% for i in 0..23 %}
+                                    <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="input-group-addon"> : </span>
+                            <select name="min_arrive_2" id="min_arrive_2" class="form-control">
+                                <option value=""> min</option>
+                                {% for i in 0..59 %}
+                                    <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr class="col-xs-12">
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="commentaire" class="col-xs-12">{{ "commentaire"|trans }}* :</label>
+                <div class="">
+                    <textarea name="commentaire" id="commentaire" rows="5" class="col-xs-6 form-control disabled"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success pull-right">{{ "valider"|trans }}</button>
+        </form>
+
+
+    </div>
 
 
 
 {% endblock %}
 
 {% block javascripts %}
+
+
+    <script src="{{ asset("js/datepicker.js") }}"></script>
+
+
     <script>
         $("#form_newSite").click(function () {
             window.location = "{{ path("homepage") }}";
+        });
+
+
+        $("#aller_ret").change(function () {
+
+            if ($(this).is(":checked")) {
+                $("#part_retour").fadeIn(100);
+                $("#lieu_depart_2").val($("#lieu_depart_1").val()).attr("disabled", true);
+                $("#lieu_arrive_2").val($("#lieu_arrive_1").val()).attr("disabled", true);
+
+            } else {
+
+                $("#part_retour").fadeOut(100);
+            }
+        });
+
+        $("#lieu_depart_1").change(function () {
+            var lieu_arrive_1 = $("#lieu_arrive_1");
+            var lieu_depart_1 = $(this);
+            if (lieu_arrive_1.val() === lieu_depart_1.val()) {
+                lieu_arrive_1.parent().addClass("has-error");
+                lieu_depart_1.parent().addClass("has-error");
+            } else {
+                lieu_arrive_1.parent().removeClass("has-error");
+                lieu_depart_1.parent().removeClass("has-error");
+            }
+
+        });
+        $("#lieu_arrive_1").change(function () {
+            var lieu_arrive_1 = $(this);
+            var lieu_depart_1 = $("#lieu_depart_1");
+            if (lieu_arrive_1.val() === lieu_depart_1.val()) {
+                lieu_arrive_1.parent().addClass("has-error");
+                lieu_depart_1.parent().addClass("has-error");
+            } else {
+                lieu_arrive_1.parent().removeClass("has-error");
+                lieu_depart_1.parent().removeClass("has-error");
+            }
+
+        });
+        $("#lieu_depart_2").change(function () {
+            var lieu_arrive_2 = $("#lieu_arrive_2");
+            var lieu_depart_2 = $(this);
+            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
+                lieu_arrive_2.parent().addClass("has-error");
+                lieu_depart_2.parent().addClass("has-error");
+            } else {
+                lieu_arrive_2.parent().removeClass("has-error");
+                lieu_depart_2.parent().removeClass("has-error");
+            }
+
+        });
+        $("#lieu_arrive_2").change(function () {
+            var lieu_arrive_2 = $(this);
+            var lieu_depart_2 = $("#lieu_depart_2");
+            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
+                lieu_arrive_2.parent().addClass("has-error");
+                lieu_depart_2.parent().addClass("has-error");
+            } else {
+                lieu_arrive_2.parent().removeClass("has-error");
+                lieu_depart_2.parent().removeClass("has-error");
+            }
+
+        });
+
+
+        $(document).ready(function () {
+            var dateNow = new Date();
+
+            dateNow.getHours()
+
+            if ($("#aller_ret").is(":checked")) {
+                $("#part_retour").fadeIn(100);
+            } else {
+                $("#part_retour").fadeOut(100);
+            }
+
+            $('#date_depart_1').datepicker({
+                todayButton: new Date(),
+                language: 'fr',
+                minDate: new Date(),
+                position: 'bottom left',
+                onSelect: function (formattedDate, date, inst) {
+                    $('#date_arrive_1').data('datepicker').update('minDate', date)
+                }
+            }).data('datepicker').selectDate(dateNow);
+
+
+            $('#date_arrive_1').datepicker({
+                todayButton: new Date(),
+                language: 'fr',
+                minDate: new Date(),
+                position: 'bottom left',
+                onSelect: function (formattedDate, date, inst) {
+                    $('#date_depart_2').data('datepicker').update('minDate', date)
+                }
+
+            });
+            $('#date_depart_2').datepicker({
+                todayButton: new Date(),
+                language: 'fr',
+                minDate: new Date(),
+                onSelect: function (formattedDate, date, inst) {
+
+                    $('#date_arrive_2').data('datepicker').update('minDate', date)
+                }
+            });
+            $('#date_arrive_2').datepicker({
+                todayButton: new Date(),
+                language: 'fr',
+                minDate: new Date(),
+            });
+//            $('#date_depart_1').datepicker().data('datepicker').selectDate(dateNow);
+
         })
+
+
+        function showDtPicker(num) {
+            switch (num) {
+                case 1:
+                    $('#date_depart_1').datepicker().data('datepicker').show();
+                    break;
+                case 2:
+                    $('#date_arrive_1').datepicker().data('datepicker').show();
+                    break;
+                case 3:
+                    $('#date_depart_2').datepicker().data('datepicker').show();
+                    break;
+                case 4:
+                    $('#date_arrive_2').datepicker().data('datepicker').show();
+                    break;
+            }
+        }
+
     </script>
+    <script src="{{ asset("js/datepicker.fr.js") }}"></script>
 {% endblock %}

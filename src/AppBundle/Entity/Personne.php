@@ -144,6 +144,7 @@ class Personne
     public function getNom()
     {
         return $this->_DECRYPTE_DATA($this->nom);
+//        return $this->nom;
     }
 
     /**

@@ -6,3 +6,11 @@ mon_compte: 'My account'
 charte_conducteur: 'Charter driver'
 contact: Contact
 contraintes_legales: 'Legal constraints'
+demande_covoit: __demande_covoit
+conducteur: __conducteur
+lieu_depart: __lieu_depart
+lieu_arrive: __lieu_arrive
+vehicule: __vehicule
+aller_retour: __aller_retour
+commentaire: __commentaire
+valider: __valider
