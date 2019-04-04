@@ -51,8 +51,16 @@ class Personne
      */
     private $motDePasse;
 
+    /**
+     * @var string
+     * @Assert\Length(min=6, minMessage="Le mot de passe doit contenir minimum 6 caractères")
+     */
     private $nouveauMotDePasse;
 
+    /**
+     * @var string
+     * @Assert\Length(min=6, minMessage="Le mot de passe doit contenir minimum 6 caractères")
+     */
     private $confirmationMotDePasse;
 
     /**

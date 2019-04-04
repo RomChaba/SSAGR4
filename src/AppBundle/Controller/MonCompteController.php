@@ -50,6 +50,12 @@ class MonCompteController extends Controller
 
             // On vérifie que les valeurs entrées sont correctes
             if ($this->leFormulaire->isValid()) {
+
+                if($personne1->getConfirmationMotDePasse() != null)
+                {
+                    $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
+                }
+
                 // On enregistre notre objet $advert dans la base de données, par exemple
                 //$em->persist($personne1);
                 //$em->flush();
@@ -74,7 +80,7 @@ class MonCompteController extends Controller
 
             ->add('nom', TextType::class, array('label' => 'Nom','required' => true))
             ->add('prenom', TextType::class, array('label' => 'Prénom','required' => true))
-            ->add('mail', EmailType::class, array('label' => 'Mail','required' => true))
+            ->add('mail', MailType::class, array('label' => 'Mail'))
             ->add('rue', TextType::class, array('label' => 'Rue','required' => true))
             ->add('cp', TextType::class, array('label' => 'Code postal'))
             ->add('ville', TextType::class, array('label' => 'Ville'))
