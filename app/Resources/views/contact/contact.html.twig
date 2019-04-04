@@ -2,27 +2,27 @@
 
 {% block body %}
     <center>
-        <h1>Contacter le webmaster</h1>
+        <h1>{{ "contacter_le_webmaster"|trans }}</h1>
 
         <form method="post" action="sendMail">
             <table style="border-collapse : separate; border-spacing: 15px 15px">
                 <tr>
-                    <td><span>Votre nom et prénom: </span> </td>
+                    <td><span>{{ "votre_nom_prenom"|trans }}<span style="color:#ff0000;">*</span>: </span> </td>
                     <td><input type="text" name="nom" size="30"/></td>
                 </tr>
                 <tr>
-                    <td><span>Votre email: <span style="color:#ff0000;">*</span>: </span></td>
+                    <td><span>{{ "votre_mail"|trans }}<span style="color:#ff0000;">*</span>: </span></td>
                     <td><input type="text" name="email" size="30" /></td>
                 </tr>
                 <tr>
-                    <td><span>Message <span style="color:#ff0000;">*</span>:</span></td>
+                    <td><span>{{ "votre_message"|trans }}<span style="color:#ff0000;">*</span>: </span></td>
                     <td><textarea name="message" cols="60" rows="10"></textarea></td>
 
                 <tr>
                     <td colspan="2"><div class="g-recaptcha" data-sitekey="6Ldk25sUAAAAAEPrLYbr45P7BpqgkI-hLqt1-By4" ></div></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input style="float: right;" type="submit" name="submit" value="Envoyer" /></td>
+                    <td colspan="2"><input style="float: right;" type="submit" name="submit" value="{{ "envoyer"|trans }}" /></td>
                 </tr>
             </table>
         </form>

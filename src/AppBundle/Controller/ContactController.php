@@ -136,6 +136,8 @@ class ContactController extends Controller
             } else {
                 return $this->render('Contact/contact.html.twig', array('erreurs' => $erreur, 'tableauErreur' => $tableauErreur)); //On envoie à la vue... une vue générée par le constructeur de formulaire.
             }
+        } else {
+            return $this->render('Contact/contact.html.twig'); // Dans le cas d'un changement de langue après l'envoi de mail
         }
     }
 }

@@ -25,3 +25,8 @@ compte_err_02: 'Les 2 mots de passe doivent être identique'
 compte_err_03: 'Le code postal doit faire maximum 5 caractères.'
 compte_err_04: 'Veuillez ne rentrer que des chiffres'
 enregistrer: 'Enregistrer'
+votre_nom_prenom: 'Votre nom et prénom'
+votre_mail: 'Votre mail'
+votre_message: 'Votre message'
+envoyer: Envoyer
+contacter_le_webmaster: 'Contacter le webmaster'

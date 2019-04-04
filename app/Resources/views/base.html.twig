@@ -39,6 +39,10 @@
             <div class="col-xs-3"><a href="#"><span class="glyphicon glyphicon-flag"></span></a></div>
         </div>
     </div>
+    <div>
+        <a href="{{ path('setlocale', {'language': 'fr'}) }}"><span>Français</span></a>
+        <a href="{{ path('setlocale', {'language': 'en'}) }}"><span>Anglais</span></a>
+    </div>
 {% else %}
     <div class="container-fluid">
         <div class="col-xs-12 text-center topNavBar">
@@ -46,9 +50,18 @@
             <div class="col-xs-3"><a class="btn btn-default" href="#">{{ "participer_voyage"|trans }}</a></div>
             <div class="col-xs-2">{{ "bonjour"|trans }} <span style="color: red;">[NOM_COMPTE]</span></div>
             <div class="col-xs-1"><a class="btn btn-default" href="#">{{ "mon_compte"|trans }}</a></div>
-            <div class="col-xs-3"><a href="#"><span class="glyphicon glyphicon-flag"></span></a></div>
+            <div class="col-xs-3">
+                {% if app.request.locale is defined %}
+                    {% if app.request.locale == 'en' %}
+                        <a href="{{ path('setlocale', {'language': 'fr'}) }}"><img style="width: 10%" src="{{ asset('img/drapeauFR.png') }}" /></a>
+                    {%  else %}
+                        <a href="{{ path('setlocale', {'language': 'en'}) }}"><img style="width: 10%" src="{{ asset('img/drapeauEN.png') }}" /></a>
+                    {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
+
 {% endif %}
 
 {% block body %}
