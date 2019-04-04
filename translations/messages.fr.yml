@@ -7,16 +7,16 @@ charte_conducteur: 'Charte conducteur'
 contact: Contact
 contraintes_legales: 'Contraintes légales'
 propositions_de_voyage: 'Propositions de voyage'
-personne: 'Conducteur'
-date: 'Date'
-duree: 'Durée'
+personne: Conducteur
+date: Date
+duree: Durée
 lieu_depart: 'Lieu de départ'
-lieu_arrivee: "Lieu d'arrivée"
-nom: 'Nom'
-prenom: 'Prénom'
-rue: 'Rue'
-ville: 'Ville'
-mail: 'E-mail'
+lieu_arrivee: 'Lieu d''arrivée'
+nom: Nom
+prenom: Prénom
+rue: Rue
+ville: Ville
+mail: E-mail
 code_postal: 'Code postal'
 nouveau_mdp: 'Nouveau mot de passe'
 confirmer_mdp: 'Confirmation mot de passe'
@@ -24,10 +24,17 @@ compte_err_01: 'Le mot de passe doit contenir minimum 6 caractères.'
 compte_err_02: 'Les deux mots de passe doivent être identiques.'
 compte_err_03: 'Le code postal doit faire maximum 5 caractères.'
 compte_err_04: 'Veuillez ne rentrer que des chiffres.'
-enregistrer: 'Enregistrer'
+enregistrer: Enregistrer
 votre_nom_prenom: 'Votre nom et prénom'
 votre_mail: 'Votre mail'
 votre_message: 'Votre message'
-envoyer: 'Envoyer'
+envoyer: Envoyer
 contacter_le_webmaster: 'Contacter le webmaster'
-message_envoye: "Message envoyé !"
+message_envoye: 'Message envoyé !'
+demande_covoit: __demande_covoit
+conducteur: __conducteur
+lieu_arrive: __lieu_arrive
+vehicule: __vehicule
+aller_retour: __aller_retour
+commentaire: __commentaire
+valider: __valider
