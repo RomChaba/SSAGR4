@@ -30,3 +30,4 @@ compte_err_02: 'Les 2 mots de passe doivent �tre identique'
 compte_err_03: 'Le code postal doit faire maximum 5 caract�res.'
 compte_err_04: 'Veuillez ne rentrer que des chiffres'
 enregistrer: 'Save'
+message_envoye: "Message send !"

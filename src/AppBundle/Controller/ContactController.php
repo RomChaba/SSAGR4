@@ -132,7 +132,7 @@ class ContactController extends Controller
                 // TODO tester une fois le site en ligne
                 // mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
 
-                return $this->render('Contact/contact.html.twig', array('messageOk' => 'Message envoyé !')); //On envoie à la vue... une vue générée par le constructeur de formulaire.
+                return $this->render('Contact/contact.html.twig', array('messageOk' => 'message_envoye')); //On envoie à la vue... une vue générée par le constructeur de formulaire.
             } else {
                 return $this->render('Contact/contact.html.twig', array('erreurs' => $erreur, 'tableauErreur' => $tableauErreur)); //On envoie à la vue... une vue générée par le constructeur de formulaire.
             }

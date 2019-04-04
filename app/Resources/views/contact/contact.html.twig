@@ -15,7 +15,7 @@
                     <td><input type="text" name="email" size="30" /></td>
                 </tr>
                 <tr>
-                    <td><span>{{ "votre_message"|trans }}<span style="color:#ff0000;">*</span>: </span></td>
+                    <td><span style="">{{ "votre_message"|trans }}<span style="color:#ff0000;">*</span>: </span></td>
                     <td><textarea name="message" cols="60" rows="10"></textarea></td>
 
                 <tr>
@@ -28,7 +28,7 @@
         </form>
 
             {% if messageOk is defined %}
-                <p>{{ messageOk }}</p>
+                <p>{{ messageOk|trans }}</p>
             {% endif %}
 
             {% if tableauErreur is defined %}
