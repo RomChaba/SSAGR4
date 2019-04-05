@@ -11,7 +11,7 @@ personne: 'Driver'
 date: 'Date'
 duree: 'Duration'
 lieu_depart: 'Departure place'
-lieu_arrivee: 'Arrival place'
+lieu_arrivee: 'Arrival place'w
 votre_nom_prenom: 'Your lastname and firstname'
 votre_mail: 'Your mail adress'
 votre_message: 'Your message'
