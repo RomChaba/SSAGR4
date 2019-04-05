@@ -63,7 +63,7 @@ class GestionPersonneController extends Controller
 
                 $request->getSession()->getFlashBag()->add('personne', 'Personne bien enregistrée.');
 
-                return $this->render('Administration/administration.html.twig');
+                return $this->redirectToRoute("administration");
             }
         }
 

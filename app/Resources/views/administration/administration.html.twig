@@ -11,8 +11,74 @@
     <div class="col-xs-5"><a class="btn btn-default" href="{{ path("gestionvoiture") }}">{{ "creation_voiture"|trans }}</a></div>
 
 
+
+
+    <div id="welcome">
+        <h1>Liste personnes</h1>
+    </div>
+    <div class="table-responsive" >
+        <table class="table table-hover" id="table_personne">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Permis</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for personne in personnes %}
+                <tr>
+                    <td>{{ personne.nom }}</td>
+                    <td>{{ personne.prenom }}</td>
+                    <td>{{ personne.permis }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="welcome">
+        <h1>Liste voitures</h1>
+    </div>
+    <div class="table-responsive" >
+        <table class="table table-hover" id="table_voiture">
+            <thead>
+            <tr>
+                <th>Libellé</th>
+                <th>Immatriculation</th>
+                <th>Couleur</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for voiture in voitures %}
+                <tr>
+                    <td>{{ voiture.libelle }}</td>
+                    <td>{{ voiture.immatriculation }}</td>
+                    <td>{{ voiture.couleur }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $("#table_personne").DataTable(
+
+        );
+    </script>
+
+    <script>
+        $("#table_voiture").DataTable(
+
+        );
+    </script>
 
 
 {% endblock %}

@@ -19,7 +19,7 @@ class GestionVoitureController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //TODO Aller chercher la personne en bdd avec son id dans la session
-        $voiture1 = new Vehicule();
+        $voiture1 = new Vehicule("4","","","");
 
 //        $personne1->setRue("rue de la poire");
 //        $personne1->setMail("dupont@gmail.com");

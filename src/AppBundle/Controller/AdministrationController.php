@@ -20,8 +20,11 @@ class AdministrationController extends Controller
      */
     public function administrationAction(Request $request)
     {
-        $personnnes =  Array();
-        $voitures =  Array();
+        $personnesRepo = $this->getDoctrine()->getRepository('AppBundle:Personne');
+        $voituresRepo = $this->getDoctrine()->getRepository('AppBundle:Vehicule');
+
+        $personnnes = $personnesRepo->findAll();
+        $voitures = $voituresRepo->findAll();
 
         return $this->render('Administration/administration.html.twig', array('personnes' => $personnnes, 'voitures' => $voitures));
     }
