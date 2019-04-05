@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}Connexion{% endblock %}
+{% block body %}
+<div class = "container">
+
+    <form class = "form-signin" role = "form"
+          action="connexion" method = "post">
+        <h4 class = "form-signin-heading"><label> {{ "connexion"|trans }}</label></h4>
+        <label> {{ "mail"|trans }}</label>
+        <input type = "text" class = "form-control"
+               name = "username" placeholder = "username = Dupont"
+               required autofocus></br>
+        <label>{{ "pwd"|trans }}</label>
+        <input type = "password" class = "form-control"
+               name = "password" placeholder = "password = 1234" required>
+        <br>
+        <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                name = "login">{{ "connexion"|trans }}</button>
+    </form>
+    </div>
+
+{% endblock %}
