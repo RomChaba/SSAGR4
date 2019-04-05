@@ -54,7 +54,7 @@
             <div class="col-xs-3"><a class="btn btn-default" href="{{ path("Demande") }}">{{ "proposer_un_voyage"|trans }}</a></div>
             <div class="col-xs-2"><a class="btn btn-default" href="#">{{ "participer_voyage"|trans }}</a></div>
             <div class="col-xs-2">{{ "bonjour"|trans }} <span style="color: red;">[NOM_COMPTE]</span></div>
-            <div class="col-xs-2"><a class="btn btn-default" href="#">{{ "mon_compte"|trans }}</a></div>
+            <div class="col-xs-2"><a class="btn btn-default" href="{{ path("moncompte") }}">{{ "mon_compte"|trans }}</a></div>
             <div class="col-xs-2">
                 {% if app.request.locale is defined %}
                     {% if app.request.locale == 'en' %}
@@ -74,7 +74,7 @@
 
 
 {% endblock %}
-<nav class="hidden">
+<nav>
     <ul class="nav nav-justified navbar-fixed-bottom">
         <li class="active"><a href="#">{{ "charte_conducteur"|trans }}</a></li>
         <li><a href="{{ path('contact') }}">{{ "contact"|trans }}</a></li>

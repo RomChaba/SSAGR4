@@ -25,7 +25,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
 
-//        $request->getSession()->set("EMPRUNT",array());
+ //       $request->getSession()->set("EMPRUNT",array());
 //        $request->getSession()->set("LIEU_EMPRUNT",array());
 //        #region Variable de test
 //        $personne1 = new Personne();
@@ -87,7 +87,14 @@ class DefaultController extends Controller
 //
 ////            array_push($listeEmprunt,$this->get("new_emprunt"));
 //        }
+     /*   $tampon = $this->getDoctrine()->getmanager();
 
+        $em = $this->getDoctrine()->getRepository('AppBundle:Personne');
+        $personne1 = $em->findOneBy(array('id'=>'12'));
+        $personne1->setPrenom('Jean');
+        $tampon->persist($personne1);
+        $tampon->flush();
+        die();*/
         $listeEmprunt = $request->getSession()->get("EMPRUNT");
         $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
         dump($listeEmprunt);
