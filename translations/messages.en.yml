@@ -3,7 +3,7 @@ participer_voyage: 'Take part to a voyage'
 connexion: 'Connection'
 bonjour: 'Hello'
 mon_compte: 'My account'
-charte_conducteur: 'Charter driver'
+charte_conducteur: 'Driver charter'
 contact: 'Contact'
 contraintes_legales: 'Legal constraints'
 propositions_de_voyage: 'Travel proposals'
@@ -29,17 +29,15 @@ compte_err_01: 'The password must contain at least 6 characters'
 compte_err_02: 'Passwords must to be identical.'
 compte_err_03: 'Area code must contains at most 5 characters.'
 compte_err_04: 'Please enter only numbers.'
-enregistrer: Save
-message_envoye: 'Message send !'
-demande_covoit: __demande_covoit
-conducteur: __conducteur
-lieu_arrive: __lieu_arrive
-vehicule: __vehicule
-aller_retour: __aller_retour
-commentaire: __commentaire
-valider: __valider
+demande_covoit: 'Travel proposal'
+conducteur: 'Driver'
+lieu_arrive: 'Arrival point'
+vehicule: 'Vehicle'
+aller_retour: 'Round trip'
+commentaire: 'Commentary'
+valider: 'Validate'
 enregistrer: 'Save'
-message_envoye: "Message send !"
-creation_personne: 'Ajouter un utilisateur'
-creation_voiture: 'Ajouter une voiture'
+message_envoye: 'Message send !'
+creation_personne: 'Add a user'
+creation_voiture: 'Add a car'
 administration: 'Administration'

@@ -38,8 +38,6 @@ vehicule: 'Véhicule'
 aller_retour: 'Aller Retour'
 commentaire: 'Commentaire'
 valider: 'Valider'
-
-message_envoye: "Message envoyé !"
 creation_personne: 'Ajouter un utilisateur'
 creation_voiture: 'Ajouter une voiture'
 administration: 'Administration'
