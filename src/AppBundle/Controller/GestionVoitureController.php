@@ -21,18 +21,6 @@ class GestionVoitureController extends Controller
         //TODO Aller chercher la personne en bdd avec son id dans la session
         $voiture1 = new Vehicule("4","","","");
 
-//        $personne1->setRue("rue de la poire");
-//        $personne1->setMail("dupont@gmail.com");
-//        $personne1->setMotDePasse("mdp1");
-//        $personne1->setNom("Dupont");
-//        $personne1->setPrenom("Jean");
-//        $personne1->setTelephone("0980473828");
-//        $personne1->setMotDePasse("mdp");
-//        $personne1->setPhoto("photo");
-//        $personne1->setPermis(false);
-//        $personne1->setActif(true);
-//        $personne1->setDateCreation(new DateTime());
-
         $this->createFormulaire($voiture1); //On crée le formulaire
 
 

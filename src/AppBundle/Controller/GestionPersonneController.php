@@ -24,18 +24,6 @@ class GestionPersonneController extends Controller
         //TODO Aller chercher la personne en bdd avec son id dans la session
         $personne1 = new Personne();
 
-//        $personne1->setRue("rue de la poire");
-//        $personne1->setMail("dupont@gmail.com");
-//        $personne1->setMotDePasse("mdp1");
-//        $personne1->setNom("Dupont");
-//        $personne1->setPrenom("Jean");
-//        $personne1->setTelephone("0980473828");
-//        $personne1->setMotDePasse("mdp");
-//        $personne1->setPhoto("photo");
-//        $personne1->setPermis(false);
-//        $personne1->setActif(true);
-//        $personne1->setDateCreation(new DateTime());
-
         $this->createFormulaire($personne1); //On crée le formulaire
 
 
@@ -50,6 +38,11 @@ class GestionPersonneController extends Controller
 
             // On vérifie que les valeurs entrées sont correctes
             if ($this->leFormulaire->isValid()) {
+
+                if($personne1->getConfirmationMotDePasse() != null)
+                {
+                    $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
+                }
 
                 if($personne1->getId() <= 0) {
                     // On enregistre notre objet $advert dans la base de données, par exemple
@@ -85,7 +78,8 @@ class GestionPersonneController extends Controller
             ->add('rue', TextType::class, array('label' => 'Rue','required' => true))
             ->add('cp', TextType::class, array('label' => 'Code postal'))
             ->add('ville', TextType::class, array('label' => 'Ville'))
-            ->add('motDePasse', PasswordType::class, array('label' => 'Mot de passe','required' => true))
+            ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Mot de passe','required' => true))
+            ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe','required' => false))
             ->add('telephone', TextType::class, array('label' => 'Téléphone'))
             ->add('permis', CheckboxType::class, array('label' => 'Permis'))
             ->add('Enregistrer', SubmitType::class)

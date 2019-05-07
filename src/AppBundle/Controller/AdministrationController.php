@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdministrationController extends Controller
 {
+    private  $personnnes;
     /**
      * @Route("/administration", name="administration")
      */
@@ -39,6 +40,15 @@ class AdministrationController extends Controller
 
         return $this->render('Administration/administration.html.twig', array('personnes' => $personnnes, 'voitures' => $voitures));
     }
+
+    /**
+     * @Route("/suppressionpersonne", name="suppressionpersonne")
+     */
+    public function suppressionPersonneAction(Request $request, int $id)
+    {
+        unset($this->personnnes, $id);
+    }
+
 
     /**
      * @Route("/creationPersonne", name="creationPersonne")

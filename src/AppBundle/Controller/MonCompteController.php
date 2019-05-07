@@ -66,8 +66,6 @@ class MonCompteController extends Controller
             }
         }
 
-
-
         return $this->render('moncompte/moncompte.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
     }
 
@@ -75,7 +73,6 @@ class MonCompteController extends Controller
 
     private function createFormulaire(Personne $personne)
     {
-
         $this->leFormulaire = $this->createFormBuilder($personne)
 
             ->add('nom', TextType::class, array('label' => 'Nom','required' => true))
@@ -92,36 +89,4 @@ class MonCompteController extends Controller
             ->getForm();
 
     }
-
-//    /**
-//     * @Route("/participer2", name="clickparticiper")
-//     */
-//    public function clickParticiperAction(Request $request, $emprunt)
-//    {
-//        $listeEmprunt = $_SESSION["liste_Emprunt"];
-//        $listeEmpruntPersonne = $_SESSION["liste_Emprunt_Personne"];
-//        $listeEmprunt2 = Array();
-//
-//        foreach ($listeEmprunt as $empruntBoucle )
-//        {
-//            if($empruntBoucle->getgetNbJourLocation() != $emprunt)
-//            {
-//                array_push($listeEmprunt2,$empruntBoucle);
-//            }
-//            else
-//            {
-//                array_push($listeEmpruntPersonne,$empruntBoucle);
-//            }
-//        }
-//
-//        $_SESSION["liste_Emprunt"] = $listeEmprunt2;
-//        $_SESSION["liste_Emprunt_Personne"] = $listeEmpruntPersonne;
-//
-//        // replace this example code with whatever you need
-//        return $this->render('participer/participer.html.twig', [
-//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-//            'listeEmprunt'=> $listeEmprunt2
-//        ]);
-//    }
-
 }
