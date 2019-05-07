@@ -15,14 +15,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class GestionPersonneController extends Controller
 {
     /**
-     * @Route("/gestionpersonne", name="gestionpersonne")
+     * @Route("/gestionpersonne/{id}", name="gestionpersonne")
      */
-    public function gestionPersonneAction(Request $request)
+    public function gestionPersonneAction(Request $request, int $id)
     {
         $em = $this->getDoctrine()->getManager();
+        $personnesRepo = $this->getDoctrine()->getRepository('AppBundle:Personne');
 
-        //TODO Aller chercher la personne en bdd avec son id dans la session
-        $personne1 = new Personne();
+        if($id <= 0 || $id == null) {
+            //TODO Aller chercher la personne en bdd avec son id dans la session
+            $personne1 = new Personne();
+        }
+        else
+        {
+            $personne1 = $personnesRepo->findOneById($id);
+        }
 
         $this->createFormulaire($personne1); //On crée le formulaire
 
@@ -39,20 +46,22 @@ class GestionPersonneController extends Controller
             // On vérifie que les valeurs entrées sont correctes
             if ($this->leFormulaire->isValid()) {
 
-                if($personne1->getConfirmationMotDePasse() != null)
-                {
-                    $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
-                }
+
 
                 if($personne1->getId() <= 0) {
+                    if($personne1->getConfirmationMotDePasse() != null)
+                    {
+                        $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
+                    }
+
                     // On enregistre notre objet $advert dans la base de données, par exemple
                     $personne1->setDateCreation(new DateTime());
                     $personne1->setPhoto("testPhoto");
                     $personne1->setActif(true);
-
-                    $em->persist($personne1);
-                    $em->flush();
                 }
+
+                $em->persist($personne1);
+                $em->flush();
 
                 $request->getSession()->getFlashBag()->add('personne', 'Personne bien enregistrée.');
 
@@ -70,21 +79,36 @@ class GestionPersonneController extends Controller
     private function createFormulaire(Personne $personne)
     {
 
-        $this->leFormulaire = $this->createFormBuilder($personne)
+        if ($personne->getId() <= 0) {
+            $this->leFormulaire = $this->createFormBuilder($personne)
+                ->add('nom', TextType::class, array('label' => 'Nom', 'required' => true))
+                ->add('prenom', TextType::class, array('label' => 'Prénom', 'required' => true))
+                ->add('mail', EmailType::class, array('label' => 'Mail'))
+                ->add('rue', TextType::class, array('label' => 'Rue', 'required' => true))
+                ->add('cp', TextType::class, array('label' => 'Code postal'))
+                ->add('ville', TextType::class, array('label' => 'Ville'))
+                ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Mot de passe', 'required' => true))
+                ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe', 'required' => false))
+                ->add('telephone', TextType::class, array('label' => 'Téléphone'))
+                ->add('permis', CheckboxType::class, array('label' => 'Permis'))
+                ->add('Enregistrer', SubmitType::class)
+                ->getForm();
+        }
+        else
+        {
+            $this->leFormulaire = $this->createFormBuilder($personne)
+                ->add('nom', TextType::class, array('label' => 'Nom', 'required' => true))
+                ->add('prenom', TextType::class, array('label' => 'Prénom', 'required' => true))
+                ->add('mail', EmailType::class, array('label' => 'Mail'))
+                ->add('rue', TextType::class, array('label' => 'Rue', 'required' => true))
+                ->add('cp', TextType::class, array('label' => 'Code postal'))
+                ->add('ville', TextType::class, array('label' => 'Ville'))
 
-            ->add('nom', TextType::class, array('label' => 'Nom','required' => true))
-            ->add('prenom', TextType::class, array('label' => 'Prénom','required' => true))
-            ->add('mail', EmailType::class, array('label' => 'Mail'))
-            ->add('rue', TextType::class, array('label' => 'Rue','required' => true))
-            ->add('cp', TextType::class, array('label' => 'Code postal'))
-            ->add('ville', TextType::class, array('label' => 'Ville'))
-            ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Mot de passe','required' => true))
-            ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe','required' => false))
-            ->add('telephone', TextType::class, array('label' => 'Téléphone'))
-            ->add('permis', CheckboxType::class, array('label' => 'Permis'))
-            ->add('Enregistrer', SubmitType::class)
-            ->getForm();
-
+                ->add('telephone', TextType::class, array('label' => 'Téléphone'))
+                ->add('permis', CheckboxType::class, array('label' => 'Permis'))
+                ->add('Enregistrer', SubmitType::class)
+                ->getForm();
+        }
     }
 
 
