@@ -1,28 +1,29 @@
 proposer_un_voyage: 'Voyage proposal'
 participer_voyage: 'Take part to a voyage'
-connexion: 'Connection'
-bonjour: 'Hello'
+connexion: Connection
+bonjour: Hello
 mon_compte: 'My account'
 charte_conducteur: 'Driver charter'
-contact: 'Contact'
+contact: Contact
 contraintes_legales: 'Legal constraints'
 propositions_de_voyage: 'Travel proposals'
-personne: 'Driver'
-date: 'Date'
-duree: 'Duration'
+personne: Driver
+date: Date
+date_depart: 'Departure date'
+date_arrivee: 'Arrival date'
+duree: Duration
 lieu_depart: 'Departure place'
 lieu_arrivee: 'Arrival place'
 votre_nom_prenom: 'Your lastname and firstname'
 votre_mail: 'Your mail adress'
 votre_message: 'Your message'
-envoyer: 'Submit'
+envoyer: Submit
 contacter_le_admin: 'Contact the administrator'
 nom: 'Last name'
 prenom: 'First name'
-rue: 'Street'
-ville: 'City'
-mail: 'Mail'
-pwd: 'Password'
+rue: Street
+ville: City
+mail: Mail
 code_postal: 'Area code'
 nouveau_mdp: 'New password'
 confirmer_mdp: 'Confirm password'
@@ -31,13 +32,30 @@ compte_err_02: 'Passwords must to be identical.'
 compte_err_03: 'Area code must contains at most 5 characters.'
 compte_err_04: 'Please enter only numbers.'
 demande_covoit: 'Travel proposal'
-conducteur: 'Driver'
+conducteur: Driver
 lieu_arrive: 'Arrival point'
-vehicule: 'Vehicle'
+vehicule: Vehicle
 aller_retour: 'Round trip'
-commentaire: 'Commentary'
-enregistrer: 'Save'
+commentaire: Commentary
+enregistrer: Save
 message_envoye: 'Message send !'
 creation_personne: 'Add a user'
 creation_voiture: 'Add a car'
-administration: 'Administration'
+administration: Administration
+previous: Previous
+traitement_en_cours: __traitement_en_cours
+search: 'Search :'
+afficher: 'Display '
+elements: ' elements'
+chargement_en_cours: Loading...
+aucun_element_afficher: 'No items to display'
+no_donnees_a_afficher: 'No data to display'
+premier: First
+next: Next
+last: Last
+activer_tri_croissant: 'Activate ascending sort'
+activer_tri_decroissant: 'Activate descending sort'
+affichage_de_element: "Display of "
+à: " to "
+sur: " from "
+filtre_de: "Filter of "

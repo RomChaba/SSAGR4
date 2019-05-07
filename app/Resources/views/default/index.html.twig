@@ -12,11 +12,11 @@
                 <table class="table table-hover" id="table_home">
                     <thead>
                     <tr>
-                        <th>Personne</th>
-                        <th>Départ</th>
-                        <th>Arrivé</th>
-                        <th>Lieu Depart</th>
-                        <th>Lieu Arrivée</th>
+                        <th>{{ "personne"|trans }}</th>
+                        <th>{{ "date_depart"|trans }}</th>
+                        <th>{{ "date_arrivee"|trans }}</th>
+                        <th>{{ "lieu_depart"|trans }}</th>
+                        <th>{{ "lieu_arrivee"|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -81,13 +81,34 @@
 </style>
 {% endblock %}
 
+ {% block javascripts %}
 
-{% block javascripts %}
-<script>
-    $("#table_home").DataTable(
-
-    );
-</script>
+             <script>
+                 $("#table_home").DataTable({
+                     language: {
+                         processing:     '{{ "traitement_en_cours"|trans }}',
+                         search:         '{{ "search"|trans }}',
+                         lengthMenu:    '{{ "afficher"|trans }} _MENU_ {{ "elements"|trans }}',
+                         info:           '{{ "affichage_de_element"|trans }} _START_ {{ "à"|trans }} _END_ {{ "sur"|trans }} _TOTAL_ {{ "elements"|trans }}',
+                         infoEmpty:      '{{ "affichage_de_element"|trans }} 0 {{ "à"|trans }} 0 {{ "sur"|trans }} 0 {{ "elements"|trans }}',
+                         infoFiltered:   '{{ "filtre_de"|trans }} _MAX_ {{ 'elements_au_total' }}',
+                         infoPostFix:    "",
+                         loadingRecords: '{{ "chargement_en_cours"|trans }}',
+                         zeroRecords:    '{{ "aucun_element_afficher"|trans }}',
+                         emptyTable:     '{{ "no_donnees_a_afficher"|trans }}',
+                         paginate: {
+                             first:      '{{ "premier"|trans }}',
+                             previous:   '{{ "previous"|trans }}',
+                             next:       '{{ "next"|trans }}',
+                             last:       '{{ "last"|trans }}'
+                         },
+                         aria: {
+                             sortAscending:  '{{ "activer_tri_croissant"|trans }}',
+                             sortDescending: '{{ "activer_tri_decroissant"|trans }}',
+                         }
+                     }
+                 });
+             </script>
 
 
 {% endblock %}

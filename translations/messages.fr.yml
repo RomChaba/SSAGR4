@@ -7,17 +7,18 @@ charte_conducteur: 'Charte conducteur'
 contact: Contact
 contraintes_legales: 'Contraintes légales'
 propositions_de_voyage: 'Propositions de voyage'
-personne: 'Conducteur'
-date: 'Date'
-duree: 'Durée'
+personne: Conducteur
+date: Date
+date_depart: 'Date de départ'
+date_arrivee: 'Date d''arrivée'
+duree: Durée
 lieu_depart: 'Lieu de départ'
-lieu_arrivee: "Lieu d'arrivée"
-nom: 'Nom'
-prenom: 'Prénom'
-rue: 'Rue'
-ville: 'Ville'
-mail: 'E-mail'
-pwd: 'Mot de passe'
+lieu_arrivee: 'Lieu d''arrivée'
+nom: Nom
+prenom: Prénom
+rue: Rue
+ville: Ville
+mail: E-mail
 code_postal: 'Code postal'
 nouveau_mdp: 'Nouveau mot de passe'
 confirmer_mdp: 'Confirmation mot de passe'
@@ -25,19 +26,36 @@ compte_err_01: 'Le mot de passe doit contenir minimum 6 caractères.'
 compte_err_02: 'Les deux mots de passe doivent être identiques.'
 compte_err_03: 'Le code postal doit faire maximum 5 caractères.'
 compte_err_04: 'Veuillez ne rentrer que des chiffres.'
-enregistrer: 'Enregistrer'
+enregistrer: Enregistrer
 votre_nom_prenom: 'Votre nom et prénom'
 votre_mail: 'Votre mail'
 votre_message: 'Votre message'
-envoyer: 'Envoyer'
-contacter_le_admin: "Contacter l'administrateur"
+envoyer: Envoyer
+contacter_le_admin: 'Contacter l''administrateur'
 message_envoye: 'Message envoyé !'
 demande_covoit: 'Proposition de Voyage'
-conducteur: 'Conducteur'
-lieu_arrive: 'Lieu d''arrivé'
-vehicule: 'Véhicule'
-aller_retour: 'Aller Retour'
-commentaire: 'Commentaire'
+conducteur: Conducteur
+lieu_arrive: 'Lieu d''arrivée'
+vehicule: Véhicule
+aller_retour: 'Aller - Retour'
+commentaire: Commentaire
 creation_personne: 'Ajouter un utilisateur'
 creation_voiture: 'Ajouter une voiture'
-administration: 'Administration'
+administration: Administration
+previous: Précédent
+next: Suivant
+traitement_en_cours: 'Traitement en cours'
+search: 'Recherche :'
+afficher: 'Afficher '
+elements: ' éléments'
+chargement_en_cours: 'Chargement en cours'
+aucun_element_afficher: 'Aucun élément à afficher'
+no_donnees_a_afficher: 'Pas de données à afficher'
+premier: Premier
+last: Dernier
+activer_tri_croissant: 'Activer le tri par ordre croissant'
+activer_tri_decroissant: 'Activer le tri par ordre décroissant'
+affichage_de_element: "Affichage de l'élement "
+à: "à"
+sur: " sur "
+filtre_de: "Filtre de "
