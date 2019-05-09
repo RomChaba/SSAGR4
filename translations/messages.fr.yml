@@ -55,7 +55,12 @@ premier: Premier
 last: Dernier
 activer_tri_croissant: 'Activer le tri par ordre croissant'
 activer_tri_decroissant: 'Activer le tri par ordre décroissant'
-affichage_de_element: "Affichage de l'élement "
-à: "à"
-sur: " sur "
-filtre_de: "Filtre de "
+affichage_de_element: 'Affichage de l''élement '
+à: à
+sur: ' sur '
+filtre_de: 'Filtre de '
+mail_contact: __mail_contact
+modifier: __modifier
+supprimer: __supprimer
+pwd: __pwd
+is_conducteur: __is_conducteur

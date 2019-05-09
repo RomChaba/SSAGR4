@@ -55,7 +55,12 @@ next: Next
 last: Last
 activer_tri_croissant: 'Activate ascending sort'
 activer_tri_decroissant: 'Activate descending sort'
-affichage_de_element: "Display of "
-à: " to "
-sur: " from "
-filtre_de: "Filter of "
+affichage_de_element: 'Display of '
+à: ' to '
+sur: ' from '
+filtre_de: 'Filter of '
+mail_contact: __mail_contact
+modifier: __modifier
+supprimer: __supprimer
+pwd: __pwd
+is_conducteur: __is_conducteur
