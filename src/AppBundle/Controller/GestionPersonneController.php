@@ -69,8 +69,6 @@ class GestionPersonneController extends Controller
             }
         }
 
-
-
         return $this->render('gestionpersonne/gestionpersonne.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
     }
 

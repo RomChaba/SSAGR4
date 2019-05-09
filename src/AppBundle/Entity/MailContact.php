@@ -9,28 +9,28 @@
 namespace AppBundle\Entity;
 
 
+
 class MailContact
 {
-
     /**
      * @var string
      *
      */
-    private $mailContact;
+    private $mail;
 
     /**
      * @return string
      */
-    public function getMailContact()
+    public function getMail()
     {
-        return $this->mailContact;
+        return $this->mail;
     }
 
     /**
-     * @param string $mailContact
+     * @param string $mail
      */
-    public function setMailContact($mailContact)
+    public function setMail($mail)
     {
-        $this->mailContact = $mailContact;
+        $this->mail = $mail;
     }
 }
