@@ -59,8 +59,27 @@ affichage_de_element: 'Display of '
 à: ' to '
 sur: ' from '
 filtre_de: 'Filter of '
-mail_contact: __mail_contact
-modifier: __modifier
-supprimer: __supprimer
-pwd: __pwd
-is_conducteur: __is_conducteur
+mail_contact: "Mail contact"
+modifier: "Modify"
+supprimer: "Delete"
+point_1: "I have a valid driving licence, and undertake to present it at the request of my superiors and to inform my supervisor in the event of his or her disability. I undertake not to use a vehicle if I do not have the required capacities or if I do not have a valid driver's licence."
+point_2: "I regularly check the tyre pressure, levels, the proper functioning of the lights and indicators and more generally the general condition of the vehicle entrusted to me. If necessary, I refuel when I return and not just before I leave."
+point_3: "Before using the vehicle, I make sure it works properly. I report all anomalies."
+point_4: "I assess the risks associated with travel that cannot be avoided, I apply the rules of civic conduct, respectful of my safety and that of other road users."
+point_5: "I plan my travel and other activities to give you the time you need to drive safely."
+point_6: "When workloads are heavy or driving conditions deteriorate, I take these elements into account in organizing my travel and adapt my driving to these circumstances."
+point_7: "I identify and take the safest routes."
+point_8: "I wear my seat belt in all circumstances and ensure that my passengers do the same."
+point_9: "I respect distances and safety intervals by applying the 2-second rule."
+point_10: "In case of uncertainty, I always put my right foot in front of the brake."
+point_11: "I respect the speed limits in all circumstances and adapt my speed to traffic and weather conditions."
+point_12: "I know the type and size of my vehicle, height, width, weight and comply with the related road signs."
+point_13: "At the first sign of fatigue, I take a 15-minute break."
+point_14: "In case of delay, I stop to notify the administrator of the VoyageEnVoiture application, I know that time is never caught up on the road."
+point_15: "I park my vehicle always ready to go."
+point_16: "I don't phone while driving, I never compose or read E-mails or Text messages while driving."
+point_17: "If I take medication, I respect the symbolism on the box."
+point_18: "I do not drive with more alcohol than is allowed. I don't take narcotics."
+point_19: "In the event of an accident, even a minor one, whether or not responsible, with or without a third party, I fill out an amicable report and immediately notify the administrator of VoyageEnVoiture."
+point_20: "My vehicle is a work tool and reflects the image of our company, I undertake to manage it as a good family man and to ensure that it is in good bodywork, mechanical and clean inside and out."
+pwd: "Password"
