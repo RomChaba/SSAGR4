@@ -90,7 +90,8 @@ class GestionPersonneController extends Controller
                 ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Mot de passe', 'required' => true))
                 ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe', 'required' => false))
                 ->add('telephone', TextType::class, array('label' => 'Téléphone'))
-                ->add('permis', CheckboxType::class, array('label' => 'Permis'))
+                ->add('permis', CheckboxType::class, array('label' => 'Permis', 'required' => false))
+                ->add('isAdmin', CheckboxType::class, array('label' => 'Administrateur', 'required' => false))
                 ->add('Enregistrer', SubmitType::class)
                 ->getForm();
         }
@@ -104,7 +105,8 @@ class GestionPersonneController extends Controller
                 ->add('cp', TextType::class, array('label' => 'Code postal'))
                 ->add('ville', TextType::class, array('label' => 'Ville'))
                 ->add('telephone', TextType::class, array('label' => 'Téléphone'))
-                ->add('permis', CheckboxType::class, array('label' => 'Permis'))
+                ->add('permis', CheckboxType::class, array('label' => 'Permis', 'required' => false))
+                ->add('isAdmin', CheckboxType::class, array('label' => 'Administrateur', 'required' => false))
                 ->add('Enregistrer', SubmitType::class)
                 ->getForm();
         }

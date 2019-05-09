@@ -45,6 +45,13 @@ class Personne
     private $mail;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="isAdmin", type="boolean", nullable=true, options={"default":"0"})
+     */
+    private $isAdmin=false;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="motDePasse", type="string", length=255)
@@ -120,7 +127,7 @@ class Personne
      *
      * @ORM\Column(name="permis", type="boolean")
      */
-    private $permis;
+    private $permis=false;
 
     /**
      * @var bool
@@ -203,6 +210,22 @@ class Personne
     }
 
     /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+    }
+
+    /**
      * Set motDePasse
      *
      * @param string $motDePasse
@@ -225,6 +248,7 @@ class Personne
     {
         return $this->motDePasse;
     }
+
 
     /**
      * @return mixed
