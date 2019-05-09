@@ -103,7 +103,6 @@ class GestionPersonneController extends Controller
                 ->add('rue', TextType::class, array('label' => 'Rue', 'required' => true))
                 ->add('cp', TextType::class, array('label' => 'Code postal'))
                 ->add('ville', TextType::class, array('label' => 'Ville'))
-
                 ->add('telephone', TextType::class, array('label' => 'Téléphone'))
                 ->add('permis', CheckboxType::class, array('label' => 'Permis'))
                 ->add('Enregistrer', SubmitType::class)
