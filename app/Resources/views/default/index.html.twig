@@ -2,12 +2,74 @@
 
 {% block body %}
     <div id="wrapper">
-        <div id="container">
+        <div id="container-fluid">
             <div id="welcome">
                 <h1>{{ "propositions_de_voyage"|trans }}</h1>
             </div>
 
+            <div class="col-xs-12" style="padding: 1em">
+                <div class="col-xs-2">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Lieu départ
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            {% for lieu in listeLieu %}
+                                <li onclick="search_depart('{{ lieu.libelle }}');"><a href="#">{{ lieu.libelle }}</a></li>
+                            {% endfor %}
 
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Lieu arrivé
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            {% for lieu in listeLieu %}
+                                <li onclick="search_arrive('{{ lieu.libelle }}');"><a href="#">{{ lieu.libelle }}</a></li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Date départ
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            {% for data in lieu_emprunt %}
+                                {% if data.depart == true %}
+                                    <li onclick="search_date('{{ data.dateEtHeure|date("d/m/Y", false) }}')"><a href="#">{{ data.dateEtHeure|date("d/m/Y", false) }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Conducteur
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li onclick="search_conducteur('conducteur')"><a href="#">Oui</a></li>
+                            <li onclick="search_conducteur('passager')"><a href="#">Non</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <button onclick="search_reset()" class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-refresh"></i>
+                    </button>
+                </div>
+            </div>
             <div class="table-responsive" >
                 <table class="table table-hover" id="table_home">
                     <thead>
@@ -25,27 +87,34 @@
                         <td>{{ emprunt.listePersonne[0].prenom|default('Pierre') }} {{ emprunt.listePersonne[0].nom|default('Marc') }}</td>
                         {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
 
-                        {% for data in lieu_emprunt %}
-                            {% if data.depart == true %}
-                                <td>{{ data.dateEtHeure|date("d/m/Y h:i", false) }}</td>
-                            {% else %}
-                                <td>{{ data.dateEtHeure|date("d/m/Y h:i", false) }}</td>
-                            {% endif %}
-                        {% endfor %}
+                                {% for data in lieu_emprunt %}
+                                    {% if emprunt.id == data.empruntId and data.depart == true %}
+                                        <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                                    {% elseif emprunt.id == data.empruntId %}
+                                        <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                                    {% endif %}
+                                {% endfor %}
 
-                        <td>{{ emprunt.listeLieux[0].libelle }}</td>
-                        <td>{{ emprunt.listeLieux[1].libelle }}</td>
-                    </tr>
-                    {% endfor %}
-                    {#<tr>#}
-                        {#<td>qsdqsd</td>#}
-                        {#<td>qsdqsd</td>#}
-                        {#<td>qsdqsd</td>#}
-                        {#<td>qsdqsd</td>#}
-                        {#<td>qsdqsd</td>#}
-                    {#</tr>#}
-                    </tbody>
-                </table>
+                                <td>{{ emprunt.listeLieux[0].libelle }}</td>
+                                <td>{{ emprunt.listeLieux[1].libelle }}</td>
+                                {% if pers_co.id == emprunt.listePersonne[0].id %}
+                                    <td align="center" class="alert alert-success">
+                                        <span class="glyphicon glyphicon-ok">
+                                            <span style="display: none;">conducteur</span>
+                                        </span>
+                                    </td>
+                                {% else %}
+                                    <td align="center" class="alert alert-danger">
+                                        <span class="glyphicon glyphicon-remove">
+                                            <span style="display: none;">passager</span>
+                                        </span>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
@@ -53,38 +122,120 @@
 {% endblock %}
 
 {% block stylesheets %}
-<style>
-    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
-    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
-    h1 { font-size: 36px; }
-    h2 { font-size: 21px; margin-bottom: 1em; }
-    p { margin: 0 0 1em 0; }
-    a { color: #0000F0; }
-    a:hover { text-decoration: none; }
-    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
-    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
-    #container { padding: 2em; }
-    #welcome, #status { margin-bottom: 2em; }
-    #welcome h1 span { display: block; font-size: 75%; }
-    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
-    #icon-book { display: none; }
+    <style>
+        body {
+            background: #F5F5F5;
+            font: 18px/1.5 sans-serif;
+        }
 
-    @media (min-width: 768px) {
-        #wrapper { width: 80%; margin: 2em auto; }
-        #icon-book { display: inline-block; }
-        #status a, #next a { display: block; }
+        h1, h2 {
+            line-height: 1.2;
+            margin: 0 0 .5em;
+        }
 
-        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
-    }
-</style>
+        h1 {
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 21px;
+            margin-bottom: 1em;
+        }
+
+        p {
+            margin: 0 0 1em 0;
+        }
+
+        a {
+            color: #0000F0;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        code {
+            background: #F5F5F5;
+            max-width: 100px;
+            padding: 2px 6px;
+            word-wrap: break-word;
+        }
+
+        #wrapper {
+            background: #FFF;
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+        }
+
+        #container {
+            padding: 2em;
+        }
+
+        #welcome, #status {
+            margin-bottom: 2em;
+        }
+
+        #welcome h1 span {
+            display: block;
+            font-size: 75%;
+        }
+
+        #icon-status, #icon-book {
+            float: left;
+            height: 64px;
+            margin-right: 1em;
+            margin-top: -4px;
+            width: 64px;
+        }
+
+        #icon-book {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            #wrapper {
+                width: 80%;
+                margin: 2em auto;
+            }
+
+            #icon-book {
+                display: inline-block;
+            }
+
+            #status a, #next a {
+                display: block;
+            }
+
+            @-webkit-keyframes fade-in {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+            @keyframes fade-in {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+            .sf-toolbar {
+                opacity: 0;
+                -webkit-animation: fade-in 1s .2s forwards;
+                animation: fade-in 1s .2s forwards;
+            }
+        }
+    </style>
 {% endblock %}
 
- {% block javascripts %}
 
-             <script>
-                 $("#table_home").DataTable({
+{% block javascripts %}
+<script>
+    $("#table_home").DataTable({
                      language: {
                          processing:     '{{ "traitement_en_cours"|trans }}',
                          search:         '{{ "search"|trans }}',
@@ -106,9 +257,40 @@
                              sortAscending:  '{{ "activer_tri_croissant"|trans }}',
                              sortDescending: '{{ "activer_tri_decroissant"|trans }}',
                          }
-                     }
-                 });
-             </script>
+}
+    });
+function search_depart(recherche) {
+           var table = $("#table_home").DataTable();
+            search_reset();
+            table.columns(3).search(recherche ).draw();
+        }
+        function search_arrive(recherche) {
+           var table = $("#table_home").DataTable();
+            search_reset();
+            table.columns(4).search(recherche ).draw();
+        }
+        function search_date(recherche) {
+            console.log(recherche);
+           var table = $("#table_home").DataTable();
+            search_reset();
+            table.columns(1).search(recherche ).draw();
+        }
+        function search_conducteur(recherche) {
+            console.log(recherche);
+           var table = $("#table_home").DataTable();
+            search_reset();
+            table.column(5).search(recherche).draw();
+        }
+        function search_reset() {
+            console.log("reset");
+           var table = $("#table_home").DataTable();
+            table.column(0).search("").draw();
+            table.column(1).search("").draw();
+            table.column(2).search("").draw();
+            table.column(3).search("").draw();
+            table.column(4).search("").draw();
+            table.column(5).search("").draw();
+        }</script>
 
 
 {% endblock %}
