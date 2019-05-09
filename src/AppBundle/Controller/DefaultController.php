@@ -24,49 +24,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-//        $request->getSession()->set("EMPRUNT",array());
-//        $request->getSession()->set("LIEU_EMPRUNT",array());
-//        #region Variable de test
-//        $personne1 = new Personne();
-//        $personne1->setId(1);
-//        $personne1->setRue("rue de la poire");
-//        $personne1->setMail("dupont@gmail.com");
-//        $personne1->setMotDePasse("mdp1");
-//        $personne1->setNom("dupont");
-//        $personne1->setPrenom("jean");
-//        $personne1->setTelephone("0980473828");
-//        $personne1->setPermis(true);
-//        $personne1->setPhoto("photoTemp");
-//
-//        $v1 = new Vehicule();
-//        $v1->setId(1);
-//        $v1->setImmatriculation("ss-522-sd");
-//        $v1->setDisponibilite(true);
-//        $v1->setCouleur("Rouge");
-//        $v1->setLibelle("Voiture 1");
-//
-//        $v2 = $v1;
-//        $v2->setId(2);
-//        $v2->setLibelle("Voiture 2");
-//
-//        $emp1 = new Emprunt();
-//        $emp1->setId(1);
-//        $emp1->setVehiculeId($v1);
-//        $emp1->setCommentaire("Commentaire 1");
-//
-//        $emp2 = new Emprunt();
-//        $emp2->setId(2);
-//        $emp2->setVehiculeId($v2);
-//        $emp2->setCommentaire("Commentaire 2");
-
-        #endregion
+        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
 
 
-
-
-
-
+        $pers_co = $repoPersonne->findOneById(10);
 
         $em = $this->getDoctrine()->getManager();
 
@@ -89,6 +50,8 @@ class DefaultController extends Controller
 //        }
 
         $listeEmprunt = $request->getSession()->get("EMPRUNT");
+
+        
         $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
         dump($listeEmprunt);
         dump($lieu_emprunt);
@@ -107,6 +70,7 @@ class DefaultController extends Controller
             'listeEmprunt'=> $listeEmprunt,
             'lieu_emprunt'=> $lieu_emprunt,
             'listeLieu'=> $listeLieu,
+            'pers_co'=> $pers_co,
         ]);
     }
 

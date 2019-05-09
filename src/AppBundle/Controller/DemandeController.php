@@ -46,7 +46,7 @@ class DemandeController extends Controller
 
         date_default_timezone_set('Europe/Paris');
         $dateDuJour = getdate();
-        dump($dateDuJour);
+//        dump($dateDuJour);
 
         return $this->render(
             'Demande/demande.html.twig',
@@ -69,46 +69,28 @@ class DemandeController extends Controller
      */
     public function DemandeFormAction(Request $request)
     {
-        //exemple
-        /*
-          "name" => "2"
-          "lieu_depart_1" => "1"
-          "date_depart_1" => "04/04/2019"
-          "h_depart_1" => "10"
-          "min_depart_1" => "42"
-          "lieu_arrive_1" => "2"
-          "date_arrive_1" => "25/04/2019"
-          "h_arrive_1" => "6"
-          "min_arrive_1" => "5"
-          "vehicule" => "2"
-          "h_depart_2" => "10"
-          "min_depart_2" => "48"
-          "h_arrive_2" => "14"
-          "min_arrive_2" => "15"
-          "commentaire" => "azertyuiop"
 
-         */
+
+        /********* INIT DES REPOSOTORY ********/
+        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
+        $repoVehicule = $this->getDoctrine()->getRepository("AppBundle:Vehicule");
+        $repoLieu = $this->getDoctrine()->getRepository("AppBundle:Lieu");
+
 
         //recuperation du conducteur
-        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
-
         /** @var Personne $conducteur */
         $conducteur = $repoPersonne->findOneBy(["id"=>$request->get("personne")]);
 
 
-        dump($conducteur);
         //recuperation du vehicule
-        $repoVehicule = $this->getDoctrine()->getRepository("AppBundle:Vehicule");
         /** @var Vehicule $vehicule */
         $vehicule = $repoVehicule->findOneBy(["id"=>$request->get("vehicule")]);
 
-        dump($vehicule);
         //recuperation du commentaire
         $commentaire = $request->get("commentaire");
 
-        dump($commentaire);
+
         //recuperation du lieu de depart date + h:min
-        $repoLieu = $this->getDoctrine()->getRepository("AppBundle:Lieu");
         /** @var Lieu $lieu_depart */
         $lieu_depart = $repoLieu->findOneBy(["id"=>$request->get("lieu_depart_1")]);
 
@@ -118,8 +100,6 @@ class DemandeController extends Controller
         $date_depart->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
         $date_depart->setTime($request->get("h_depart_1"),$request->get("min_depart_1"));
 
-        dump($lieu_depart);
-        dump($date_depart);
 
 
         //recuperation du lieu d'arrive date + h:min
@@ -132,31 +112,31 @@ class DemandeController extends Controller
         $date_arrive->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
         $date_arrive->setTime($request->get("h_arrive_1"),$request->get("min_arrive_1"));
 
-        dump($lieu_arrive);
-        dump($date_arrive);
 
 
+        // Création de la liste des lieux
         $listeLieu = new ArrayCollection();
+
+        //Ajout des lieux de l'aller dans la liste
         $listeLieu->add($lieu_depart);
         $listeLieu->add($lieu_arrive);
 
+        //Création de la liste des personnes pour l'emprunt
         $listePersonne = new ArrayCollection();
+        // Ajout du conducteur
         $listePersonne->add($conducteur);
 
 
         //Creation de l'emprunt et de ses branches
         $emprunt = new Emprunt();
-        $emprunt->setId(rand());
+        $emprunt->setId(time());
         $emprunt->setVehiculeId($vehicule);
         $emprunt->setListeLieux($listeLieu);
         $emprunt->setListePersonne($listePersonne);
         $emprunt->setCommentaire($commentaire);
 
-        dump($emprunt);
-
         //Création de la liaison entre l'emprunt et les lieux
-
-        $liste_lieux = array();
+        $liste_lieux_new = array();
 
         $lieu_emprunt_dep = new Lieu_emprunt();
         $lieu_emprunt_ari = new Lieu_emprunt();
@@ -166,16 +146,16 @@ class DemandeController extends Controller
         $lieu_emprunt_dep->setLieuId($lieu_depart->getId());
         $lieu_emprunt_dep->setDepart(true);
 
-        array_push($liste_lieux,$lieu_emprunt_dep);
+        array_push($liste_lieux_new,$lieu_emprunt_dep);
 
         $lieu_emprunt_ari->setEmpruntId($emprunt->getId());
         $lieu_emprunt_ari->setDateEtHeure($date_arrive);
         $lieu_emprunt_ari->setLieuId($lieu_arrive->getId());
         $lieu_emprunt_ari->setDepart(false);
 
-        array_push($liste_lieux,$lieu_emprunt_ari);
+        array_push($liste_lieux_new,$lieu_emprunt_ari);
 
-
+        //Récupération de la liste des emprunts existant
         //TODO ENLEVER ET REMPLACER
         if ($request->getSession()->get("EMPRUNT") == null) {
             $request->getSession()->set("EMPRUNT",array());
@@ -183,17 +163,90 @@ class DemandeController extends Controller
         if ($request->getSession()->get("LIEU_EMPRUNT") == null) {
             $request->getSession()->set("LIEU_EMPRUNT",array());
         }
+
         /** @var array $liste_emprunt */
         $liste_emprunt = $request->getSession()->get("EMPRUNT");
-        array_push($liste_emprunt,$emprunt);
-        $request->getSession()->set("EMPRUNT",$liste_emprunt);
+
+
+//    Test si aller retour a ete coche
+        if ($request->get("aller_ret") == "on") {
+
+//            inversion des lieux de depart et d'arrive
+
+            $old_depart = $lieu_depart;
+            $lieu_depart = $lieu_arrive;
+            $lieu_arrive = $old_depart;
+
+            // Création de la liste des lieux
+            $listeLieu = new ArrayCollection();
+
+            //Ajout des lieux de l'aller dans la liste
+            $listeLieu->add($lieu_depart);
+            $listeLieu->add($lieu_arrive);
+
+            //            Creation du nouvel emprunt
+            $emprunt_ret = new Emprunt();
+            $emprunt_ret->setId(time()+1);
+            $emprunt_ret->setVehiculeId($vehicule);
+            $emprunt_ret->setListeLieux($listeLieu);
+            $emprunt_ret->setListePersonne($listePersonne);
+            $emprunt_ret->setCommentaire($commentaire);
+            array_push($liste_emprunt,$emprunt_ret);
+
+
+//            Recupertation des dates 1 pour le retour
+            $date_tempo = explode("/",$request->get("date_depart_2"));
+            $date_depart = new \DateTime();
+            $date_depart->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
+            $date_depart->setTime($request->get("h_depart_2"),$request->get("min_depart_2"));
+
+
+//            Recupertation des dates 2 pour le retour
+
+            $date_tempo = explode("/",$request->get("date_arrive_1"));
+            $date_arrive = new \DateTime();
+            $date_arrive->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
+            $date_arrive->setTime($request->get("h_arrive_2"),$request->get("min_arrive_2"));
+
+            $lieu_emprunt_dep = new Lieu_emprunt();
+            $lieu_emprunt_dep->setEmpruntId($emprunt_ret->getId());
+            $lieu_emprunt_dep->setDateEtHeure($date_depart);
+            $lieu_emprunt_dep->setLieuId($lieu_depart->getId());
+            $lieu_emprunt_dep->setDepart(true);
+
+            array_push($liste_lieux_new,$lieu_emprunt_dep);
+
+
+            dump($request->get("lieu_arrive_2"));
+
+            $lieu_emprunt_ari = new Lieu_emprunt();
+            $lieu_emprunt_ari->setEmpruntId($emprunt_ret->getId());
+            $lieu_emprunt_ari->setDateEtHeure($date_arrive);
+            $lieu_emprunt_ari->setLieuId($lieu_arrive->getId());
+            $lieu_emprunt_ari->setDepart(false);
+
+            array_push($liste_lieux_new,$lieu_emprunt_ari);
+
+
+        }
+
+
+        $liste_lieux = $request->getSession()->get("LIEU_EMPRUNT");
+        $liste_lieux = array_merge($liste_lieux,$liste_lieux_new);
+
         $request->getSession()->set("LIEU_EMPRUNT",$liste_lieux);
 
-        $em = $this->getDoctrine()->getManager();
+
+
+        array_push($liste_emprunt,$emprunt);
+        $request->getSession()->set("EMPRUNT",$liste_emprunt);
+
+//        $em = $this->getDoctrine()->getManager();
 
 //        $em->persist($emprunt);
 //        $em->flush();
-
+//
+//        die();
 //        $lieu_emprunt_dep = new Lieu_emprunt();
 //        $lieu_emprunt_dep->setEmpruntId($emprunt->getId());
 //        $lieu_emprunt_dep->setDepart(true);
