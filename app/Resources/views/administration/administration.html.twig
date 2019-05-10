@@ -47,18 +47,17 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Permis</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
+                <th>Modifier / Supprimer</th>
             </tr>
             </thead>
             <tbody>
             {% for personne in personnes %}
                 <tr>
-                    <td>{{ personne.nom }}</td>
-                    <td>{{ personne.prenom }}</td>
-                    <td>{{ personne.permis }}</td>
-                    <td><a class="btn btn-default" href="{{ path("gestionpersonne", {id: personne.id} )}}">{{ "modifier"|trans }}</a></td>
-                    <td><a class="btn btn-default" href="{{ path("suppressionpersonne", {id: personne.id} ) }}">{{ "supprimer"|trans }}</a></td>
+                    <td align="center">{{ personne.nom }}</td>
+                    <td align="center">{{ personne.prenom }}</td>
+                    <td align="center">{{ personne.permis }}</td>
+                    <td align="center"><a class="btn btn-default" href="{{ path("gestionpersonne", {id: personne.id} )}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-default" href="{{ path("suppressionpersonne", {id: personne.id} ) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -73,21 +72,21 @@
         <table class="table table-hover" id="table_voiture">
             <thead>
             <tr>
-                <th>Libellé</th>
-                <th>Immatriculation</th>
-                <th>Couleur</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
+                <th align="center">Libellé</th>
+                <th align="center">Immatriculation</th>
+                <th align="center">Couleur</th>
+                <th align="center">Modifier / Supprimer</th>
+
             </tr>
             </thead>
             <tbody>
             {% for voiture in voitures %}
                 <tr>
-                    <td>{{ voiture.libelle }}</td>
-                    <td>{{ voiture.immatriculation }}</td>
-                    <td>{{ voiture.couleur }}</td>
-                    <td><a class="btn btn-default" href="{{ path("gestionvoiture", {id: voiture.id} )}}">{{ "modifier"|trans }}</a></td>
-                    <td><a class="btn btn-default" href="{{ path("suppressionvoiture", {id: voiture.id} ) }}">{{ "supprimer"|trans }}</a></td>
+                    <td align="center">{{ voiture.libelle }}</td>
+                    <td align="center">{{ voiture.immatriculation }}</td>
+                    <td align="center">{{ voiture.couleur }}</td>
+                    <td align="center"><a class="btn btn-default" href="{{ path("gestionvoiture", {id: voiture.id} )}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-default" href="{{ path("suppressionvoiture", {id: voiture.id} ) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -12,10 +12,9 @@
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
             {{ form_row(formulairePersonne.nom) }}
             {{ form_row(formulairePersonne.mail) }}
-            {% if app.request.get('id') <= 0 %}
-                {{ form_row(formulairePersonne.nouveauMotDePasse) }}
-                {{ form_row(formulairePersonne.confirmationMotDePasse) }}
-            {% endif %}
+            {{ form_row(formulairePersonne.nouveauMotDePasse) }}
+            {{ form_row(formulairePersonne.confirmationMotDePasse) }}
+
 
 
             {{ form_row(formulairePersonne.telephone) }}

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -23,16 +24,15 @@ class GestionPersonneController extends Controller
         $personnesRepo = $this->getDoctrine()->getRepository('AppBundle:Personne');
 
         if($id <= 0 || $id == null) {
-            //TODO Aller chercher la personne en bdd avec son id dans la session
             $personne1 = new Personne();
         }
         else
         {
             $personne1 = $personnesRepo->findOneById($id);
+            //$personne1->setNouveauMotDePasse($personne1->getMotDePasse());
         }
 
         $this->createFormulaire($personne1); //On crée le formulaire
-
 
         $this->leFormulaire->handleRequest($request);
 
@@ -46,18 +46,16 @@ class GestionPersonneController extends Controller
             // On vérifie que les valeurs entrées sont correctes
             if ($this->leFormulaire->isValid()) {
 
-
-
                 if($personne1->getId() <= 0) {
-                    if($personne1->getConfirmationMotDePasse() != null)
-                    {
-                        $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
-                    }
-
                     // On enregistre notre objet $advert dans la base de données, par exemple
                     $personne1->setDateCreation(new DateTime());
                     $personne1->setPhoto("testPhoto");
                     $personne1->setActif(true);
+                }
+
+                if($personne1->getConfirmationMotDePasse() != null)
+                {
+                    $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
                 }
 
                 $em->persist($personne1);
@@ -76,8 +74,8 @@ class GestionPersonneController extends Controller
 
     private function createFormulaire(Personne $personne)
     {
+        if($personne->getId() <= 0) {
 
-        if ($personne->getId() <= 0) {
             $this->leFormulaire = $this->createFormBuilder($personne)
                 ->add('nom', TextType::class, array('label' => 'Nom', 'required' => true))
                 ->add('prenom', TextType::class, array('label' => 'Prénom', 'required' => true))
@@ -93,8 +91,8 @@ class GestionPersonneController extends Controller
                 ->add('Enregistrer', SubmitType::class)
                 ->getForm();
         }
-        else
-        {
+        else {
+
             $this->leFormulaire = $this->createFormBuilder($personne)
                 ->add('nom', TextType::class, array('label' => 'Nom', 'required' => true))
                 ->add('prenom', TextType::class, array('label' => 'Prénom', 'required' => true))
@@ -102,6 +100,8 @@ class GestionPersonneController extends Controller
                 ->add('rue', TextType::class, array('label' => 'Rue', 'required' => true))
                 ->add('cp', TextType::class, array('label' => 'Code postal'))
                 ->add('ville', TextType::class, array('label' => 'Ville'))
+                ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Mot de passe', 'required' => false))
+                ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe', 'required' => false))
                 ->add('telephone', TextType::class, array('label' => 'Téléphone'))
                 ->add('permis', CheckboxType::class, array('label' => 'Permis', 'required' => false))
                 ->add('isAdmin', CheckboxType::class, array('label' => 'Administrateur', 'required' => false))

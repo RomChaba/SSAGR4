@@ -75,6 +75,11 @@ class Personne
      */
     public function isConfirmationMotDePasse()
     {
+        if($this->getNouveauMotDePasse() == null)
+        {
+            return true;
+        }
+
         if($this->getNouveauMotDePasse() == $this->getConfirmationMotDePasse())
         {
             return true;
@@ -84,6 +89,21 @@ class Personne
             return false;
         }
     }
+
+//    /**
+//     * @Assert\IsTrue(message="Le format du téléphone n'est pas correct")
+//     */
+//    public function isTelephoneOk()
+//    {
+//        if( preg_match ( " /^[0-9]{10,10}$/ " , $this->getTelephone() ))
+//        {
+//            return true;
+//        }
+//        else
+//        {
+//            return false;
+//        }
+//    }
 
     /**
      * @var string
@@ -149,6 +169,7 @@ class Personne
      * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="personneId")
      */
     private $listeEmprunt;
+
 
     /**
      * Get id
