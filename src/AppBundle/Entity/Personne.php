@@ -90,20 +90,20 @@ class Personne
         }
     }
 
-//    /**
-//     * @Assert\IsTrue(message="Le format du téléphone n'est pas correct")
-//     */
-//    public function isTelephoneOk()
-//    {
-//        if( preg_match ( " /^[0-9]{10,10}$/ " , $this->getTelephone() ))
-//        {
-//            return true;
-//        }
-//        else
-//        {
-//            return false;
-//        }
-//    }
+    /**
+     * @Assert\IsTrue(message="Le format du téléphone n'est pas correct")
+     */
+    public function isTelephone()
+    {
+        if( preg_match ( " /^[0-9]{10,10}$/ " , $this->getTelephone() ))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     /**
      * @var string

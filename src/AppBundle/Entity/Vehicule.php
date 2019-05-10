@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Vehicule
@@ -47,6 +48,7 @@ class Vehicule
      * @var string
      *
      * @ORM\Column(name="immatriculation", type="string", length=255)
+     * @Assert\Length(min=7, minMessage="L'immatriculation doit contenir minimum 7 caractères", max=8, maxMessage="L'immatriculation doit contenir maximum 9 caractères")
      */
     private $immatriculation;
 
@@ -55,6 +57,25 @@ class Vehicule
      * @ORM\ManyToOne(targetEntity="Emprunt")
      */
     private $disponibilite;
+
+    /**
+     * @Assert\IsTrue(message="L'immatriculation ne respecte pas le bon format")
+     */
+    public function isImmatriculation()
+    {
+        if (strlen($this->getImmatriculation()) <= 9 && preg_match("#^[0-9]{1,4}[A-Z]{1,4}[0-9]{1,2}$#", $this->getImmatriculation()))
+        {
+            return true;
+        }
+        elseif  (strlen($this->getImmatriculation()) <= 7 && preg_match("#^[A-Z]{1,2}[0-9]{1,3}[A-Z]{1,2}$#", $this->getImmatriculation()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     /**
      * Vehicule constructor.
@@ -151,7 +172,8 @@ class Vehicule
      */
     public function setImmatriculation($immatriculation)
     {
-        $this->immatriculation = $immatriculation;
+        $immatFormat = str_replace(CHR(32),"",$immatriculation);
+        $this->immatriculation = strtoupper($immatFormat);
     }
 
     /**
