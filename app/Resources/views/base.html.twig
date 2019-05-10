@@ -60,7 +60,8 @@
                 <div class="col-xs-2">{{ "bonjour"|trans }} <span>Jean Dupont</span></div>
 
             {% endif %}
-            <div class="col-xs-2"><a class="btn btn-default" href="#">{{ "mon_compte"|trans }}</a></div>
+            <div class="col-xs-1"><a class="btn btn-default" href="{{ path("moncompte") }}">{{ "mon_compte"|trans }}</a></div>
+                  <div class="col-xs-1">  <a class="btn btn-default" href="{{ path("administration") }}">{{ "admin"|trans }}</a></div>
             <div class="col-xs-2">
                 {% if app.request.locale is defined %}
                     {% if app.request.locale == 'en' %}
