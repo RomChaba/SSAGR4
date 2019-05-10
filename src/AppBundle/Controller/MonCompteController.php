@@ -85,7 +85,7 @@ class MonCompteController extends Controller
             ->add('ville', TextType::class, array('label' => 'Ville'))
             ->add('nouveauMotDePasse', PasswordType::class, array('label' => 'Nouveau mot de passe','required' => false))
             ->add('confirmationMotDePasse', PasswordType::class, array('label' => 'Confirmation mot de passe','required' => false))
-            ->add('Enregistrer', SubmitType::class)
+            ->add('Enregistrer', SubmitType::class, array('attr' => ['class' => 'btn btn-success pull-right']))
             ->getForm();
 
     }

@@ -64,7 +64,7 @@ class GestionVoitureController extends Controller
             ->add('libelle', TextType::class, array('label' => 'Libellé','required' => true))
             ->add('couleur', TextType::class, array('label' => 'Couleur','required' => true))
             ->add('immatriculation', TextType::class, array('label' => 'Immatriculation'))
-            ->add('Enregistrer', SubmitType::class)
+            ->add('Enregistrer', SubmitType::class, array('attr' => ['class' => 'btn btn-success pull-right']))
             ->getForm();
     }
 }

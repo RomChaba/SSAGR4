@@ -88,7 +88,7 @@ class GestionPersonneController extends Controller
                 ->add('telephone', TextType::class, array('label' => 'Téléphone'))
                 ->add('permis', CheckboxType::class, array('label' => 'Permis', 'required' => false))
                 ->add('isAdmin', CheckboxType::class, array('label' => 'Administrateur', 'required' => false))
-                ->add('Enregistrer', SubmitType::class)
+                ->add('Enregistrer', SubmitType::class, array('attr' => ['class' => 'btn btn-success pull-right']))
                 ->getForm();
         }
         else {
@@ -105,7 +105,7 @@ class GestionPersonneController extends Controller
                 ->add('telephone', TextType::class, array('label' => 'Téléphone'))
                 ->add('permis', CheckboxType::class, array('label' => 'Permis', 'required' => false))
                 ->add('isAdmin', CheckboxType::class, array('label' => 'Administrateur', 'required' => false))
-                ->add('Enregistrer', SubmitType::class)
+                ->add('Enregistrer', SubmitType::class, array('attr' => ['class' => 'btn btn-success pull-right']))
                 ->getForm();
         }
     }

@@ -79,7 +79,7 @@ class MailContactController extends Controller
         $this->leFormulaire = $this->createFormBuilder($mailContact)
 
             ->add('mail', TextType::class)
-            ->add('Enregistrer', SubmitType::class)
+            ->add('Enregistrer', SubmitType::class, array('attr' => ['class' => 'btn btn-success']))
             ->getForm();
     }
 
