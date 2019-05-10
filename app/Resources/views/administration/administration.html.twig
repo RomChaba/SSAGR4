@@ -57,9 +57,13 @@
                     <td align="center">{{ personne.prenom }}</td>
                     {% if personne.permis == true %}
 
-                    <td readonly align="center"><input onclick="return false;" type="checkbox" name="nom_checkbox" value="{{ personne.permis }}" checked/></td>
+                    <td align="center" class="alert alert-success"><span class="glyphicon glyphicon-ok">
+
+                                        </span></td>
                     {% else %}
-                        <td readonly align="center"><input onclick="return false;" type="checkbox" name="nom_checkbox" value="{{ personne.permis }}" /></td>
+                        <td  align="center" class="alert alert-danger"><span class="glyphicon glyphicon-remove">
+                                            
+                                        </span></td>
                         {% endif %}
                     <td align="center"><a class="btn btn-default" href="{{ path("gestionpersonne", {id: personne.id} )}}"><span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-default" href="{{ path("suppressionpersonne", {id: personne.id} ) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
