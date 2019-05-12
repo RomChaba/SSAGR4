@@ -32,28 +32,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $test = new DateTime();
-        dump($test);
-
-//        $listeEmprunt = array();
-//        if (!isset($_SESSION["liste_Emprunt"])) {
-//
-//            $listeEmprunt= [
-//                $emp1,
-//                $emp2
-//            ];
-//
-//            $_SESSION["liste_Emprunt"] = $listeEmprunt;
-//        }else{
-//            $listeEmprunt = $_SESSION["liste_Emprunt"];
-//
-////            array_push($listeEmprunt,$this->get("new_emprunt"));
-//        }
 
         $listeEmprunt = $request->getSession()->get("EMPRUNT");
         $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
-        dump($listeEmprunt);
-        dump($lieu_emprunt);
-//        die();
+
 
         $listeLieu = $em->getRepository('AppBundle:Lieu')->findAll();
 

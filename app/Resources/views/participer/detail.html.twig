@@ -1,0 +1,406 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Partir en covoiturage{% endblock %}
+
+{% block body %}
+
+
+    <link href="{{ asset("css/datepicker.css") }}" rel="stylesheet" type="text/css">
+
+    <style>
+        option:checked {
+            background-color: lightgrey;
+        }
+
+        .btn-bas > a {
+            /*margin-bottom: 1em;*/
+        }
+    </style>
+
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <form action="{{ path("DemandeForm") }}" method="post" role="form">
+            <legend>{{ "detail_covoit_titre"|trans }} </legend>
+
+            <div class="form-group col-xs-12">
+                <label for="inputID" class="col-xs-12">{{ "conducteur"|trans }}</label>
+
+                <div class="col-xs-10 col-sm-6">
+
+                    <input type="text" name="personne" id="personne" class="form-control"
+                           value="{{ emprunt.listePersonne[0].nom }} {{ emprunt.listePersonne[0].prenom }}" title=""
+                           readonly>
+
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="" class="col-xs-12">{{ "lieu_depart"|trans }}* :</label>
+                <div class="col-xs-12 col-sm-6">
+
+                    <input type="text" name="lieu_depart_1" id="lieu_depart_1" class="form-control"
+                           value="{{ emprunt.listeLieux[0].libelle }}" title="" readonly>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" name="date_depart_1" id="date_depart_1" class="form-control"
+                               value="{{ lieu_emprunt[0].dateEtHeure|date("d/m/Y H:i", false) }}" readonly/>
+                        <span class="input-group-addon" onclick=""><span
+                                    class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="" class="col-xs-12">{{ "lieu_arrive"|trans }}* :</label>
+                <div class="col-xs-12 col-sm-6">
+                    <input type="text" name="lieu_arrive_1" id="lieu_arrive_1" class="form-control"
+                           value="{{ emprunt.listeLieux[1].libelle }}" title="" readonly>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" name="date_arrive_1" id="date_arrive_1" class="form-control"
+                               value="{{ lieu_emprunt[1].dateEtHeure|date("d/m/Y H:i", false) }}" readonly/>
+                        <span class="input-group-addon" onclick=""><span
+                                    class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="vehicule" class="col-xs-12">{{ "vehicule"|trans }}* :</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="text" name="vehicule" id="vehicule" class="form-control"
+                           value="{{ emprunt.vehicule_id.libelle }}" title=""
+                           readonly>
+
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="commentaire" class="col-xs-12">{{ "commentaire"|trans }} :</label>
+                <div class="">
+                    <textarea name="commentaire" id="commentaire" rows="5" class="col-xs-6 form-control"
+                              readonly>{{ emprunt.commentaire }}</textarea>
+                </div>
+            </div>
+        </form>
+        <div class="col-xs-6" style="margin-top: 1em">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ "detail_voyageurs"|trans }}</h3>
+                </div>
+                <div class="panel-body">
+                    {% for pers in emprunt.listePersonne %}
+                        <p>{{ pers.nom }} {{ pers.prenom }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 btn-bas">
+            <div class="col-xs-4">
+                <button type="button" class="btn btn-warning" data-toggle="modal"
+                        data-target="#retardModal">{{ "detail_signal_prob"|trans }}</button>
+            </div>
+            <div class="col-xs-4">
+                <button type="button" class="btn btn-default" data-toggle="modal"
+                        data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
+            </div>
+            <div class="col-xs-4">
+
+            </div>
+            {% if pers_co.id != emprunt.listePersonne[0].id %}
+                <div class="col-xs-4">
+                    {% set affichage = false %}
+
+                    {% for pers in emprunt.listePersonne %}
+                        {% if pers_co.id == pers.id %}
+                            {% set affichage = true %}
+
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if affichage == true %}
+                        <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-danger">{{ "detail_plus_participer"|trans }}</a>
+                    {% else %}
+                        <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-success">{{ "detail_participer"|trans }}</a>
+
+                    {% endif %}
+
+                </div>
+            {% endif %}
+        </div>
+
+
+    </div>
+    <hr class="col-xs-10 col-xs-offset-1" style="padding: 2em 0 2em 0">
+
+
+
+    </br></br></br>
+    <hr class="col-xs-10 col-xs-offset-1" style="padding-bottom: 2em">
+
+    {# MODAL POUR SIGNALER UN RETARD #}
+    <div class="col-xs-12">
+        <div id="retardModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ "retard_titre"|trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="retard_form" action="{{ path("retard") }}" method="post" role="form">
+                            <input type="hidden" name="idEmprunt" value="{{ emprunt.id }}">
+                            <div class="form-group">
+                                <label for="">{{ "retard_heure_prevu" }}</label>
+                                <input type="text" class="form-control" name="retard_date_prevu" id=""
+                                       value="{{ lieu_emprunt[1].dateEtHeure|date("d/m/Y H:i", false) }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputID" class="control-label">{{ "retard_estime"|trans }}</label>
+                                <div>
+                                    <select name="retard_retard" id="inputID" class="form-control">
+                                        <option value="15">15 min</option>
+                                        <option value="30">30 min</option>
+                                        <option value="45">45 min</option>
+                                        <option value="1">1h</option>
+                                        <option value="2">2h</option>
+                                        <option value="3">3h</option>
+                                        <option value="4">4h</option>
+                                        <option value="5">+5h</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputID" class="control-label">{{ "retard_cause"|trans }}</label>
+                                <div>
+                                    <select name="retard_cause" id="inputID" class="form-control">
+                                        <option value="1">{{ "retard_embouteillage"|trans }}</option>
+                                        <option value="2">{{ "retard_retard"|trans }}</option>
+                                        <option value="3">{{ "retard_prob_voiture"|trans }}</option>
+                                        <option value="4">{{ "retard_autre"|trans }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">{{ "retard_btn_validation"|trans }}</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {# MODAL POUR RENDRE LES CLES #}
+    <div class="col-xs-12">
+        <div id="rend_cleModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ "rend_cle_titre"|trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post" role="form">
+
+                            <div class="form-group">
+                                <label for="">{{ "rend_cle_rendu_le" }}</label>
+                                <input type="text" class="form-control" name="" id=""
+                                       value="{{ "now"|date("d/m/Y H:i", false) }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">{{ "rend_cle_signaler_prob"|trans }}</label>
+                                <textarea class="form-control" name="" id="" cols="30" rows="3"
+                                          placeholder="Message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit"
+                                        class="btn btn-primary">{{ "retard_btn_validation"|trans }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+
+    <script src="{{ asset("js/datepicker.js") }}"></script>
+
+
+    <script>
+
+            $("#retard_form").submit(function(e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    obj = JSON.parse(data);
+                    alert(obj); // show response from the php script.
+
+                }
+            });
+
+
+        });
+
+
+
+        $("#form_newSite").click(function () {
+            window.location = "{{ path("homepage") }}";
+        });
+
+
+        $("#aller_ret").change(function () {
+
+            if ($(this).is(":checked")) {
+                $("#part_retour").fadeIn(100);
+                $("#lieu_depart_2").val($("#lieu_depart_1").val()).attr("disabled", true);
+                $("#lieu_arrive_2").val($("#lieu_arrive_1").val()).attr("disabled", true);
+
+            } else {
+
+                $("#part_retour").fadeOut(100);
+            }
+        });
+
+        $("#lieu_depart_1").change(function () {
+            var lieu_arrive_1 = $("#lieu_arrive_1");
+            var lieu_depart_1 = $(this);
+            $("#lieu_depart_2").val($("#lieu_depart_1").val());
+            if (lieu_arrive_1.val() === lieu_depart_1.val()) {
+                lieu_arrive_1.parent().addClass("has-error");
+                lieu_depart_1.parent().addClass("has-error");
+            } else {
+                lieu_arrive_1.parent().removeClass("has-error");
+                lieu_depart_1.parent().removeClass("has-error");
+            }
+
+        });
+        $("#lieu_arrive_1").change(function () {
+            var lieu_arrive_1 = $(this);
+            var lieu_depart_1 = $("#lieu_depart_1");
+            $("#lieu_arrive_2").val($("#lieu_arrive_1").val());
+            if (lieu_arrive_1.val() === lieu_depart_1.val()) {
+                lieu_arrive_1.parent().addClass("has-error");
+                lieu_depart_1.parent().addClass("has-error");
+            } else {
+                lieu_arrive_1.parent().removeClass("has-error");
+                lieu_depart_1.parent().removeClass("has-error");
+            }
+
+        });
+        $("#lieu_depart_2").change(function () {
+            var lieu_arrive_2 = $("#lieu_arrive_2");
+            var lieu_depart_2 = $(this);
+            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
+                lieu_arrive_2.parent().addClass("has-error");
+                lieu_depart_2.parent().addClass("has-error");
+            } else {
+                lieu_arrive_2.parent().removeClass("has-error");
+                lieu_depart_2.parent().removeClass("has-error");
+            }
+
+        });
+        $("#lieu_arrive_2").change(function () {
+            var lieu_arrive_2 = $(this);
+            var lieu_depart_2 = $("#lieu_depart_2");
+            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
+                lieu_arrive_2.parent().addClass("has-error");
+                lieu_depart_2.parent().addClass("has-error");
+            } else {
+                lieu_arrive_2.parent().removeClass("has-error");
+                lieu_depart_2.parent().removeClass("has-error");
+            }
+
+        });
+
+
+        $(document).ready(function () {
+            var dateNow = new Date();
+
+            dateNow.getHours()
+
+            if ($("#aller_ret").is(":checked")) {
+                $("#part_retour").fadeIn(100);
+            } else {
+                $("#part_retour").fadeOut(100);
+            }
+
+//            $('#date_depart_1').datepicker({
+//                todayButton: new Date(),
+//                language: 'fr',
+//                minDate: new Date(),
+//                position: 'bottom left',
+//                onSelect: function (formattedDate, date, inst) {
+//                    $('#date_arrive_1').data('datepicker').update('minDate', date)
+//                }
+//            }).data('datepicker').selectDate(dateNow);
+
+
+//            $('#date_arrive_1').datepicker({
+//                todayButton: new Date(),
+//                language: 'fr',
+//                minDate: new Date(),
+//                position: 'bottom left',
+//                onSelect: function (formattedDate, date, inst) {
+//                    $('#date_depart_2').data('datepicker').update('minDate', date)
+//                }
+//
+//            });
+//            $('#date_depart_2').datepicker({
+//                todayButton: new Date(),
+//                language: 'fr',
+//                minDate: new Date(),
+//                onSelect: function (formattedDate, date, inst) {
+//
+//                    $('#date_arrive_2').data('datepicker').update('minDate', date)
+//                }
+//            });
+//            $('#date_arrive_2').datepicker({
+//                todayButton: new Date(),
+//                language: 'fr',
+//                minDate: new Date(),
+//            });
+//            $('#date_depart_1').datepicker().data('datepicker').selectDate(dateNow);
+
+        })
+
+
+        function showDtPicker(num) {
+            switch (num) {
+                case 1:
+                    $('#date_depart_1').datepicker().data('datepicker').show();
+                    break;
+                case 2:
+                    $('#date_arrive_1').datepicker().data('datepicker').show();
+                    break;
+                case 3:
+                    $('#date_depart_2').datepicker().data('datepicker').show();
+                    break;
+                case 4:
+                    $('#date_arrive_2').datepicker().data('datepicker').show();
+                    break;
+            }
+        }
+
+    </script>
+    <script src="{{ asset("js/datepicker.fr.js") }}"></script>
+{% endblock %}
