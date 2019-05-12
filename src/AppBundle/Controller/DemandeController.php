@@ -7,6 +7,7 @@ use AppBundle\Entity\Lieu;
 use AppBundle\Entity\Lieu_emprunt;
 use AppBundle\Entity\Personne;
 use AppBundle\Entity\Site;
+use AppBundle\Form\LieuType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -27,13 +28,8 @@ class DemandeController extends Controller
      */
     public function DemandeAction()
     {
-
-        $pers_co = new Personne();
-        $pers_co->setId(1);
-        $pers_co->setPrenom("Marc");
-        $pers_co->setNom("Dupont");
-        $pers_co->setPermis(true);
-
+        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
+        $pers_co = $repoPersonne->findOneById(10);
 
         $personnes = $this->getDoctrine()->getRepository('AppBundle:Personne');
         $lieu = $this->getDoctrine()->getRepository('AppBundle:Lieu');
@@ -48,15 +44,25 @@ class DemandeController extends Controller
         $dateDuJour = getdate();
 //        dump($dateDuJour);
 
+
+//       ***** Creation du form pour un nouveau lieu *****
+
+        $lieu = new Lieu();
+
+
+        $form_lieu = $this->createForm(LieuType::class,$lieu);
+
+
         return $this->render(
             'Demande/demande.html.twig',
             array(
-                "messageEnregistrement"=>"OKKKKKKK",
-                "pers_co"=>$pers_co,
-                "listePersonne"=>$listePersonne,
-                "listeLieu"=>$listeLieu,
-                "listeVehicule"=>$listeVehicule,
-                "dateDuJour"=>$dateDuJour,
+                "messageEnregistrement" => "OKKKKKKK",
+                "pers_co" => $pers_co,
+                "listePersonne" => $listePersonne,
+                "listeLieu" => $listeLieu,
+                "listeVehicule" => $listeVehicule,
+                "dateDuJour" => $dateDuJour,
+                "form_lieu" => $form_lieu->createView(),
             )
         );
     }
@@ -79,12 +85,12 @@ class DemandeController extends Controller
 
         //recuperation du conducteur
         /** @var Personne $conducteur */
-        $conducteur = $repoPersonne->findOneBy(["id"=>$request->get("personne")]);
+        $conducteur = $repoPersonne->findOneBy(["id" => $request->get("personne")]);
 
 
         //recuperation du vehicule
         /** @var Vehicule $vehicule */
-        $vehicule = $repoVehicule->findOneBy(["id"=>$request->get("vehicule")]);
+        $vehicule = $repoVehicule->findOneBy(["id" => $request->get("vehicule")]);
 
         //recuperation du commentaire
         $commentaire = $request->get("commentaire");
@@ -92,26 +98,24 @@ class DemandeController extends Controller
 
         //recuperation du lieu de depart date + h:min
         /** @var Lieu $lieu_depart */
-        $lieu_depart = $repoLieu->findOneBy(["id"=>$request->get("lieu_depart_1")]);
+        $lieu_depart = $repoLieu->findOneBy(["id" => $request->get("lieu_depart_1")]);
 
-        $date_tempo = explode("/",$request->get("date_depart_1"));
+        $date_tempo = explode("/", $request->get("date_depart_1"));
 
         $date_depart = new \DateTime();
-        $date_depart->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
-        $date_depart->setTime($request->get("h_depart_1"),$request->get("min_depart_1"));
-
+        $date_depart->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
+        $date_depart->setTime($request->get("h_depart_1"), $request->get("min_depart_1"));
 
 
         //recuperation du lieu d'arrive date + h:min
         /** @var Lieu $lieu_arrive */
-        $lieu_arrive = $repoLieu->findOneBy(["id"=>$request->get("lieu_arrive_1")]);
+        $lieu_arrive = $repoLieu->findOneBy(["id" => $request->get("lieu_arrive_1")]);
 
-        $date_tempo = explode("/",$request->get("date_arrive_1"));
+        $date_tempo = explode("/", $request->get("date_arrive_1"));
 
         $date_arrive = new \DateTime();
-        $date_arrive->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
-        $date_arrive->setTime($request->get("h_arrive_1"),$request->get("min_arrive_1"));
-
+        $date_arrive->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
+        $date_arrive->setTime($request->get("h_arrive_1"), $request->get("min_arrive_1"));
 
 
         // Création de la liste des lieux
@@ -146,22 +150,22 @@ class DemandeController extends Controller
         $lieu_emprunt_dep->setLieuId($lieu_depart->getId());
         $lieu_emprunt_dep->setDepart(true);
 
-        array_push($liste_lieux_new,$lieu_emprunt_dep);
+        array_push($liste_lieux_new, $lieu_emprunt_dep);
 
         $lieu_emprunt_ari->setEmpruntId($emprunt->getId());
         $lieu_emprunt_ari->setDateEtHeure($date_arrive);
         $lieu_emprunt_ari->setLieuId($lieu_arrive->getId());
         $lieu_emprunt_ari->setDepart(false);
 
-        array_push($liste_lieux_new,$lieu_emprunt_ari);
+        array_push($liste_lieux_new, $lieu_emprunt_ari);
 
         //Récupération de la liste des emprunts existant
         //TODO ENLEVER ET REMPLACER
         if ($request->getSession()->get("EMPRUNT") == null) {
-            $request->getSession()->set("EMPRUNT",array());
+            $request->getSession()->set("EMPRUNT", array());
         }
         if ($request->getSession()->get("LIEU_EMPRUNT") == null) {
-            $request->getSession()->set("LIEU_EMPRUNT",array());
+            $request->getSession()->set("LIEU_EMPRUNT", array());
         }
 
         /** @var array $liste_emprunt */
@@ -186,27 +190,27 @@ class DemandeController extends Controller
 
             //            Creation du nouvel emprunt
             $emprunt_ret = new Emprunt();
-            $emprunt_ret->setId(time()+1);
+            $emprunt_ret->setId(time() + 1);
             $emprunt_ret->setVehiculeId($vehicule);
             $emprunt_ret->setListeLieux($listeLieu);
             $emprunt_ret->setListePersonne($listePersonne);
             $emprunt_ret->setCommentaire($commentaire);
-            array_push($liste_emprunt,$emprunt_ret);
+            array_push($liste_emprunt, $emprunt_ret);
 
 
 //            Recupertation des dates 1 pour le retour
-            $date_tempo = explode("/",$request->get("date_depart_2"));
+            $date_tempo = explode("/", $request->get("date_depart_2"));
             $date_depart = new \DateTime();
-            $date_depart->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
-            $date_depart->setTime($request->get("h_depart_2"),$request->get("min_depart_2"));
+            $date_depart->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
+            $date_depart->setTime($request->get("h_depart_2"), $request->get("min_depart_2"));
 
 
 //            Recupertation des dates 2 pour le retour
 
-            $date_tempo = explode("/",$request->get("date_arrive_1"));
+            $date_tempo = explode("/", $request->get("date_arrive_1"));
             $date_arrive = new \DateTime();
-            $date_arrive->setDate($date_tempo[2],$date_tempo[1],$date_tempo[0]);
-            $date_arrive->setTime($request->get("h_arrive_2"),$request->get("min_arrive_2"));
+            $date_arrive->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
+            $date_arrive->setTime($request->get("h_arrive_2"), $request->get("min_arrive_2"));
 
             $lieu_emprunt_dep = new Lieu_emprunt();
             $lieu_emprunt_dep->setEmpruntId($emprunt_ret->getId());
@@ -214,7 +218,7 @@ class DemandeController extends Controller
             $lieu_emprunt_dep->setLieuId($lieu_depart->getId());
             $lieu_emprunt_dep->setDepart(true);
 
-            array_push($liste_lieux_new,$lieu_emprunt_dep);
+            array_push($liste_lieux_new, $lieu_emprunt_dep);
 
 
             dump($request->get("lieu_arrive_2"));
@@ -225,21 +229,20 @@ class DemandeController extends Controller
             $lieu_emprunt_ari->setLieuId($lieu_arrive->getId());
             $lieu_emprunt_ari->setDepart(false);
 
-            array_push($liste_lieux_new,$lieu_emprunt_ari);
+            array_push($liste_lieux_new, $lieu_emprunt_ari);
 
 
         }
 
 
         $liste_lieux = $request->getSession()->get("LIEU_EMPRUNT");
-        $liste_lieux = array_merge($liste_lieux,$liste_lieux_new);
+        $liste_lieux = array_merge($liste_lieux, $liste_lieux_new);
 
-        $request->getSession()->set("LIEU_EMPRUNT",$liste_lieux);
+        $request->getSession()->set("LIEU_EMPRUNT", $liste_lieux);
 
 
-
-        array_push($liste_emprunt,$emprunt);
-        $request->getSession()->set("EMPRUNT",$liste_emprunt);
+        array_push($liste_emprunt, $emprunt);
+        $request->getSession()->set("EMPRUNT", $liste_emprunt);
 
 //        $em = $this->getDoctrine()->getManager();
 
@@ -261,14 +264,6 @@ class DemandeController extends Controller
         return $this->redirectToRoute("homepage");
 
     }
-
-
-
-
-
-
-
-
 
 
     private $leFormulaire = null;

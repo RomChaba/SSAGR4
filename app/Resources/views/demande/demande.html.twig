@@ -50,6 +50,9 @@
                 </div>
             </div>
             <div class="form-group col-xs-12">
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Ajouter un lieu</button>
+                </div>
                 <div class="col-xs-6 col-sm-6 pull-right">
                     <div class="input-group">
                         <select name="h_depart_1" id="h_depart_1" class="form-control" required>
@@ -65,7 +68,7 @@
                         <span class="input-group-addon"> : </span>
                         <select name="min_depart_1" id="min_depart_1" class="form-control" required>
                             <option value=""> min</option>
-                            {% for i in 0..59 %}
+                            {% for i in range(0,55,5) %}
                                 {% if i == dateDuJour.minutes %}
                                     <option value="{{ i }}" selected>{{ "%02d"|format(i) }}</option>
                                 {% else %}
@@ -96,6 +99,7 @@
                 </div>
             </div>
             <div class="form-group col-xs-12">
+
                 <div class="col-xs-6 col-sm-6 pull-right">
                     <div class="input-group">
                         <select name="h_arrive_1" id="h_arrive_1" class="form-control" required>
@@ -107,7 +111,7 @@
                         <span class="input-group-addon"> : </span>
                         <select name="min_arrive_1" id="min_arrive_1" class="form-control" required>
                             <option value=""> min</option>
-                            {% for i in 0..59 %}
+                            {% for i in range(0,55,5) %}
                                 <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
                             {% endfor %}
                         </select>
@@ -158,6 +162,7 @@
                     </div>
                 </div>
                 <div class="form-group col-xs-12">
+
                     <div class="col-xs-6 col-sm-6 pull-right">
                         <div class="input-group">
                             <select name="h_depart_2" id="h_depart_2" class="form-control">
@@ -173,7 +178,7 @@
                             <span class="input-group-addon"> : </span>
                             <select name="min_depart_2" id="min_depart_2" class="form-control">
                                 <option value=""> min</option>
-                                {% for i in 0..59 %}
+                                {% for i in range(0,55,5) %}
                                     {% if i == dateDuJour.minutes %}
                                         <option value="{{ i }}" selected>{{ "%02d"|format(i) }}</option>
                                     {% else %}
@@ -215,7 +220,7 @@
                             <span class="input-group-addon"> : </span>
                             <select name="min_arrive_2" id="min_arrive_2" class="form-control">
                                 <option value=""> min</option>
-                                {% for i in 0..59 %}
+                                {% for i in range(0,55,5) %}
                                     <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
                                 {% endfor %}
                             </select>
@@ -235,9 +240,37 @@
 
 
     </div>
-    </br></br></br>
-    <hr class="col-xs-12" style="padding-bottom: 2em">
 
+
+
+    {# MODAL POUR AJOUTER UN LIEU #}
+
+
+<div class="col-xs-12">
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ "new_lieu_titre_modal"|trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form_lieu,{'attr': {'id': 'form_lieu_add'},'action': path('new_lieu_ajax')}) }}
+                    {{ form_widget(form_lieu) }}
+                    {{ form_end(form_lieu) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    </br>
+    </br>
+    </br>
+    <hr class="col-xs-10" style="padding-bottom: 2em">
 
 {% endblock %}
 
@@ -248,6 +281,43 @@
 
 
     <script>
+
+
+        $("#form_lieu_add").submit(function(e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    //alert(data["id"]); // show response from the php script.
+                    obj = JSON.parse(data);
+                    console.log(obj.id);
+                    $("#lieu_depart_1").append($('<option>', {value:obj.id, text:obj.libelle}));
+                    $("#lieu_depart_2").append($('<option>', {value:obj.id, text:obj.libelle}));
+                    $("#lieu_arrive_1").append($('<option>', {value:obj.id, text:obj.libelle}));
+                    $("#lieu_arrive_2").append($('<option>', {value:obj.id, text:obj.libelle}));
+                    $("#myModal").modal('toggle');
+
+                }
+            });
+
+
+        });
+
+//lieu_depart_1
+{#//        <option value="{{ lieu.id }}"> {{ lieu.libelle }}</option>#}
+
+
+
+
+
         $("#form_newSite").click(function () {
             window.location = "{{ path("homepage") }}";
         });

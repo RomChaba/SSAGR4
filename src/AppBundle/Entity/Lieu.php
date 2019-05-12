@@ -160,8 +160,16 @@ class Lieu
         $this->siteOfficiel = $siteOfficiel;
     }
 
+    public function __toString()
+    {
+        return '{"id":'.$this->getId().
+            ',"libelle":"'.$this->getLibelle().'"'.
+            ',"commentaire":"'.$this->getCommentaire().'"'.
+            ',"latitude":"'.$this->getLatitude().'"'.
+            ',"longitude":"'.$this->getLongitude().'"}';
 
 
+    }
 
 
 }
