@@ -37,6 +37,8 @@ class ConnexionController extends Controller
                 $_SESSION['valid'] = true;
                 $_SESSION['timeout'] = time();
                 $_SESSION['username'] = 'Dupont';
+                session_start();
+
 
                 return $this->render('default/index.html.twig');
             }else {

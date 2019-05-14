@@ -20,30 +20,14 @@ use AppBundle\Entity\Vehicule;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class ConnexionController extends Controller
+class DeconnexionController extends Controller
 {
     /**
-     * @Route("/connexion", name="connexion")
+     * @Route("/deconnexion", name="deconnexion")
      */
-    public function ConnexionAction()
+    public function DeconnexionAction()
     {
-        return $this->render('connexion/connexion.html.twig');
-
-        if (isset($_POST['login']) && !empty($_POST['username'])
-            && !empty($_POST['password'])) {
-
-            if ($_POST['username'] == 'Dupont' &&
-                $_POST['password'] == '1234') {
-                $_SESSION['valid'] = true;
-                $_SESSION['timeout'] = time();
-                $_SESSION['username'] = 'Dupont';
-                session_start();
-
-
-                return $this->render('default/index.html.twig');
-            }else {
-                return $this->render('connexion/connexion.html.twig');
-            }
-        }
+        session_destroy();
+        return $this->render('default/index.html.twig');
     }
 }
