@@ -40,6 +40,10 @@ class Personne
     /**
      * @var string
      *
+     * @Assert\Email(
+     *     message = "L' email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
      * @ORM\Column(name="mail", type="string", length=255, unique=true)
      */
     private $mail;
@@ -95,7 +99,7 @@ class Personne
      */
     public function isTelephone()
     {
-        if( preg_match ( " /^[0-9]{10,10}$/ " , $this->getTelephone() ))
+        if( preg_match ( " /^[0-9]{10,12}$/ " , $this->getTelephone() ))
         {
             return true;
         }
