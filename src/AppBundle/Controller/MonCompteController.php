@@ -21,22 +21,22 @@ class MonCompteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        //TODO Aller chercher la personne en bdd avec son id dans la session
-        $personne1 = new Personne();
+        $pers_co = $request->getSession()->get('userConnect');
+        $personne2 = new Personne();
 
-        $personne1->setRue("rue de la poire");
-        $personne1->setMail("dupont@gmail.com");
-        $personne1->setMotDePasse("mdp1");
-        $personne1->setNom("Dupont");
-        $personne1->setPrenom("Jean");
-        $personne1->setTelephone("0980473828");
-        $personne1->setMotDePasse("mdp");
-        $personne1->setPhoto("photo");
-        $personne1->setPermis(false);
-        $personne1->setActif(true);
-        $personne1->setDateCreation(new DateTime());
+        $personne2->setRue($pers_co->getRue());
+        $personne2->setMail($pers_co->getMail());
+        $personne2->setMotDePasse($pers_co->getMotDePasse());
+        $personne2->setNom($pers_co->getNom());
+        $personne2->setPrenom($pers_co->getPrenom());
+        $personne2->setTelephone($pers_co->getTelephone());
+        $personne2->setMotDePasse($pers_co->getMotDePasse());
+        $personne2->setPhoto($pers_co->getPhoto());
+        $personne2->setPermis(false);
+        $personne2->setActif(true);
+        $personne2->setDateCreation(new DateTime());
 
-        $this->createFormulaire($personne1); //On crée le formulaire
+        $this->createFormulaire($personne2); //On crée le formulaire
 
 
         $this->leFormulaire->handleRequest($request);
@@ -51,16 +51,16 @@ class MonCompteController extends Controller
             // On vérifie que les valeurs entrées sont correctes
             if ($this->leFormulaire->isValid()) {
 
-                if($personne1->getConfirmationMotDePasse() != null)
+                if($personne2->getConfirmationMotDePasse() != null)
                 {
-                    $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
+                    $personne2->setMotDePasse($personne2->getNouveauMotDePasse());
                 }
 
                 // On enregistre notre objet $advert dans la base de données, par exemple
                 //$em->persist($personne1);
                 //$em->flush();
 
-                $request->getSession()->getFlashBag()->add('compte', 'Compte bien enregistrée.');
+                $request->getSession()->getFlashBag()->add('compte', 'Compte bien enregistré.');
 
                 return $this->render('moncompte/moncompte.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
             }

@@ -26,6 +26,8 @@ class DefaultController extends Controller
     {
         $pers_co = $request->getSession()->get('userConnect');
 
+
+
         $em = $this->getDoctrine()->getManager();
 
         $test = new DateTime();

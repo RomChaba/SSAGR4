@@ -19,13 +19,7 @@ class ParticiperController extends Controller
      */
     public function chargementParticiperAction(Request $request)
     {
-       // $em = $this->getDoctrine()->getManager();
-
-        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
-
-
-        /** @var Personne $pers_co */
-        $pers_co = $repoPersonne->findOneById(10);
+        $pers_co = $request->getSession()->get('userConnect');
 
         $em = $this->getDoctrine()->getManager();
 

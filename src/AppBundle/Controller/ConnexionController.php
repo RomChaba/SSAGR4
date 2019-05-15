@@ -28,8 +28,12 @@ class ConnexionController extends Controller
     public function ConnexionAction(Request $request)
     {
         if (isset($_POST['login']) && !empty($_POST['username'])) {
+
+            $perso = new Personne();
+            $perso = $perso->setMail($_POST['username']);
+
             $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
-            $pers_co = $repoPersonne->findOneBy(['mail'=>$_POST['username'], 'motDePasse'=>$_POST['password']]);
+            $pers_co = $repoPersonne->findOneBy(['mail'=>$perso->getMailNoDecrypt(), 'motDePasse'=>$_POST['password']]);
 
             if($pers_co != null) {
 

@@ -40,10 +40,6 @@ class Personne
     /**
      * @var string
      *
-     * @Assert\Email(
-     *     message = "L' email '{{ value }}' n'est pas valide.",
-     *     checkMX = true
-     * )
      * @ORM\Column(name="mail", type="string", length=255, unique=true)
      */
     private $mail;
@@ -75,7 +71,7 @@ class Personne
     private $confirmationMotDePasse;
 
     /**
-     * @Assert\IsTrue(message="Les 2 mots de passe doivent être identique")
+     * @Assert\IsTrue(message="Les 2 mots de passe doivent être identiques")
      */
     public function isConfirmationMotDePasse()
     {
@@ -322,13 +318,23 @@ class Personne
     }
 
     /**
+ * Get mail
+ *
+ * @return string
+ */
+    public function getMail()
+    {
+        return $this->_DECRYPTE_DATA($this->mail);
+    }
+
+    /**
      * Get mail
      *
      * @return string
      */
-    public function getMail()
+    public function getMailNoDecrypt()
     {
-        return $this->_DECRYPTE_DATA($this->mail);
+        return $this->mail;
     }
 
     /**

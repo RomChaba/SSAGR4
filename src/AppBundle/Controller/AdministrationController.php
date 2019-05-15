@@ -22,6 +22,8 @@ class AdministrationController extends Controller
      */
     public function administrationAction(Request $request)
     {
+        $pers_co = $request->getSession()->get('userConnect');
+
         $personnesRepo = $this->getDoctrine()->getRepository('AppBundle:Personne');
         $voituresRepo = $this->getDoctrine()->getRepository('AppBundle:Vehicule');
 
@@ -36,6 +38,8 @@ class AdministrationController extends Controller
      */
     public function creationVoitureAction(Request $request)
     {
+        $pers_co = $request->getSession()->get('userConnect');
+
         $personnnes =  Array();
         $voitures =  Array();
 

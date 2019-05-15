@@ -95,10 +95,12 @@
                         {% set affichage = false %}
 
                         {% for pers in emprunt.listePersonne %}
-                            {% if pers_co.id == pers.id %}
-                                {% set affichage = true %}
+                            {% if app.session.get('userConnect') != null %}
+                                {% if app.session.get('userConnect').id == pers.id %}
+                                    {% set affichage = true %}
 
-                            {% else %}
+                                {% else %}
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
 

@@ -25,9 +25,9 @@ class DeconnexionController extends Controller
     /**
      * @Route("/deconnexion", name="deconnexion")
      */
-    public function DeconnexionAction()
+    public function DeconnexionAction(Request $request)
     {
-        session_destroy();
+        $request->getSession()->set('userConnect', null);
         return $this->render('default/index.html.twig');
     }
 }
