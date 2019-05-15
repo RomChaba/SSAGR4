@@ -20,9 +20,8 @@
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <form action="{{ path("DemandeForm") }}" method="post" role="form">
             <legend>{{ "detail_covoit_titre"|trans }} </legend>
-
             <div class="form-group col-xs-12">
-                <label for="inputID" class="col-xs-12">{{ "conducteur"|trans }}</label>
+                <label for="inputID" class="col-xs-12">{{ "personne"|trans }}</label>
 
                 <div class="col-xs-10 col-sm-6">
 
@@ -73,6 +72,7 @@
 
                 </div>
             </div>
+
             <div class="form-group col-xs-12">
                 <label for="commentaire" class="col-xs-12">{{ "commentaire"|trans }} :</label>
                 <div class="">
@@ -88,7 +88,11 @@
                 </div>
                 <div class="panel-body">
                     {% for pers in emprunt.listePersonne %}
-                        <p>{{ pers.nom }} {{ pers.prenom }}</p>
+                        {% if emprunt.listePersonne[0].id == pers.id %}
+                            <p>{{ pers.nom }} {{ pers.prenom }} : {{ "personne"|trans }}</p>
+                        {% else %}
+                            <p>{{ pers.nom }} {{ pers.prenom }}</p>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
@@ -98,10 +102,16 @@
                 <button type="button" class="btn btn-warning" data-toggle="modal"
                         data-target="#retardModal">{{ "detail_signal_prob"|trans }}</button>
             </div>
-            <div class="col-xs-4">
-                <button type="button" class="btn btn-default" data-toggle="modal"
-                        data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
-            </div>
+
+            {% if date(lieu_emprunt[0].dateEtHeure) < date() %}
+                <div class="col-xs-4">
+                    <button type="button" class="btn btn-default" data-toggle="modal"
+                            data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
+                </div>
+            {% endif %}
+
+
+
             <div class="col-xs-4">
 
             </div>
@@ -120,8 +130,9 @@
                     {% if affichage == true %}
                         <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-danger">{{ "detail_plus_participer"|trans }}</a>
                     {% else %}
-                        <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-success">{{ "detail_participer"|trans }}</a>
-
+                        {% if emprunt.listePersonne|length < 6 %}
+                            <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-success">{{ "detail_participer"|trans }}</a>
+                        {% endif %}
                     {% endif %}
 
                 </div>

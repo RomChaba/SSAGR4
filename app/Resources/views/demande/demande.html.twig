@@ -327,8 +327,8 @@
 
             if ($(this).is(":checked")) {
                 $("#part_retour").fadeIn(100);
-                $("#lieu_depart_2").val($("#lieu_depart_1").val()).attr("disabled", true);
-                $("#lieu_arrive_2").val($("#lieu_arrive_1").val()).attr("disabled", true);
+                $("#lieu_depart_2").val($("#lieu_arrive_1").val()).attr("disabled", true);
+                $("#lieu_arrive_2").val($("#lieu_depart_1").val()).attr("disabled", true);
 
             } else {
 
@@ -339,7 +339,7 @@
         $("#lieu_depart_1").change(function () {
             var lieu_arrive_1 = $("#lieu_arrive_1");
             var lieu_depart_1 = $(this);
-            $("#lieu_depart_2").val($("#lieu_depart_1").val());
+            $("#lieu_depart_2").val(lieu_arrive_1.val());
             if (lieu_arrive_1.val() === lieu_depart_1.val()) {
                 lieu_arrive_1.parent().addClass("has-error");
                 lieu_depart_1.parent().addClass("has-error");
@@ -352,7 +352,7 @@
         $("#lieu_arrive_1").change(function () {
             var lieu_arrive_1 = $(this);
             var lieu_depart_1 = $("#lieu_depart_1");
-            $("#lieu_arrive_2").val($("#lieu_arrive_1").val());
+            $("#lieu_arrive_2").val(lieu_arrive_1.val());
             if (lieu_arrive_1.val() === lieu_depart_1.val()) {
                 lieu_arrive_1.parent().addClass("has-error");
                 lieu_depart_1.parent().addClass("has-error");
@@ -362,30 +362,30 @@
             }
 
         });
-        $("#lieu_depart_2").change(function () {
-            var lieu_arrive_2 = $("#lieu_arrive_2");
-            var lieu_depart_2 = $(this);
-            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
-                lieu_arrive_2.parent().addClass("has-error");
-                lieu_depart_2.parent().addClass("has-error");
-            } else {
-                lieu_arrive_2.parent().removeClass("has-error");
-                lieu_depart_2.parent().removeClass("has-error");
-            }
-
-        });
-        $("#lieu_arrive_2").change(function () {
-            var lieu_arrive_2 = $(this);
-            var lieu_depart_2 = $("#lieu_depart_2");
-            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
-                lieu_arrive_2.parent().addClass("has-error");
-                lieu_depart_2.parent().addClass("has-error");
-            } else {
-                lieu_arrive_2.parent().removeClass("has-error");
-                lieu_depart_2.parent().removeClass("has-error");
-            }
-
-        });
+//            $("#lieu_depart_2").change(function () {
+//            var lieu_arrive_2 = $("#lieu_arrive_2");
+//            var lieu_depart_2 = $(this);
+//            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
+//                lieu_arrive_2.parent().addClass("has-error");
+//                lieu_depart_2.parent().addClass("has-error");
+//            } else {
+//                lieu_arrive_2.parent().removeClass("has-error");
+//                lieu_depart_2.parent().removeClass("has-error");
+//            }
+//
+//        });
+//        $("#lieu_arrive_2").change(function () {
+//            var lieu_arrive_2 = $(this);
+//            var lieu_depart_2 = $("#lieu_depart_2");
+//            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
+//                lieu_arrive_2.parent().addClass("has-error");
+//                lieu_depart_2.parent().addClass("has-error");
+//            } else {
+//                lieu_arrive_2.parent().removeClass("has-error");
+//                lieu_depart_2.parent().removeClass("has-error");
+//            }
+//
+//        });
 
 
         $(document).ready(function () {

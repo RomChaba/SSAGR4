@@ -59,27 +59,47 @@ affichage_de_element: 'Affichage de l''élement '
 à: à
 sur: ' sur '
 filtre_de: 'Filtre de '
-mail_contact: "Mail de contact"
-modifier: "Modifier"
-supprimer: "Supprimer"
-point_1: "Je dispose d'un permis de conduire valide, et m'engage à le présenter sur demande de ma hiérarchie et à informer mon supérieur en cas d'invalidité de celui-ci. Je m'engage à ne pas utiliser un véhicule si je n'ai pas les capacités requises ou en l'absence d'un permis de conduire valide."
-point_2: "Je vérifie régulièrement la pression des pneumatiques, les niveaux, le bon fonctionnement des feux et des clignotants et plus généralement le bon état général du véhicule qui m'est confié. Si besoin, je fais le plein de carburant à mon retour et non juste avant mon départ."
-point_3: "Avant toute utilisation du véhicule, je m'assure de son bon fonctionnement. Je signale toutes les anomalies."
-point_4: "J'évalue les risques liés aux déplacements et qui ne peuvent être évités, j'applique les règles d'une conduite citoyenne, respectueuse de ma sécurité et celle des autres usagers de la route."
-point_5: "Je planifie mes déplacements et les autres activités en vue de donner le temps nécessaire pour conduire en sécurité."
-point_6: "Lorsque les charges de travail sont importantes ou les conditions de conduite dégradées, je tiens compte de ces éléments dans l’organisation de mes déplacement et adapte ma conduite à ces circonstances."
-point_7: "J’identifie et je prends les itinéraires les plus sûrs."
-point_8: "J’attache ma ceinture de sécurité en toutes circonstances et veille à ce que mes passagers en fassent de même."
-point_9: "Je respecte les distances et intervalles de sécurité en appliquant la règle des 2 secondes."
-point_10: "En cas d’incertitude, je mets toujours le pied droit face au frein."
-point_11: "Je respecte les limitations de vitesse en toutes circonstances et adapte mon allure aux conditions de circulations ainsi que météorologiques."
-point_12: "Je connais le type et le gabarit de mon véhicule, hauteur, largeur, poids et respecte la signalisation routière y afférente."
-point_13: "Dès les premiers signes de fatigue, je fais une pause de 15 minutes."
-point_14: "En cas de retard, je m’arrête pour prévenir l’administrateur de l’application VoyageEnVoiture, je sais que le temps ne se rattrape jamais sur la route."
-point_15: "Je gare mon véhicule toujours prêt à partir."
-point_16: "Je ne téléphone pas en conduisant, je ne compose et ne lis jamais de Courriels ou de Textos en conduisant."
-point_17: "Si je prends des médicaments, je respecte la symbolique présente sur la boîte."
-point_18: "Je ne conduis pas avec un taux d’alcool supérieur au taux autorisé. Je ne prends pas de stupéfiant."
-point_19: "En cas d’accident, même bénin, responsable ou non, avec ou sans tiers, je remplis un constat amiable et j’avertis immédiatement l’administrateur de VoyageEnVoiture."
-point_20: "Mon véhicule est un outil de travail et reflète l’image de notre société, je m’engage à le gérer en bon père de famille et à veiller à ce qu’il soit en bon état de carrosserie, mécanique et de propreté intérieure et extérieure."
-pwd: "Mot de passe"
+mail_contact: 'Mail de contact'
+modifier: Modifier
+supprimer: Supprimer
+point_1: 'Je dispose d''un permis de conduire valide, et m''engage à le présenter sur demande de ma hiérarchie et à informer mon supérieur en cas d''invalidité de celui-ci. Je m''engage à ne pas utiliser un véhicule si je n''ai pas les capacités requises ou en l''absence d''un permis de conduire valide.'
+point_2: 'Je vérifie régulièrement la pression des pneumatiques, les niveaux, le bon fonctionnement des feux et des clignotants et plus généralement le bon état général du véhicule qui m''est confié. Si besoin, je fais le plein de carburant à mon retour et non juste avant mon départ.'
+point_3: 'Avant toute utilisation du véhicule, je m''assure de son bon fonctionnement. Je signale toutes les anomalies.'
+point_4: 'J''évalue les risques liés aux déplacements et qui ne peuvent être évités, j''applique les règles d''une conduite citoyenne, respectueuse de ma sécurité et celle des autres usagers de la route.'
+point_5: 'Je planifie mes déplacements et les autres activités en vue de donner le temps nécessaire pour conduire en sécurité.'
+point_6: 'Lorsque les charges de travail sont importantes ou les conditions de conduite dégradées, je tiens compte de ces éléments dans l’organisation de mes déplacement et adapte ma conduite à ces circonstances.'
+point_7: 'J’identifie et je prends les itinéraires les plus sûrs.'
+point_8: 'J’attache ma ceinture de sécurité en toutes circonstances et veille à ce que mes passagers en fassent de même.'
+point_9: 'Je respecte les distances et intervalles de sécurité en appliquant la règle des 2 secondes.'
+point_10: 'En cas d’incertitude, je mets toujours le pied droit face au frein.'
+point_11: 'Je respecte les limitations de vitesse en toutes circonstances et adapte mon allure aux conditions de circulations ainsi que météorologiques.'
+point_12: 'Je connais le type et le gabarit de mon véhicule, hauteur, largeur, poids et respecte la signalisation routière y afférente.'
+point_13: 'Dès les premiers signes de fatigue, je fais une pause de 15 minutes.'
+point_14: 'En cas de retard, je m’arrête pour prévenir l’administrateur de l’application VoyageEnVoiture, je sais que le temps ne se rattrape jamais sur la route.'
+point_15: 'Je gare mon véhicule toujours prêt à partir.'
+point_16: 'Je ne téléphone pas en conduisant, je ne compose et ne lis jamais de Courriels ou de Textos en conduisant.'
+point_17: 'Si je prends des médicaments, je respecte la symbolique présente sur la boîte.'
+point_18: 'Je ne conduis pas avec un taux d’alcool supérieur au taux autorisé. Je ne prends pas de stupéfiant.'
+point_19: 'En cas d’accident, même bénin, responsable ou non, avec ou sans tiers, je remplis un constat amiable et j’avertis immédiatement l’administrateur de VoyageEnVoiture.'
+point_20: 'Mon véhicule est un outil de travail et reflète l’image de notre société, je m’engage à le gérer en bon père de famille et à veiller à ce qu’il soit en bon état de carrosserie, mécanique et de propreté intérieure et extérieure.'
+pwd: 'Mot de passe'
+admin: __admin
+is_conducteur: __is_conducteur
+new_lieu_titre_modal: __new_lieu_titre_modal
+detail_covoit_titre: __detail_covoit_titre
+detail_voyageurs: __detail_voyageurs
+detail_signal_prob: __detail_signal_prob
+detail_rendre_cle: __detail_rendre_cle
+detail_plus_participer: __detail_plus_participer
+detail_participer: __detail_participer
+retard_titre: __retard_titre
+retard_estime: __retard_estime
+retard_cause: __retard_cause
+retard_embouteillage: __retard_embouteillage
+retard_retard: __retard_retard
+retard_prob_voiture: __retard_prob_voiture
+retard_autre: __retard_autre
+retard_btn_validation: __retard_btn_validation
+rend_cle_titre: __rend_cle_titre
+rend_cle_signaler_prob: __rend_cle_signaler_prob
+participer: __participer
