@@ -25,25 +25,22 @@ class ConnexionController extends Controller
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function ConnexionAction()
+    public function ConnexionAction(Request $request)
     {
-        return $this->render('connexion/connexion.html.twig');
+        if (isset($_POST['login']) && !empty($_POST['username'])) {
+            $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
+            $pers_co = $repoPersonne->findOneBy(['mail'=>$_POST['username'], 'motDePasse'=>$_POST['password']]);
 
-        if (isset($_POST['login']) && !empty($_POST['username'])
-            && !empty($_POST['password'])) {
+            if($pers_co != null) {
 
-            if ($_POST['username'] == 'Dupont' &&
-                $_POST['password'] == '1234') {
-                $_SESSION['valid'] = true;
-                $_SESSION['timeout'] = time();
-                $_SESSION['username'] = 'Dupont';
-                session_start();
+                $request->getSession()->set('userConnect', $pers_co);
 
-
-                return $this->render('default/index.html.twig');
-            }else {
+                return $this->redirectToRoute('homepage');
+            } else {
                 return $this->render('connexion/connexion.html.twig');
             }
         }
+
+        return $this->render('connexion/connexion.html.twig');
     }
 }

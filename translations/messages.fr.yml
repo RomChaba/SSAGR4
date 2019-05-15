@@ -83,23 +83,23 @@ point_18: 'Je ne conduis pas avec un taux d’alcool supérieur au taux autoris�
 point_19: 'En cas d’accident, même bénin, responsable ou non, avec ou sans tiers, je remplis un constat amiable et j’avertis immédiatement l’administrateur de VoyageEnVoiture.'
 point_20: 'Mon véhicule est un outil de travail et reflète l’image de notre société, je m’engage à le gérer en bon père de famille et à veiller à ce qu’il soit en bon état de carrosserie, mécanique et de propreté intérieure et extérieure.'
 pwd: 'Mot de passe'
-admin: __admin
-is_conducteur: __is_conducteur
-new_lieu_titre_modal: __new_lieu_titre_modal
-detail_covoit_titre: __detail_covoit_titre
-detail_voyageurs: __detail_voyageurs
-detail_signal_prob: __detail_signal_prob
-detail_rendre_cle: __detail_rendre_cle
-detail_plus_participer: __detail_plus_participer
-detail_participer: __detail_participer
-retard_titre: __retard_titre
-retard_estime: __retard_estime
-retard_cause: __retard_cause
-retard_embouteillage: __retard_embouteillage
-retard_retard: __retard_retard
-retard_prob_voiture: __retard_prob_voiture
-retard_autre: __retard_autre
-retard_btn_validation: __retard_btn_validation
-rend_cle_titre: __rend_cle_titre
-rend_cle_signaler_prob: __rend_cle_signaler_prob
-participer: __participer
+admin: "Administrateur"
+is_conducteur: "Suis je le conducteur ?"
+new_lieu_titre_modal: "Nouveau site :"
+detail_covoit_titre: "Détail du voyage :"
+detail_voyageurs: "Voyageurs :"
+detail_signal_prob: "Signaler problème"
+detail_rendre_cle: "Rendre les clés"
+detail_plus_participer: "Participer plus"
+detail_participer: "Participer"
+retard_titre: "Retard :"
+retard_estime: "Retard estimé : "
+retard_cause: "Cause du retard : "
+retard_embouteillage: "Embouteillage"
+retard_retard: "Retard"
+retard_prob_voiture: "Problème sur la voiture"
+retard_autre: "Autre"
+retard_btn_validation: "Valider"
+rend_cle_titre: "Rendre les clés :"
+rend_cle_signaler_prob: "Signaler un problème"
+participer: "Participer"

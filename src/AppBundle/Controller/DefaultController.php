@@ -24,10 +24,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
-
-
-        $pers_co = $repoPersonne->findOneById(10);
+        $pers_co = $request->getSession()->get('userConnect');
 
         $em = $this->getDoctrine()->getManager();
 
@@ -38,7 +35,6 @@ class DefaultController extends Controller
 
 
         $listeLieu = $em->getRepository('AppBundle:Lieu')->findAll();
-
 
         //Recuperation de la liste des villes
 

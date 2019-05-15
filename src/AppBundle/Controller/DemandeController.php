@@ -26,10 +26,9 @@ class DemandeController extends Controller
     /**
      * @Route("/demande", name="Demande")
      */
-    public function DemandeAction()
+    public function DemandeAction(Request $request)
     {
-        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
-        $pers_co = $repoPersonne->findOneById(10);
+        $pers_co = $request->getSession()->get('userConnect');
 
         $personnes = $this->getDoctrine()->getRepository('AppBundle:Personne');
         $lieu = $this->getDoctrine()->getRepository('AppBundle:Lieu');
