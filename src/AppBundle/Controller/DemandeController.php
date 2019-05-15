@@ -40,7 +40,7 @@ class DemandeController extends Controller
         $listeVehicule = $vehicule->findAll();
 
 
-        date_default_timezone_set('Europe/Paris');
+//        date_default_timezone_set('Europe/Paris');
         $dateDuJour = getdate();
 //        dump($dateDuJour);
 

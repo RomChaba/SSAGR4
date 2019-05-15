@@ -70,6 +70,10 @@ class ParticiperController extends Controller
     public function detailVoyageAction(Request $request, $idemprunt)
     {
 
+//        date_default_timezone_set('Europe/Paris');
+        $dateDuJour = getdate();
+
+
 //      ****** Recuperation de l'emprunt dans la liste ******
         $listeEmprunt = $request->getSession()->get("EMPRUNT");
         /** @var Emprunt $unEmprunt */
@@ -103,8 +107,8 @@ class ParticiperController extends Controller
             }
         }
 
-        dump($emprunt);
-        dump($new_liste);
+//        dump($emprunt);
+//        dump($new_liste);
 
         return $this->render(
             'participer/detail.html.twig',
@@ -113,6 +117,7 @@ class ParticiperController extends Controller
                 "pers_co"=>$pers_co,
                 "emprunt"=>$emprunt,
                 "lieu_emprunt"=>$new_liste,
+                "dateDuJour"=>$dateDuJour,
             )
         );
 

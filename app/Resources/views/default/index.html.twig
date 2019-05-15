@@ -91,34 +91,48 @@
                     </thead>
                     <tbody>
                     {% for emprunt in listeEmprunt %}
-                        <tr>
-                            <td>{{ emprunt.listePersonne[0].prenom|default('Pierre') }} {{ emprunt.listePersonne[0].nom|default('Marc') }}</td>
-                            {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
 
-                            {% for data in lieu_emprunt %}
-                                {% if emprunt.id == data.empruntId and data.depart == true %}
-                                    <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
-                                {% elseif emprunt.id == data.empruntId %}
-                                    <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
-                                {% endif %}
-                            {% endfor %}
+                        {% set affichage = false %}
 
-                            <td>{{ emprunt.listeLieux[0].libelle }}</td>
-                            <td>{{ emprunt.listeLieux[1].libelle }}</td>
-                            {% if pers_co.id == emprunt.listePersonne[0].id %}
-                                <td align="center" class="alert alert-success">
+                        {% for pers in emprunt.listePersonne %}
+                            {% if pers_co.id == pers.id %}
+                                {% set affichage = true %}
+
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if affichage == true %}
+                            <tr>
+                                <td>{{ emprunt.listePersonne[0].prenom|default('Pierre') }} {{ emprunt.listePersonne[0].nom|default('Marc') }}</td>
+                                {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
+
+                                {% for data in lieu_emprunt %}
+                                    {% if emprunt.id == data.empruntId and data.depart == true %}
+                                        <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                                    {% elseif emprunt.id == data.empruntId %}
+                                        <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <td>{{ emprunt.listeLieux[0].libelle }}</td>
+                                <td>{{ emprunt.listeLieux[1].libelle }}</td>
+                                {% if pers_co.id == emprunt.listePersonne[0].id %}
+                                    <td align="center" class="alert alert-success">
                                         <span class="glyphicon glyphicon-ok">
                                             <span style="display: none;">conducteur</span>
                                         </span>
-                                </td>
-                            {% else %}
-                                <td align="center" class="alert alert-danger">
+                                    </td>
+                                {% else %}
+                                    <td align="center" class="alert alert-danger">
                                         <span class="glyphicon glyphicon-remove">
                                             <span style="display: none;">passager</span>
                                         </span>
-                                </td>
-                            {% endif %}
-                        </tr>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+
                     {% endfor %}
                     </tbody>
                 </table>
