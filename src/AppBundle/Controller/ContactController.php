@@ -116,7 +116,10 @@ class ContactController extends Controller
                 $message = htmlentities($_POST['message']);
 
                 // Variables concernant l'email
-                $destinataire = 'giraudeau.samantha@gmail.com'; // Adresse email du webmaster
+                $repoParametre = $this->getDoctrine()->getRepository("AppBundle:Parametre");
+                $destinataire = $repoParametre->findOneBy(['cle'=>'mail_contact']);
+                $destinataire = $destinataire->getValeur(); // Adresse email de l'administrateur
+
                 $sujet = 'Titre du message'; // Titre de l'email
                 $contenu = '<html><head><title>Titre du message</title></head><body>';
                 $contenu .= '<p>Bonjour, vous avez reçu un message à partir de votre site web.</p>';
