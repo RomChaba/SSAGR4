@@ -30,6 +30,10 @@ class DemandeController extends Controller
     {
         $pers_co = $request->getSession()->get('userConnect');
 
+        if ($pers_co == null) {
+            return $this->redirectToRoute("connexion");
+        }
+
         $personnes = $this->getDoctrine()->getRepository('AppBundle:Personne');
         $lieu = $this->getDoctrine()->getRepository('AppBundle:Lieu');
         $vehicule = $this->getDoctrine()->getRepository('AppBundle:Vehicule');

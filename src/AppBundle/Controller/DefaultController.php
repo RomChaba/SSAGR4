@@ -26,6 +26,9 @@ class DefaultController extends Controller
     {
         $pers_co = $request->getSession()->get('userConnect');
 
+        if ($pers_co == null) {
+            return $this->redirectToRoute("connexion");
+        }
 
 
         $em = $this->getDoctrine()->getManager();
