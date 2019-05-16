@@ -34,16 +34,21 @@
             <div class="col-xs-1"><a href="{{ path("homepage") }}"><img src="{{ asset('img/logo-horizontal.png') }}" style="height: 100%; width: 100%;"></img></a></div>
             <div class="col-xs-3"><a class="btn btn-default" href="{{ path("Demande") }}">{{ "proposer_un_voyage"|trans }}</a></div>
             <div class="col-xs-3"><a class="btn btn-default disabled" href="{{ path("participer") }}">{{ "participer_voyage"|trans }}</a></div>
-            <div class="col-xs-2"><a class="btn btn-default" href="{{ path("connexion") }}"><span class="glyphicon glyphicon-log-in"></span></a></div>
-            <div class="col-xs-3">
-                {% if app.request.locale is defined %}
-                    {% if app.request.locale == 'en' %}
-                        <a href="{{ path('setlocale', {'language': 'fr'}) }}"><img style="width: 10%" src="{{ asset('img/drapeauFR.png') }}" /></a>
-                    {%  else %}
-                        <a href="{{ path('setlocale', {'language': 'en'}) }}"><img style="width: 10%" src="{{ asset('img/drapeauEN.png') }}" /></a>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-4">
+                <div class="col-xs-6"></div>
+                <div class="col-xs-3"><a class="btn btn-default" href="{{ path("connexion") }}"><span class="glyphicon glyphicon-log-in"></span></a></div>
+                <div class="col-xs-3">
+                    {% if app.request.locale is defined %}
+                        {% if app.request.locale == 'en' %}
+                            <a href="{{ path('setlocale', {'language': 'fr'}) }}"><img style="width: 45%" src="{{ asset('img/drapeauFR.png') }}" /></a>
+                        {%  else %}
+                            <a href="{{ path('setlocale', {'language': 'en'}) }}"><img style="width: 45%" src="{{ asset('img/drapeauEN.png') }}" /></a>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -52,31 +57,32 @@
         <div class="col-xs-12 text-center topNavBar">
             <div class="col-xs-1"><a href="{{ path("homepage") }}"><img src="{{ asset('img/logo-horizontal.png') }}" style="height: 100%; width: 100%;"></img></a></div>
             <div class="col-xs-3"><a class="btn btn-default" href="{{ path("Demande") }}">{{ "proposer_un_voyage"|trans }}</a></div>
-            <div class="col-xs-2"><a class="btn btn-default" href="{{ path("participer") }}">{{ "participer_voyage"|trans }}</a></div>
+            <div class="col-xs-3"><a class="btn btn-default" href="{{ path("participer") }}">{{ "participer_voyage"|trans }}</a></div>
             {#<div class="col-xs-2">{{ "bonjour"|trans }} <span>{{ pers_co.nom }} {{ pers_co.prenom }}</span></div>#}
+            <div class="col-xs-1"></div>
             {% if app.session.get('userConnect') is defined %}
-                <div class="col-xs-2">{{ "bonjour"|trans }} <span>{{ app.session.get('userConnect').nom }} {{ app.session.get('userConnect').prenom }}</span></div>
+                <div class="col-xs-1">{{ "bonjour"|trans }} <span>{{ app.session.get('userConnect').nom }} {{ app.session.get('userConnect').prenom }}</span></div>
             {% else %}
-                <div class="col-xs-2">{{ "connectez_vous"|trans }}</span></div>
+                <div class="col-xs-1">{{ "connectez_vous"|trans }}</span></div>
 
             {% endif %}
-            <div class="col-xs-2">
-                <div class="col-xs-4"><a class="btn btn-default" href="{{ path("moncompte") }}"><span class="glyphicon glyphicon-user"></span></a></div>
+            <div class="col-xs-3">
+                <div class="col-xs-2"><a class="btn btn-default" href="{{ path("moncompte") }}"><span class="glyphicon glyphicon-user"></span></a></div>
                 {% if app.session.get('userConnect').isAdmin %}
-                    <div class="col-xs-4"><a class="btn btn-default" href="{{ path("administration") }}"><span class="glyphicon glyphicon-wrench"></span></a></div>
+                    <div class="col-xs-2"><a class="btn btn-default" href="{{ path("administration") }}"><span class="glyphicon glyphicon-wrench"></span></a></div>
                 {% endif %}
-                <div class="col-xs-4"><a class="btn btn-default" href="{{ path("deconnexion") }}"><span class="glyphicon glyphicon-log-out"></span></a></div>
-            </div>
-
-            <div class="col-xs-2">
-                {% if app.request.locale is defined %}
+                <div class="col-xs-2"><a class="btn btn-default" href="{{ path("deconnexion") }}"><span class="glyphicon glyphicon-log-out"></span></a></div>
+                <div class="col-xs-6">{% if app.request.locale is defined %}
                     {% if app.request.locale == 'en' %}
-                        <a href="{{ path('setlocale', {'language': 'fr'}) }}"><img style="width: 15%" src="{{ asset('img/drapeauFR.png') }}" /></a>
+                        <a href="{{ path('setlocale', {'language': 'fr'}) }}"><img style="width: 30%" src="{{ asset('img/drapeauFR.png') }}" /></a>
                     {%  else %}
-                        <a href="{{ path('setlocale', {'language': 'en'}) }}"><img style="width: 15%" src="{{ asset('img/drapeauEN.png') }}" /></a>
+                        <a href="{{ path('setlocale', {'language': 'en'}) }}"><img style="width: 30%" src="{{ asset('img/drapeauEN.png') }}" /></a>
                     {% endif %}
                 {% endif %}
+                </div>
             </div>
+
+
         </div>
     </div>
 

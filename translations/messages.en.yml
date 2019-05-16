@@ -88,26 +88,26 @@ is_conducteur: 'I''m the driver ?'
 new_lieu_titre_modal: 'New site : '
 detail_covoit_titre: 'Travel''s details :'
 detail_voyageurs: 'Passengers :'
-detail_signal_prob: __detail_signal_prob
-detail_rendre_cle: __detail_rendre_cle
-detail_plus_participer: __detail_plus_participer
-detail_participer: __detail_participer
-retard_titre: __retard_titre
-retard_estime: __retard_estime
-retard_cause: __retard_cause
-retard_embouteillage: __retard_embouteillage
-retard_retard: __retard_retard
-retard_prob_voiture: __retard_prob_voiture
-retard_autre: __retard_autre
-retard_btn_validation: __retard_btn_validation
-rend_cle_titre: __rend_cle_titre
-rend_cle_signaler_prob: __rend_cle_signaler_prob
-participer: __participer
-liste_de_personnes: __liste_de_personnes
-permis: __permis
-modifier_et_supprimer: __modifier_et_supprimer
-liste_de_voitures: __liste_de_voitures
-libelle: __libelle
-immatriculation: __immatriculation
-couleur: __couleur
-connectez_vous: __connectez_vous
+detail_signal_prob: "Report a problem"
+detail_rendre_cle: "Return keys"
+detail_plus_participer: "No longer participate"
+detail_participer: "Participate"
+retard_titre: "Delay"
+retard_estime: "Estimated delay"
+retard_cause: "Reason for delay"
+retard_embouteillage: "Traffic jam"
+retard_retard: "Delay"
+retard_prob_voiture: "Car problem"
+retard_autre: "Other"
+retard_btn_validation: "Save"
+rend_cle_titre: "Return keys"
+rend_cle_signaler_prob: "Report a problem"
+participer: "Participate"
+liste_de_personnes: "List of people"
+permis: "Driver licence"
+modifier_et_supprimer: "Edit / Delete"
+liste_de_voitures: "List of cars"
+libelle: "Label"
+immatriculation: "Car registration"
+couleur: "Color"
+connectez_vous: "Please login"

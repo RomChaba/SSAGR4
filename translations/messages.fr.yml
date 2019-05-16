@@ -103,11 +103,11 @@ retard_btn_validation: Valider
 rend_cle_titre: 'Rendre les clés :'
 rend_cle_signaler_prob: 'Signaler un problème'
 participer: Participer
-liste_de_personnes: __liste_de_personnes
-permis: __permis
-modifier_et_supprimer: __modifier_et_supprimer
-liste_de_voitures: __liste_de_voitures
-libelle: __libelle
-immatriculation: __immatriculation
-couleur: __couleur
-connectez_vous: __connectez_vous
+liste_de_personnes: "Liste des personnes"
+permis: "Permis ?"
+modifier_et_supprimer: "Modifier / Supprimer"
+liste_de_voitures: "Liste des voitures"
+libelle: "Libellé"
+immatriculation: "Immatriculation"
+couleur: "Couleur"
+connectez_vous: "Connectez vous"
