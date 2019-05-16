@@ -94,7 +94,13 @@
 
 {% endblock %}
 
-
+<nav>
+    <ul class="nav nav-justified navbar-fixed-bottom">
+        <li class="active"><a href="#">{{ "charte_conducteur"|trans }}</a></li>
+        <li><a href="{{ path('contact') }}">{{ "contact"|trans }}</a></li>
+        <li><a href="{{ path('contrainteslegales') }}">{{ "contraintes_legales"|trans }}</a></li>
+    </ul>
+</nav>
 
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>

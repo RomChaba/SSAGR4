@@ -88,26 +88,26 @@ is_conducteur: 'I''m the driver ?'
 new_lieu_titre_modal: 'New site : '
 detail_covoit_titre: 'Travel''s details :'
 detail_voyageurs: 'Passengers :'
-detail_signal_prob: "Report a problem"
-detail_rendre_cle: "Return keys"
-detail_plus_participer: "No longer participate"
-detail_participer: "Participate"
-retard_titre: "Delay"
-retard_estime: "Estimated delay"
-retard_cause: "Reason for delay"
-retard_embouteillage: "Traffic jam"
-retard_retard: "Delay"
-retard_prob_voiture: "Car problem"
-retard_autre: "Other"
-retard_btn_validation: "Save"
-rend_cle_titre: "Return keys"
-rend_cle_signaler_prob: "Report a problem"
-participer: "Participate"
-liste_de_personnes: "List of people"
-permis: "Driver licence"
-modifier_et_supprimer: "Edit / Delete"
-liste_de_voitures: "List of cars"
-libelle: "Label"
-immatriculation: "Car registration"
-couleur: "Color"
-connectez_vous: "Please login"
+detail_signal_prob: 'Report a problem'
+detail_rendre_cle: 'Return keys'
+detail_plus_participer: 'No longer participate'
+detail_participer: Participate
+retard_titre: Delay
+retard_estime: 'Estimated delay'
+retard_cause: 'Reason for delay'
+retard_embouteillage: 'Traffic jam'
+retard_retard: Delay
+retard_prob_voiture: 'Car problem'
+retard_autre: Other
+retard_btn_validation: Save
+rend_cle_titre: 'Return keys'
+rend_cle_signaler_prob: 'Report a problem'
+participer: Participate
+liste_de_personnes: 'List of people'
+permis: 'Driver licence'
+modifier_et_supprimer: 'Edit / Delete'
+liste_de_voitures: 'List of cars'
+libelle: Label
+immatriculation: 'Car registration'
+couleur: Color
+connectez_vous: 'Please login'
