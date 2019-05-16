@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Administration{% endblock %}
+{% block title %}{{ "administration"|trans }}{% endblock %}
 
 {% block body %}
 
@@ -37,17 +37,17 @@
 
 
     <div id="welcome">
-        <h1>Liste personnes</h1>
+        <h1>{{ "liste_de_personnes"|trans }}</h1>
     </div>
     <div class="row"><br/></div>
     <div class="table-responsive" >
         <table class="table table-hover" id="table_personne">
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Permis</th>
-                <th>Modifier / Supprimer</th>
+                <th>{{ "nom"|trans }}</th>
+                <th>{{ "prenom"|trans }}</th>
+                <th>{{ "permis"|trans }}</th>
+                <th>{{ "modifier_et_supprimer"|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -74,17 +74,17 @@
     </div>
     <div class="row"></div>
     <div id="welcome">
-        <h1>Liste voitures</h1>
+        <h1>{{ "liste_de_voitures"|trans }}</h1>
     </div>
     <div class="row"><br/></div>
     <div class="table-responsive" >
         <table class="table table-hover" id="table_voiture">
             <thead>
             <tr>
-                <th align="center">Libellé</th>
-                <th align="center">Immatriculation</th>
-                <th align="center">Couleur</th>
-                <th align="center">Modifier / Supprimer</th>
+                <th align="center">{{ "libelle"|trans }}</th>
+                <th align="center">{{ "immatriculation"|trans }}</th>
+                <th align="center">{{ "couleur"|trans }}</th>
+                <th align="center">{{ "modifier_et_supprimer"|trans }}</th>
 
             </tr>
             </thead>
@@ -111,15 +111,57 @@
 
 {% block javascripts %}
     <script>
-        $("#table_personne").DataTable(
-
-        );
+        $("#table_personne").DataTable({
+                language: {
+                    processing: '{{ "traitement_en_cours"|trans }}',
+                    search: '{{ "search"|trans }}',
+                    lengthMenu: '{{ "afficher"|trans }} _MENU_ {{ "elements"|trans }}',
+                    info: '{{ "affichage_de_element"|trans }} _START_ {{ "à"|trans }} _END_ {{ "sur"|trans }} _TOTAL_ {{ "elements"|trans }}',
+                    infoEmpty: '{{ "affichage_de_element"|trans }} 0 {{ "à"|trans }} 0 {{ "sur"|trans }} 0 {{ "elements"|trans }}',
+                    infoFiltered: '{{ "filtre_de"|trans }} _MAX_ {{ 'elements_au_total' }}',
+                    infoPostFix: "",
+                    loadingRecords: '{{ "chargement_en_cours"|trans }}',
+                    zeroRecords: '{{ "aucun_element_afficher"|trans }}',
+                    emptyTable: '{{ "no_donnees_a_afficher"|trans }}',
+                    paginate: {
+                        first: '{{ "premier"|trans }}',
+                        previous: '{{ "previous"|trans }}',
+                        next: '{{ "next"|trans }}',
+                        last: '{{ "last"|trans }}'
+                    },
+                    aria: {
+                        sortAscending: '{{ "activer_tri_croissant"|trans }}',
+                        sortDescending: '{{ "activer_tri_decroissant"|trans }}',
+                    }
+                }
+            });
     </script>
 
     <script>
-        $("#table_voiture").DataTable(
-
-        );
+        $("#table_voiture").DataTable({
+                language: {
+                    processing: '{{ "traitement_en_cours"|trans }}',
+                    search: '{{ "search"|trans }}',
+                    lengthMenu: '{{ "afficher"|trans }} _MENU_ {{ "elements"|trans }}',
+                    info: '{{ "affichage_de_element"|trans }} _START_ {{ "à"|trans }} _END_ {{ "sur"|trans }} _TOTAL_ {{ "elements"|trans }}',
+                    infoEmpty: '{{ "affichage_de_element"|trans }} 0 {{ "à"|trans }} 0 {{ "sur"|trans }} 0 {{ "elements"|trans }}',
+                    infoFiltered: '{{ "filtre_de"|trans }} _MAX_ {{ 'elements_au_total' }}',
+                    infoPostFix: "",
+                    loadingRecords: '{{ "chargement_en_cours"|trans }}',
+                    zeroRecords: '{{ "aucun_element_afficher"|trans }}',
+                    emptyTable: '{{ "no_donnees_a_afficher"|trans }}',
+                    paginate: {
+                        first: '{{ "premier"|trans }}',
+                        previous: '{{ "previous"|trans }}',
+                        next: '{{ "next"|trans }}',
+                        last: '{{ "last"|trans }}'
+                    },
+                    aria: {
+                        sortAscending: '{{ "activer_tri_croissant"|trans }}',
+                        sortDescending: '{{ "activer_tri_decroissant"|trans }}',
+                    }
+                }
+            });
     </script>
 
 

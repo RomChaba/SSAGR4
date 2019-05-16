@@ -83,23 +83,31 @@ point_18: 'Je ne conduis pas avec un taux d’alcool supérieur au taux autoris�
 point_19: 'En cas d’accident, même bénin, responsable ou non, avec ou sans tiers, je remplis un constat amiable et j’avertis immédiatement l’administrateur de VoyageEnVoiture.'
 point_20: 'Mon véhicule est un outil de travail et reflète l’image de notre société, je m’engage à le gérer en bon père de famille et à veiller à ce qu’il soit en bon état de carrosserie, mécanique et de propreté intérieure et extérieure.'
 pwd: 'Mot de passe'
-admin: "Administrateur"
-is_conducteur: "Suis je le conducteur ?"
-new_lieu_titre_modal: "Nouveau site :"
-detail_covoit_titre: "Détail du voyage :"
-detail_voyageurs: "Voyageurs :"
-detail_signal_prob: "Signaler problème"
-detail_rendre_cle: "Rendre les clés"
-detail_plus_participer: "Ne pas participer"
-detail_participer: "Participer"
-retard_titre: "Retard :"
-retard_estime: "Retard estimé : "
-retard_cause: "Cause du retard : "
-retard_embouteillage: "Embouteillage"
-retard_retard: "Retard"
-retard_prob_voiture: "Problème sur la voiture"
-retard_autre: "Autre"
-retard_btn_validation: "Valider"
-rend_cle_titre: "Rendre les clés :"
-rend_cle_signaler_prob: "Signaler un problème"
-participer: "Participer"
+admin: Administrateur
+is_conducteur: 'Suis je le conducteur ?'
+new_lieu_titre_modal: 'Nouveau site :'
+detail_covoit_titre: 'Détail du voyage :'
+detail_voyageurs: 'Voyageurs :'
+detail_signal_prob: 'Signaler problème'
+detail_rendre_cle: 'Rendre les clés'
+detail_plus_participer: 'Ne pas participer'
+detail_participer: Participer
+retard_titre: 'Retard :'
+retard_estime: 'Retard estimé : '
+retard_cause: 'Cause du retard : '
+retard_embouteillage: Embouteillage
+retard_retard: Retard
+retard_prob_voiture: 'Problème sur la voiture'
+retard_autre: Autre
+retard_btn_validation: Valider
+rend_cle_titre: 'Rendre les clés :'
+rend_cle_signaler_prob: 'Signaler un problème'
+participer: Participer
+liste_de_personnes: __liste_de_personnes
+permis: __permis
+modifier_et_supprimer: __modifier_et_supprimer
+liste_de_voitures: __liste_de_voitures
+libelle: __libelle
+immatriculation: __immatriculation
+couleur: __couleur
+connectez_vous: __connectez_vous

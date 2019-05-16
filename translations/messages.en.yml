@@ -83,11 +83,11 @@ point_18: 'I do not drive with more alcohol than is allowed. I don''t take narco
 point_19: 'In the event of an accident, even a minor one, whether or not responsible, with or without a third party, I fill out an amicable report and immediately notify the administrator of VoyageEnVoiture.'
 point_20: 'My vehicle is a work tool and reflects the image of our company, I undertake to manage it as a good family man and to ensure that it is in good bodywork, mechanical and clean inside and out.'
 pwd: Password
-admin: "Administrator"
-is_conducteur: "I'm the driver ?"
-new_lieu_titre_modal: "New site : "
-detail_covoit_titre: "Travel's details :"
-detail_voyageurs: "Passengers :"
+admin: Administrator
+is_conducteur: 'I''m the driver ?'
+new_lieu_titre_modal: 'New site : '
+detail_covoit_titre: 'Travel''s details :'
+detail_voyageurs: 'Passengers :'
 detail_signal_prob: __detail_signal_prob
 detail_rendre_cle: __detail_rendre_cle
 detail_plus_participer: __detail_plus_participer
@@ -103,3 +103,11 @@ retard_btn_validation: __retard_btn_validation
 rend_cle_titre: __rend_cle_titre
 rend_cle_signaler_prob: __rend_cle_signaler_prob
 participer: __participer
+liste_de_personnes: __liste_de_personnes
+permis: __permis
+modifier_et_supprimer: __modifier_et_supprimer
+liste_de_voitures: __liste_de_voitures
+libelle: __libelle
+immatriculation: __immatriculation
+couleur: __couleur
+connectez_vous: __connectez_vous

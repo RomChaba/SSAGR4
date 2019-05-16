@@ -28,6 +28,6 @@ class DeconnexionController extends Controller
     public function DeconnexionAction(Request $request)
     {
         $request->getSession()->set('userConnect', null);
-        return $this->render('default/index.html.twig');
+        return $this->redirectToRoute('homepage');
     }
 }
