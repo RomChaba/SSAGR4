@@ -9,11 +9,11 @@ contraintes_legales: 'Legal constraints'
 propositions_de_voyage: 'Travel proposals'
 personne: Driver
 date: Date
-date_depart: 'Departure date'
+date_depart: 'Starting date'
 date_arrivee: 'Arrival date'
 duree: Duration
-lieu_depart: 'Departure place'
-lieu_arrivee: 'Arrival place'
+lieu_depart: 'Starting point'
+lieu_arrivee: 'Arrival point'
 votre_nom_prenom: 'Your lastname and firstname'
 votre_mail: 'Your mail adress'
 votre_message: 'Your message'
@@ -111,3 +111,4 @@ libelle: Label
 immatriculation: 'Car registration'
 couleur: Color
 connectez_vous: 'Please login'
+date_debut: 'Starting date'
