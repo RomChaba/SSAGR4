@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * EmpruntRepository
  *
@@ -16,5 +18,15 @@ class EmpruntRepository extends \Doctrine\ORM\EntityRepository
         $qb->delete()
             ->getQuery()
             ->execute();
+    }
+
+    public function insertEmprunt(int $idVehicule, string $commentaireEmprunt)
+    {
+        $queryBuilder = $this->createQueryBuilder('e');
+        //$query = $this->create('INSERT INTO dbo.emprunt (Vehicule_id_id, commentaire) VALUES (?, ?)');
+        //$query->setParameter($idVehicule, $commentaireEmprunt);
+        //$query->execute();
+        $queryBuilder->add('emprunt')->values(['vehicule_id_id' => '?', 'commentaire' => '?'])->setParameter(0, $idVehicule)->setParameter(1, $commentaireEmprunt);
+        return $queryBuilder->execute();
     }
 }

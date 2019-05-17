@@ -37,16 +37,16 @@ class Emprunt
     private $commentaire;
 
     /**
-     * @var Personne
+     * @var Emprunt_Personne
      *
-     * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="empruntId")
+     * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="empruntId",cascade={"persist"})
      */
     private $listePersonne;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="empruntId")
+     * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="empruntId",cascade={"persist"})
      */
     private $listeLieux;
 
@@ -113,7 +113,7 @@ class Emprunt
     }
 
     /**
-     * @return Personne
+     * @return Emprunt_Personne
      */
     public function getListePersonne()
     {

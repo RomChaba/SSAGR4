@@ -57,9 +57,9 @@ class Emprunt_Personne
     /**
      * Set empruntId
      *
-     * @param integer $empruntId
+     * @param Emprunt $empruntId
      *
-     * @return Emprunt_Personne
+     * @return Emprunt
      */
     public function setEmpruntId($empruntId)
     {

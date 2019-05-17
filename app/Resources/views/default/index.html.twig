@@ -110,9 +110,9 @@
                                 {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
 
                                 {% for data in lieu_emprunt %}
-                                    {% if emprunt.id == data.empruntId and data.depart == true %}
+                                    {% if emprunt.id == data.empruntId.id and data.depart == true %}
                                         <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
-                                    {% elseif emprunt.id == data.empruntId %}
+                                    {% elseif emprunt.id == data.empruntId.id %}
                                         <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
                                     {% endif %}
                                 {% endfor %}

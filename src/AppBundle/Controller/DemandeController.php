@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emprunt;
+use AppBundle\Entity\Emprunt_Personne;
 use AppBundle\Entity\Lieu;
 use AppBundle\Entity\Lieu_emprunt;
 use AppBundle\Entity\Personne;
@@ -123,44 +124,46 @@ class DemandeController extends Controller
 
         // Création de la liste des lieux
         $listeLieu = new ArrayCollection();
-
-        //Ajout des lieux de l'aller dans la liste
-        $listeLieu->add($lieu_depart);
-        $listeLieu->add($lieu_arrive);
-
-        //Création de la liste des personnes pour l'emprunt
-        $listePersonne = new ArrayCollection();
-        // Ajout du conducteur
-        $listePersonne->add($conducteur);
+        $lieuxEmpruntDepart = new Lieu_emprunt();
+        $lieuxEmpruntArriver = new Lieu_emprunt();
 
 
         //Creation de l'emprunt et de ses branches
         $emprunt = new Emprunt();
         $emprunt->setId(time());
         $emprunt->setVehiculeId($vehicule);
+        $lieuxEmpruntArriver->setEmpruntId($emprunt);
+        $lieuxEmpruntArriver->setLieuId($lieu_arrive);
+        $lieuxEmpruntArriver->setDepart(false);
+        $lieuxEmpruntArriver->setDateEtHeure($date_arrive);
+        $lieuxEmpruntDepart->setDateEtHeure($date_depart);
+        $lieuxEmpruntDepart->setEmpruntId($emprunt);
+        $lieuxEmpruntDepart->setLieuId($lieu_depart);
+        $lieuxEmpruntDepart->setDepart(true);
+        //Ajout des lieux de l'aller dans la liste
+        $listeLieu->add($lieuxEmpruntDepart);
+        $listeLieu->add($lieuxEmpruntArriver);
         $emprunt->setListeLieux($listeLieu);
-        $emprunt->setListePersonne($listePersonne);
+
         $emprunt->setCommentaire($commentaire);
+
+        //Création de la liste des personnes pour l'emprunt
+        $listePersonne = new ArrayCollection();
+        $empruntPerosnne = new Emprunt_Personne();
+        $empruntPerosnne->setPersonneId($conducteur);
+        $empruntPerosnne->setEmpruntId($emprunt);
+        $empruntPerosnne->setConducteur(true);
+        // Ajout du conducteur
+        $listePersonne->add($empruntPerosnne);
+        $emprunt->setListePersonne($listePersonne);
+
 
         //Création de la liaison entre l'emprunt et les lieux
         $liste_lieux_new = array();
 
-        $lieu_emprunt_dep = new Lieu_emprunt();
-        $lieu_emprunt_ari = new Lieu_emprunt();
+        array_push($liste_lieux_new, $lieuxEmpruntDepart);
 
-        $lieu_emprunt_dep->setEmpruntId($emprunt->getId());
-        $lieu_emprunt_dep->setDateEtHeure($date_depart);
-        $lieu_emprunt_dep->setLieuId($lieu_depart->getId());
-        $lieu_emprunt_dep->setDepart(true);
-
-        array_push($liste_lieux_new, $lieu_emprunt_dep);
-
-        $lieu_emprunt_ari->setEmpruntId($emprunt->getId());
-        $lieu_emprunt_ari->setDateEtHeure($date_arrive);
-        $lieu_emprunt_ari->setLieuId($lieu_arrive->getId());
-        $lieu_emprunt_ari->setDepart(false);
-
-        array_push($liste_lieux_new, $lieu_emprunt_ari);
+        array_push($liste_lieux_new, $lieuxEmpruntArriver);
 
         //Récupération de la liste des emprunts existant
         //TODO ENLEVER ET REMPLACER
@@ -195,7 +198,7 @@ class DemandeController extends Controller
             $emprunt_ret = new Emprunt();
             $emprunt_ret->setId(time() + 1);
             $emprunt_ret->setVehiculeId($vehicule);
-            $emprunt_ret->setListeLieux($listeLieu);
+
             $emprunt_ret->setListePersonne($listePersonne);
             $emprunt_ret->setCommentaire($commentaire);
             array_push($liste_emprunt, $emprunt_ret);
@@ -206,7 +209,7 @@ class DemandeController extends Controller
             $date_depart = new \DateTime();
             $date_depart->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
             $date_depart->setTime($request->get("h_depart_2"), $request->get("min_depart_2"));
-
+            $listeLieuEmprunt = new ArrayCollection();
 
 //            Recupertation des dates 2 pour le retour
 
@@ -220,7 +223,7 @@ class DemandeController extends Controller
             $lieu_emprunt_dep->setDateEtHeure($date_depart);
             $lieu_emprunt_dep->setLieuId($lieu_depart->getId());
             $lieu_emprunt_dep->setDepart(true);
-
+            $listeLieuEmprunt->add($lieu_emprunt_dep);
             array_push($liste_lieux_new, $lieu_emprunt_dep);
 
 
@@ -231,10 +234,10 @@ class DemandeController extends Controller
             $lieu_emprunt_ari->setDateEtHeure($date_arrive);
             $lieu_emprunt_ari->setLieuId($lieu_arrive->getId());
             $lieu_emprunt_ari->setDepart(false);
-
+            $listeLieuEmprunt->add($lieu_emprunt_ari);
             array_push($liste_lieux_new, $lieu_emprunt_ari);
 
-
+            $emprunt_ret->setListeLieux($listeLieuEmprunt);
         }
 
 
@@ -247,22 +250,10 @@ class DemandeController extends Controller
         array_push($liste_emprunt, $emprunt);
         $request->getSession()->set("EMPRUNT", $liste_emprunt);
 
-//        $em = $this->getDoctrine()->getManager();
-
-//        $em->persist($emprunt);
-//        $em->flush();
-//
-//        die();
-//        $lieu_emprunt_dep = new Lieu_emprunt();
-//        $lieu_emprunt_dep->setEmpruntId($emprunt->getId());
-//        $lieu_emprunt_dep->setDepart(true);
-//        $lieu_emprunt_dep->setEmpruntId(true);
-//        $lieu_emprunt_dep->setLieuId($lieu_depart->getId());
-//        $lieu_emprunt_dep->setDateEtHeure($date_depart);
-
-
-//        dump($request);
-//        die();
+        $em = $this->getDoctrine()->getManager();
+        $repoEmprunt = $this->getDoctrine()->getRepository("AppBundle:Emprunt");
+        $em->persist($emprunt);
+        $em->flush();
 
         return $this->redirectToRoute("homepage");
 

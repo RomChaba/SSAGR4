@@ -22,14 +22,14 @@ class Lieu_emprunt
     private $id;
 
     /**
-     * @var int
+     * @var Emprunt
      *
      * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listeLieux")
      */
     private $empruntId;
 
     /**
-     * @var int
+     * @var Lieu
      *
      * @ORM\ManyToOne(targetEntity="Lieu", inversedBy="listeEmprunt")
      */
@@ -77,7 +77,7 @@ class Lieu_emprunt
     /**
      * Get empruntId
      *
-     * @return int
+     * @return Emprunt
      */
     public function getEmpruntId()
     {
@@ -87,9 +87,9 @@ class Lieu_emprunt
     /**
      * Set lieuId
      *
-     * @param integer $lieuId
+     * @param Lieu $lieuId
      *
-     * @return Lieu_emprunt
+     * @return Lieu
      */
     public function setLieuId($lieuId)
     {
@@ -101,7 +101,7 @@ class Lieu_emprunt
     /**
      * Get lieuId
      *
-     * @return int
+     * @return Lieu
      */
     public function getLieuId()
     {

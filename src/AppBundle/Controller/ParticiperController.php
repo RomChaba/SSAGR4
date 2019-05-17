@@ -51,7 +51,8 @@ class ParticiperController extends Controller
         $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
 
         $listeLieu = $em->getRepository('AppBundle:Lieu')->findAll();
-
+dump($new_liste);
+die();
         // replace this example code with whatever you need
         return $this->render('participer/participer.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,

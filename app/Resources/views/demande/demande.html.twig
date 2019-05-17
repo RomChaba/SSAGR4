@@ -176,7 +176,7 @@
                                 {% endfor %}
                             </select>
                             <span class="input-group-addon"> : </span>
-                            <select name="min_depart_2" id="min_depart_2" class="form-control">
+                            <select name="min_depart_2" id="min_depart_2" class="form-control" required>
                                 <option value=""> min</option>
                                 {% for i in range(0,55,5) %}
                                     {% if i == dateDuJour.minutes %}
@@ -193,7 +193,7 @@
                 <div class="form-group col-xs-12">
                     <label for="" class="col-xs-12">{{ "lieu_arrive"|trans }}* :</label>
                     <div class="col-xs-6">
-                        <select name="lieu_arrive_2" id="lieu_arrive_2" class="form-control" >
+                        <select name="lieu_arrive_2" id="lieu_arrive_2" class="form-control">
                             {% for lieu in listeLieu %}
                                 <option value="{{ lieu.id }}"> {{ lieu.libelle }}</option>
                             {% endfor %}
@@ -218,7 +218,7 @@
                                 {% endfor %}
                             </select>
                             <span class="input-group-addon"> : </span>
-                            <select name="min_arrive_2" id="min_arrive_2" class="form-control">
+                            <select name="min_arrive_2" id="min_arrive_2" class="form-control" required>
                                 <option value=""> min</option>
                                 {% for i in range(0,55,5) %}
                                     <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
