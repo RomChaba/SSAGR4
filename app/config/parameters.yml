@@ -1,26 +1,26 @@
 # This file is auto-generated during the composer install
-#parameters:
-#    database_driver: sqlsrv
-#    database_host: (local)
-#    database_port: null
-#    database_name: VoyageEnVoiture
-#    database_user: admin
-#    database_password: admin
-#    mailer_transport: smtp
-#    mailer_host: 127.0.0.1
-#    mailer_user: null
-#    mailer_password: null
-#    secret: ThisTokenIsNotSoSecretChangeIt
-
 parameters:
-    database_driver: pdo_mysql
-    database_host: 127.0.0.1
-    database_port: 3306
+    database_driver: sqlsrv
+    database_host: (local)
+    database_port: null
     database_name: VoyageEnVoiture
-    database_user: root
-    database_password:
+    database_user: admin
+    database_password: admin
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
+
+#parameters:
+#    database_driver: pdo_mysql
+#    database_host: mysql-voyageenvoiture.alwaysdata.net
+#    database_port: 3306
+#    database_name: voyageenvoiture_VoyageEnVoiture
+#    database_user: 183931
+#    database_password: z9mhE74EF
+#    mailer_transport: smtp
+#    mailer_host: 127.0.0.1
+#    mailer_user: null
+#    mailer_password: null
+#    secret: ThisTokenIsNotSoSecretChangeIt
