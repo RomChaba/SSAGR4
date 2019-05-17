@@ -30,6 +30,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute("connexion");
         }
 
+        //$pers_co = $repoPersonne->findOneById(11);
 
         $em = $this->getDoctrine()->getManager();
 
