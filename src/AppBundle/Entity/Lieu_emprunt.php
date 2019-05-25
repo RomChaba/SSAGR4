@@ -22,14 +22,14 @@ class Lieu_emprunt
     private $id;
 
     /**
-     * @var int
+     * @var Emprunt
      *
      * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listeLieux")
      */
     private $empruntId;
 
     /**
-     * @var int
+     * @var Lieu
      *
      * @ORM\ManyToOne(targetEntity="Lieu", inversedBy="listeEmprunt")
      */
