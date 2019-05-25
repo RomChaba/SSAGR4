@@ -39,21 +39,21 @@ class Emprunt
     /**
      * @var Personne
      *
-     * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="empruntId")
+     * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="empruntId", cascade={"remove"})
      */
     private $listePersonne;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="empruntId")
+     * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="empruntId", cascade={"remove"})
      */
     private $listeLieux;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Cle_emprunt",mappedBy="empruntId")
+     * @ORM\OneToMany(targetEntity="Cle_emprunt",mappedBy="empruntId", cascade={"remove"})
      */
     private $listeCle;
 
@@ -129,7 +129,7 @@ class Emprunt
     }
 
     /**
-     * @return Lieu
+     * @return Lieu_emprunt
      */
     public function getListeLieux()
     {

@@ -103,6 +103,42 @@
     </div>
     <div class="row"><br/></div>
 
+    {# Emprunts #}
+    <div id="welcome">
+        <h1>{{ "liste_demprunt"|trans }}</h1>
+    </div>
+    <div class="row"><br/></div>
+    <div class="table-responsive" >
+        <table class="table table-hover" id="table_emprunt">
+            <thead>
+            <tr>
+                <th align="center">{{ "conducteur"|trans }}</th>
+                <th align="center">{{ "date_depart"|trans }}</th>
+                <th align="center">{{ "date_arrivee"|trans }}</th>
+                <th align="center">{{ "lieu_depart"|trans }}</th>
+                <th align="center">{{ "lieu_arrive"|trans }}</th>
+                <th align="center">{{ "supprimer"|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for emprunt in emprunts %}
+                <tr>
+                    <td align="center">{{ emprunt.conducteurName }}</td>
+                    <td align="center">{{ emprunt.date_depart }}</td>
+                    <td align="center">{{ emprunt.date_arriver }}</td>
+                    <td align="center">{{ emprunt.lieu_depart }}</td>
+                    <td align="center">{{ emprunt.lieu_arriver }}</td>
+                    <td align="center">
+                        <a class="btn btn-default" href="{{ path("suppressionemprunt", {id: emprunt.idEmprunt} ) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
 </div>
 
 
