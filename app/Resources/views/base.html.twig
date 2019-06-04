@@ -8,7 +8,7 @@
     <title>{% block title %}SSAGR4{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    {#<link rel="stylesheet" href="css/bootstrap.css">#}
+    <link rel="stylesheet" href={{ asset('css/index.css') }}>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
     <link rel="stylesheet" href="{{ asset('js/datatables.min.css') }}"/>
 </head>
@@ -95,8 +95,8 @@
 {% endblock %}
 
 <nav>
-    <ul class="nav nav-justified navbar-fixed-bottom">
-        <li class="active"><a href="#">{{ "charte_conducteur"|trans }}</a></li>
+    <ul class="nav nav-justified navbar-fixed-bottom" style="background-color: #f1f1f1;">
+        <li class="active"><a href="{{ path('charteconducteur') }}">{{ "charte_conducteur"|trans }}</a></li>
         <li><a href="{{ path('contact') }}">{{ "contact"|trans }}</a></li>
         <li><a href="{{ path('contrainteslegales') }}">{{ "contraintes_legales"|trans }}</a></li>
     </ul>
