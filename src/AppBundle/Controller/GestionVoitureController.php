@@ -68,4 +68,40 @@ class GestionVoitureController extends Controller
             ->add('Enregistrer', SubmitType::class, array('attr' => ['class' => 'btn btn-success pull-right']))
             ->getForm();
     }
+
+    /**
+     * @Route("/importcsv", name="importcsv")
+     */
+    public function importCSV(){
+        if (isset($_POST["import"])) {
+
+            $fileName = $_FILES["file"]["tmp_name"];
+
+            if ($_FILES["file"]["size"] > 0) {
+
+                $file = fopen($fileName, "r");
+                $em = $this->getDoctrine()->getManager();
+                while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+                    $vehicule = new Vehicule();
+                    $vehicule->setLibelle($column[0]);
+                    $vehicule->setCouleur($column[1]);
+                    $vehicule->setImmatriculation($column[2]);
+                    $em->persist($vehicule);
+                    $sqlInsert = "INSERT into vehiocule (libelle,couleur,immatriculation)
+                   values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
+                    dump($sqlInsert);
+
+                    if (! empty($result)) {
+                        $type = "success";
+                        $message = "CSV Data Imported into the Database";
+                    } else {
+                        $type = "error";
+                        $message = "Problem in Importing CSV Data";
+                    }
+                }
+                $em->flush();
+                $this->redirectToRoute("administration", ["type"=>$type,"message"=>$message]);
+            }
+        }
+    }
 }

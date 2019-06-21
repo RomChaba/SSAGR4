@@ -108,28 +108,28 @@ class Personne
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=255)
+     * @ORM\Column(name="photo", type="string", length=255, nullable=true)
      */
     private $photo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255)
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rue", type="string", length=255)
+     * @ORM\Column(name="rue", type="string", length=255, nullable=true)
      */
     private $rue;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cp", type="string", length=255)
+     * @ORM\Column(name="cp", type="string", length=255, nullable=true)
      * @Assert\Length(max=5, maxMessage="Le code postal doit faire maximum 5 caractères.")
      * @Assert\Regex(pattern="/^[0-9]+$/", message="Veuillez ne rentrer que des chiffres")
      */
@@ -138,28 +138,28 @@ class Personne
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
      */
     private $ville;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="permis", type="boolean")
+     * @ORM\Column(name="permis", type="boolean", nullable=true)
      */
     private $permis=false;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="actif", type="boolean")
+     * @ORM\Column(name="actif", type="boolean", nullable=true)
      */
     private $actif;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreation", type="datetime")
+     * @ORM\Column(name="dateCreation", type="datetime", nullable=true)
      */
     private $dateCreation;
 
