@@ -89,7 +89,6 @@ class GestionVoitureController extends Controller
                     $em->persist($vehicule);
                     $sqlInsert = "INSERT into vehiocule (libelle,couleur,immatriculation)
                    values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
-                    dump($sqlInsert);
 
                     if (! empty($result)) {
                         $type = "success";

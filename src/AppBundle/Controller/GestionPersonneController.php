@@ -131,7 +131,6 @@ class GestionPersonneController extends Controller
                     $em->persist($personne);
                     $sqlInsert = "INSERT into personne (nom,prenom,mail,motDePasse)
                    values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "')";
-                    dump($sqlInsert);
 
                     if (! empty($result)) {
                         $type = "success";
