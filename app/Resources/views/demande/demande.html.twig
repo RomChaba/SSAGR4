@@ -14,7 +14,7 @@
     </style>
 
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        <form action="{{ path("DemandeForm") }}" method="post" role="form">
+        <form action="{{ path("DemandeForm") }}" method="post">
             <legend>{{ "demande_covoit"|trans }} </legend>
 
             <div class="form-group col-xs-12">
@@ -23,7 +23,12 @@
                 <div class="col-xs-10 col-sm-6">
                     <select name="personne" id="personne" class="form-control" required>
                         {% for personne in listePersonne %}
-                            <option value="{{ personne.id }}">{{ personne.nom }} {{ personne.prenom }}</option>
+                            {% if personne.id == pers_co.id %}
+                                <option value="{{ personne.id }}" selected>{{ personne.nom }} {{ personne.prenom }}</option>
+                            {% else %}
+                                <option value="{{ personne.id }}">{{ personne.nom }} {{ personne.prenom }}</option>
+                            {% endif %}
+
                         {% endfor %}
 
                     </select>
@@ -176,7 +181,7 @@
                                 {% endfor %}
                             </select>
                             <span class="input-group-addon"> : </span>
-                            <select name="min_depart_2" id="min_depart_2" class="form-control" required>
+                            <select name="min_depart_2" id="min_depart_2" class="form-control" >
                                 <option value=""> min</option>
                                 {% for i in range(0,55,5) %}
                                     {% if i == dateDuJour.minutes %}
@@ -218,7 +223,7 @@
                                 {% endfor %}
                             </select>
                             <span class="input-group-addon"> : </span>
-                            <select name="min_arrive_2" id="min_arrive_2" class="form-control" required>
+                            <select name="min_arrive_2" id="min_arrive_2" class="form-control" >
                                 <option value=""> min</option>
                                 {% for i in range(0,55,5) %}
                                     <option value="{{ i }}">{{ "%02d"|format(i) }}</option>
@@ -235,9 +240,8 @@
                     <textarea name="commentaire" id="commentaire" rows="5" class="col-xs-6 form-control"></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success pull-right">{{ "enregistrer"|trans }}</button>
+            <input type="submit" class="btn btn-success pull-right" value="{{ "enregistrer"|trans }}">
         </form>
-
 
     </div>
 

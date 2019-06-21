@@ -24,14 +24,14 @@ class Emprunt_Personne
     /**
      * @var Emprunt
      *
-     * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listePersonne")
+     * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listePersonne",cascade={"persist"})
      */
     private $empruntId;
 
     /**
      * @var Personne
      *
-     * @ORM\ManyToOne(targetEntity="Personne", inversedBy="listeEmprunt")
+     * @ORM\ManyToOne(targetEntity="Personne", inversedBy="listeEmprunt",cascade={ "persist"})
      */
     private $personneId;
 
@@ -81,7 +81,7 @@ class Emprunt_Personne
     /**
      * Set personneId
      *
-     * @param integer $personneId
+     * @param Personne $personneId
      *
      * @return Emprunt_Personne
      */
@@ -95,7 +95,7 @@ class Emprunt_Personne
     /**
      * Get personneId
      *
-     * @return int
+     * @return Personne
      */
     public function getPersonneId()
     {

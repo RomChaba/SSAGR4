@@ -91,20 +91,34 @@
                 </thead>
                 <tbody>
                 {% for emprunt in listeEmprunt %}
-                    <tr>
-                        <td>{{ emprunt.listePersonne[0].prenom|default('Pierre') }} {{ emprunt.listePersonne[0].nom|default('Marc') }}</td>
-                        {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
 
-                        {% for data in lieu_emprunt %}
-                            {% if emprunt.id == data.empruntId.id and data.depart == true %}
-                                <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
-                            {% elseif emprunt.id == data.empruntId.id %}
-                                <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                    <tr>
+                        {#<td>{{ emprunt.id }}</td>#}
+                        {% for personne in emprunt.listePersonne %}
+                            {#{{ dump(personne) }}#}
+                            {% if personne.conducteur %}
+
+                                <td>{{ personne.personneId.prenom|default('Pierre') }} {{ personne.personneId.nom|default('Marc') }}</td>
                             {% endif %}
                         {% endfor %}
 
-                        <td>{{ emprunt.listeLieux[0].libelle }}</td>
-                        <td>{{ emprunt.listeLieux[1].libelle }}</td>
+                        {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
+
+                        {% for data in emprunt.listeLieux %}
+                            {% if  data.depart == true %}
+                                <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                            {% else %}
+                                <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                            {% endif %}
+                        {% endfor %}
+                        {% for data in emprunt.listeLieux %}
+                            {% if  data.depart == true %}
+                                <td>{{ data.lieuId.libelle }}</td>
+                            {% else %}
+                                <td>{{ data.lieuId.libelle }}</td>
+                            {% endif %}
+                        {% endfor %}
+
                         <td align="center"><a href="{{ path('detailEmprunt',{'idemprunt':emprunt.id}   ) }}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a></td>
                     </tr>
                 {% else %}

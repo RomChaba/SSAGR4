@@ -37,23 +37,23 @@ class Emprunt
     private $commentaire;
 
     /**
-     * @var Personne
+     * @var Emprunt_Personne
      *
-     * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="empruntId", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Emprunt_Personne",mappedBy="empruntId", cascade={"remove", "persist"},fetch="EAGER")
      */
     private $listePersonne;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="empruntId", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Lieu_emprunt",mappedBy="empruntId", cascade={"remove", "persist"},fetch="EAGER")
      */
     private $listeLieux;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Cle_emprunt",mappedBy="empruntId", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Cle_emprunt",mappedBy="empruntId", cascade={"remove", "persist"},fetch="EAGER")
      */
     private $listeCle;
 
@@ -113,7 +113,7 @@ class Emprunt
     }
 
     /**
-     * @return Personne
+     * @return Emprunt_Personne
      */
     public function getListePersonne()
     {
@@ -161,6 +161,19 @@ class Emprunt
     }
 
 
+    public function removePersonne($pers_co)
+    {
+        foreach ($this->getListePersonne() as $personne){
+//            dump($personne);
+            if($personne->getPersonneId()->getId() == $pers_co->getId()){
+//                dump($personne->getPersonneId()->getId() == $pers_co->getId());
+
+                /** @var Emprunt_Personne $test */
+                $this->getListePersonne()->removeElement($personne);
+                return;
+            }
+        }
+    }
 
 
 

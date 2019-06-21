@@ -2,11 +2,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emprunt;
+use AppBundle\Entity\Emprunt_Personne;
 use AppBundle\Entity\Lieu_emprunt;
 use AppBundle\Entity\Personne;
 use AppBundle\Repository\PersonneRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,11 +31,8 @@ class ParticiperController extends Controller
 
         $test = new DateTime();
         //Récupération de la liste des emprunts existant
-        //TODO ENLEVER ET REMPLACER
-        if ($request->getSession()->get("EMPRUNT") == null) {
-            $request->getSession()->set("EMPRUNT", array());
-        }
-        $listeEmprunt = $request->getSession()->get("EMPRUNT");
+
+        $listeEmprunt = $em->getRepository("AppBundle:Emprunt")->findAll();
 
 
         $new_liste = array();
@@ -42,17 +41,19 @@ class ParticiperController extends Controller
         /** @var Emprunt $emprunt */
         foreach ($listeEmprunt as $emprunt) {
 
-            if ($emprunt->getListePersonne()[0]->getId() != $pers_co->getId()) {
-                array_push($new_liste,$emprunt);
+            /** @var Emprunt_Personne $emp_pers */
+            foreach ($emprunt->getListePersonne() as $emp_pers) {
+                if ($emp_pers->getPersonneId()->getId() != $pers_co->getId()){
+                    array_push($new_liste,$emprunt);
+
+                }
             }
         }
-
-
-        $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
+        $lieu_emprunt = null;
 
         $listeLieu = $em->getRepository('AppBundle:Lieu')->findAll();
-dump($new_liste);
-die();
+//        dump($new_liste);
+//die();
         // replace this example code with whatever you need
         return $this->render('participer/participer.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
@@ -73,26 +74,20 @@ die();
         $dateDuJour = getdate();
 
 
-//      ****** Recuperation de l'emprunt dans la liste ******
-        $listeEmprunt = $request->getSession()->get("EMPRUNT");
-        /** @var Emprunt $unEmprunt */
-        foreach ($listeEmprunt as $unEmprunt){
-            if ($unEmprunt->getId() == $idemprunt){
-                /** @var Emprunt $emprunt */
-                $emprunt = $unEmprunt;
-                break;
-            }
-        }
+        $em = $this->getDoctrine()->getManager();
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$idemprunt]);
+
+
 
 //      ****** Recuperation de l'utilisateur connecté ******
         $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
 
         /** @var Personne $pers_co */
-        $pers_co = $repoPersonne->findOneById(10);
+        $pers_co = $request->getSession()->get('userConnect');
 
 
-//        ****** Recuêration du lien entre les lieux et les emprunts ******
-        $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
+//        ****** Recupêration du lien entre les lieux et les emprunts ******
+        $lieu_emprunt = array();
         $new_liste = array();
 
         /** @var Lieu_emprunt $lieu_emp */
@@ -163,29 +158,28 @@ die();
      */
     public function clickParticiperAction(Request $request,$empruntId,$personneId)
     {
-        $repoEmprunt = $this->getDoctrine()->getRepository("AppBundle:Emprunt");
         /** @var Emprunt $emprunt */
-//        $emprunt = $repoEmprunt->findOneById($empruntId);
-        $liste_emprunt = $request->getSession()->get("EMPRUNT");
+        $em = $this->getDoctrine()->getManager();
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$empruntId]);
 
-        foreach ($liste_emprunt as $k => $unemp){
-            if ($unemp->getId() == $empruntId) {
-                $emplacement = $k;
-                $emprunt = $unemp;
-            }
-        }
 
 //        ***** RECUPERATION PERSONNE *****
 
-        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
         /** @var Personne $pers_co */
-        $pers_co = $repoPersonne->findOneById($personneId);
+        $pers_co = $em->getRepository("AppBundle:Personne")->findOneById($personneId);
 
-        $emprunt->getListePersonne()->add($pers_co);
 
-        $liste_emprunt[$emplacement] = $emprunt;
 
-        $request->getSession()->set("EMPRUNT",$liste_emprunt);
+        $empruntPersonne = new Emprunt_Personne();
+
+        $empruntPersonne->setPersonneId($pers_co);
+        $empruntPersonne->setEmpruntId($emprunt);
+        $empruntPersonne->setConducteur(false);
+
+        $emprunt->getListePersonne()->add($empruntPersonne);
+
+        $em->persist($emprunt);
+        $em->flush();
 
         return $this->redirectToRoute("detailEmprunt",["idemprunt"=>$empruntId]);
     }
@@ -197,36 +191,27 @@ die();
      */
     public function plusParticiperAction(Request $request,$empruntId,$personneId)
     {
-        $repoEmprunt = $this->getDoctrine()->getRepository("AppBundle:Emprunt");
         /** @var Emprunt $emprunt */
-//        $emprunt = $repoEmprunt->findOneById($empruntId);
-        $liste_emprunt = $request->getSession()->get("EMPRUNT");
+        $em = $this->getDoctrine()->getManager();
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$empruntId]);
 
-        foreach ($liste_emprunt as $k => $unemp){
-            if ($unemp->getId() == $empruntId) {
-                $emplacement = $k;
-                $emprunt = $unemp;
-            }
-        }
-
+//        dump($emprunt);
+//        die();
 //        ***** RECUPERATION PERSONNE *****
-
-        $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
         /** @var Personne $pers_co */
-        $pers_co = $repoPersonne->findOneById($personneId);
+        $pers_co = $em->getRepository("AppBundle:Personne")->findOneById($personneId);
+//        dump($pers_co);
 
-        $new_liste = new ArrayCollection();
 
-        foreach ($emprunt->getListePersonne() as $k => $unePers) {
-            if ($unePers->getId() != $pers_co->getId()) {
-                $new_liste[$k] = $unePers;
+        /** @var Emprunt_Personne $item */
+        foreach ($emprunt->getListePersonne() as $item) {
+            if ($pers_co->getId() == $item->getPersonneId()->getId()){
+                $em->remove($item);
             }
         }
-        $emprunt->setListePersonne($new_liste);
+        $em->flush();
 
-        $liste_emprunt[$emplacement] = $emprunt;
-
-        $request->getSession()->set("EMPRUNT",$liste_emprunt);
+        $em->refresh($emprunt);
 
         return $this->redirectToRoute("detailEmprunt",["idemprunt"=>$empruntId]);
 

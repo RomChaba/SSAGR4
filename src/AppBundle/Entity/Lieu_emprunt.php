@@ -24,14 +24,14 @@ class Lieu_emprunt
     /**
      * @var Emprunt
      *
-     * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listeLieux")
+     * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="listeLieux",cascade={"remove","persist"})
      */
     private $empruntId;
 
     /**
      * @var Lieu
      *
-     * @ORM\ManyToOne(targetEntity="Lieu", inversedBy="listeEmprunt")
+     * @ORM\ManyToOne(targetEntity="Lieu", inversedBy="listeEmprunt",cascade={"remove","persist"})
      */
     private $lieuId;
 
@@ -63,7 +63,7 @@ class Lieu_emprunt
     /**
      * Set empruntId
      *
-     * @param integer $empruntId
+     * @param Emprunt $empruntId
      *
      * @return Lieu_emprunt
      */

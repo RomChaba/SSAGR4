@@ -24,24 +24,42 @@
                 <label for="inputID" class="col-xs-12">{{ "personne"|trans }}</label>
 
                 <div class="col-xs-10 col-sm-6">
+                    {% for personne in emprunt.listePersonne %}
+                        {#{{ dump(personne) }}#}
+                        {% if personne.conducteur %}
 
-                    <input type="text" name="personne" id="personne" class="form-control"
-                           value="{{ emprunt.listePersonne[0].nom }} {{ emprunt.listePersonne[0].prenom }}" title=""
-                           readonly>
+                            <input type="text" name="personne" id="personne" class="form-control"
+                                   value="{{ personne.personneId.nom }} {{ personne.personneId.prenom }}" title=""
+                                   readonly>
+                        {% endif %}
+                    {% endfor %}
+
 
                 </div>
             </div>
             <div class="form-group col-xs-12">
                 <label for="" class="col-xs-12">{{ "lieu_depart"|trans }}* :</label>
                 <div class="col-xs-12 col-sm-6">
+                    {% for data in emprunt.listeLieux %}
+                        {% if data.depart == true %}
+                            dum
+                            <input type="text" name="lieu_depart_1" id="lieu_depart_1" class="form-control"
+                                   value="{{ data.lieuId.libelle }}" title="" readonly>
+                        {% endif %}
+                    {% endfor %}
 
-                    <input type="text" name="lieu_depart_1" id="lieu_depart_1" class="form-control"
-                           value="{{ emprunt.listeLieux[0].libelle }}" title="" readonly>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <div class="input-group">
-                        <input type="text" name="date_depart_1" id="date_depart_1" class="form-control"
-                               value="{{ lieu_emprunt[0].dateEtHeure|date("d/m/Y H:i", false) }}" readonly/>
+
+
+                        {% for data in emprunt.listeLieux %}
+                            {% if  data.depart == true %}
+                                <input type="text" name="date_depart_1" id="date_depart_1" class="form-control"
+                                       value="{{ data.dateEtHeure|date("d/m/Y H:i", false) }}" readonly/>
+                            {% endif %}
+                        {% endfor %}
+
                         <span class="input-group-addon" onclick=""><span
                                     class="glyphicon glyphicon-calendar"></span></span>
                     </div>
@@ -51,13 +69,23 @@
             <div class="form-group col-xs-12">
                 <label for="" class="col-xs-12">{{ "lieu_arrive"|trans }}* :</label>
                 <div class="col-xs-12 col-sm-6">
-                    <input type="text" name="lieu_arrive_1" id="lieu_arrive_1" class="form-control"
-                           value="{{ emprunt.listeLieux[1].libelle }}" title="" readonly>
+
+                    {% for data in emprunt.listeLieux %}
+                        {% if  data.depart != true %}
+                            <input type="text" name="lieu_arrive_1" id="lieu_arrive_1" class="form-control"
+                                   value="{{ data.lieuId.libelle }}" title="" readonly>
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <div class="input-group">
-                        <input type="text" name="date_arrive_1" id="date_arrive_1" class="form-control"
-                               value="{{ lieu_emprunt[1].dateEtHeure|date("d/m/Y H:i", false) }}" readonly/>
+
+                        {% for data in emprunt.listeLieux %}
+                            {% if  data.depart != true %}
+                                <input type="text" name="date_arrive_1" id="date_arrive_1" class="form-control"
+                                       value="{{ data.dateEtHeure|date("d/m/Y H:i", false) }}" readonly/>
+                            {% endif %}
+                        {% endfor %}
                         <span class="input-group-addon" onclick=""><span
                                     class="glyphicon glyphicon-calendar"></span></span>
                     </div>
@@ -87,11 +115,12 @@
                     <h3 class="panel-title">{{ "detail_voyageurs"|trans }}</h3>
                 </div>
                 <div class="panel-body">
-                    {% for pers in emprunt.listePersonne %}
-                        {% if emprunt.listePersonne[0].id == pers.id %}
-                            <p>{{ pers.nom }} {{ pers.prenom }} : {{ "personne"|trans }}</p>
+                    {% for personne in emprunt.listePersonne %}
+                        {#{{ dump(personne) }}#}
+                        {% if personne.conducteur %}
+                            <p>{{ personne.personneId.nom }} {{ personne.personneId.prenom }} : {{ "personne"|trans }}</p>
                         {% else %}
-                            <p>{{ pers.nom }} {{ pers.prenom }}</p>
+                            <p>{{ personne.personneId.nom }} {{ personne.personneId.prenom }}</p>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -102,41 +131,47 @@
                 <button type="button" class="btn btn-warning" data-toggle="modal"
                         data-target="#retardModal">{{ "detail_signal_prob"|trans }}</button>
             </div>
-
-            {% if date(lieu_emprunt[0].dateEtHeure) < date() %}
-                <div class="col-xs-4">
-                    <button type="button" class="btn btn-default" data-toggle="modal"
-                            data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
-                </div>
-            {% endif %}
-
+            {% for data in emprunt.listeLieux %}
+                {% if data.depart == true and date(data.dateEtHeure) < date() %}
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
+                    </div>
+                {% endif %}
+            {% endfor %}
 
 
             <div class="col-xs-4">
 
             </div>
-            {% if pers_co.id != emprunt.listePersonne[0].id %}
-                <div class="col-xs-4">
-                    {% set affichage = false %}
 
-                    {% for pers in emprunt.listePersonne %}
-                        {% if pers_co.id == pers.id %}
-                            {% set affichage = true %}
+            {% for personne in emprunt.listePersonne %}
 
+                {#{{ dump(personne) }}#}
+                {% if pers_co.id != personne.personneId.id %}
+                    <div class="col-xs-4">
+                        {% set affichage = false %}
+
+                        {% for pers in emprunt.listePersonne %}
+                            {% if pers_co.id == pers.personneId.id %}
+                                {% set affichage = true %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if affichage == true %}
+                            <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-danger">{{ "detail_plus_participer"|trans }}</a>
                         {% else %}
-                        {% endif %}
-                    {% endfor %}
 
-                    {% if affichage == true %}
-                        <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-danger">{{ "detail_plus_participer"|trans }}</a>
-                    {% else %}
-                        {% if emprunt.listePersonne|length < 6 %}
-                            <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-success">{{ "detail_participer"|trans }}</a>
+                            {% if emprunt.listePersonne|length < 6 %}
+                                <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-success">{{ "detail_participer"|trans }}</a>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
 
-                </div>
-            {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
         </div>
 
 
@@ -164,8 +199,17 @@
                             <input type="hidden" name="idEmprunt" value="{{ emprunt.id }}">
                             <div class="form-group">
                                 <label for="">{{ "retard_heure_prevu" }}</label>
-                                <input type="text" class="form-control" name="retard_date_prevu" id=""
-                                       value="{{ lieu_emprunt[1].dateEtHeure|date("d/m/Y H:i", false) }}" readonly>
+
+                                {% for data in emprunt.listeLieux %}
+                                    {% if  data.depart != true %}
+                                        <input type="text" class="form-control" name="retard_date_prevu" id=""
+                                               value="{{ data.dateEtHeure|date("d/m/Y H:i", false) }}" readonly>
+                                    {% endif %}
+                                {% endfor %}
+
+
+
+
                             </div>
                             <div class="form-group">
                                 <label for="inputID" class="control-label">{{ "retard_estime"|trans }}</label>

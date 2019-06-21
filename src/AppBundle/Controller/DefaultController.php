@@ -34,10 +34,25 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+
+        $repoEmprunt = $em->getRepository("AppBundle:Emprunt");
+        $repoLieuEmprunt = $em->getRepository("AppBundle:Lieu_emprunt");
+
+
+
+
+
         $test = new DateTime();
 
-        $listeEmprunt = $request->getSession()->get("EMPRUNT");
-        $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
+//        $listeEmprunt = $request->getSession()->get("EMPRUNT");
+//        $lieu_emprunt = $request->getSession()->get("LIEU_EMPRUNT");
+        $listeEmprunt = $repoEmprunt->findAll();
+        $lieu_emprunt = $repoLieuEmprunt->findAll();
+
+//        dump($listeEmprunt);
+//        dump($lieu_emprunt);
+//        dump($pers_co);
+//        die();
 
 
         $listeLieu = $em->getRepository('AppBundle:Lieu')->findAll();
