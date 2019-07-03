@@ -110,5 +110,41 @@ class GestionPersonneController extends Controller
         }
     }
 
+    /**
+     * @Route("/importcsv", name="importcsv")
+     */
+    public function importCSV(){
+        if (isset($_POST["import"])) {
+
+            $fileName = $_FILES["file"]["tmp_name"];
+
+            if ($_FILES["file"]["size"] > 0) {
+
+                $file = fopen($fileName, "r");
+                $em = $this->getDoctrine()->getManager();
+                while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+                    $personne = new Personne();
+                    $personne->setNom($column[0]);
+                    $personne->setPrenom($column[1]);
+                    $personne->setMail($column[2]);
+                    $personne->setMotDePasse($column[3]);
+                    $em->persist($personne);
+                    $sqlInsert = "INSERT into personne (nom,prenom,mail,motDePasse)
+                   values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "')";
+
+                    if (! empty($result)) {
+                        $type = "success";
+                        $message = "CSV Data Imported into the Database";
+                    } else {
+                        $type = "error";
+                        $message = "Problem in Importing CSV Data";
+                    }
+                }
+                $em->flush();
+                $this->redirectToRoute("administration", ["type"=>$type,"message"=>$message]);
+            }
+        }
+    }
+
 
 }

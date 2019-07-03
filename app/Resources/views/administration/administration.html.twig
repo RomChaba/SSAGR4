@@ -202,6 +202,33 @@
             });
     </script>
 
+    <script>
+        $("#table_emprunt").DataTable({
+            language: {
+                processing: '{{ "traitement_en_cours"|trans }}',
+                search: '{{ "search"|trans }}',
+                lengthMenu: '{{ "afficher"|trans }} _MENU_ {{ "elements"|trans }}',
+                info: '{{ "affichage_de_element"|trans }} _START_ {{ "à"|trans }} _END_ {{ "sur"|trans }} _TOTAL_ {{ "elements"|trans }}',
+                infoEmpty: '{{ "affichage_de_element"|trans }} 0 {{ "à"|trans }} 0 {{ "sur"|trans }} 0 {{ "elements"|trans }}',
+                infoFiltered: '{{ "filtre_de"|trans }} _MAX_ {{ 'elements_au_total' }}',
+                infoPostFix: "",
+                loadingRecords: '{{ "chargement_en_cours"|trans }}',
+                zeroRecords: '{{ "aucun_element_afficher"|trans }}',
+                emptyTable: '{{ "no_donnees_a_afficher"|trans }}',
+                paginate: {
+                    first: '{{ "premier"|trans }}',
+                    previous: '{{ "previous"|trans }}',
+                    next: '{{ "next"|trans }}',
+                    last: '{{ "last"|trans }}'
+                },
+                aria: {
+                    sortAscending: '{{ "activer_tri_croissant"|trans }}',
+                    sortDescending: '{{ "activer_tri_decroissant"|trans }}',
+                }
+            }
+        });
+    </script>
+
 
 {% endblock %}
 

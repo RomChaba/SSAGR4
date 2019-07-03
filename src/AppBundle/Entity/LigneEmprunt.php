@@ -49,7 +49,7 @@ class LigneEmprunt
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
     public function getDate_Depart()
     {
@@ -57,7 +57,7 @@ class LigneEmprunt
     }
 
     /**
-     * @param \DateTime $date_depart
+     * @param string $date_depart
      */
     public function setDate_Depart($date_depart)
     {
@@ -65,7 +65,7 @@ class LigneEmprunt
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
     public function getDate_Arriver()
     {
@@ -73,7 +73,7 @@ class LigneEmprunt
     }
 
     /**
-     * @param \DateTime $date_arriver
+     * @param string $date_arriver
      */
     public function setDate_Arriver($date_arriver)
     {
@@ -118,12 +118,12 @@ class LigneEmprunt
     private $conducteurName;
 
     /**
- * @var \DateTime
+ * @var string
  */
     private $date_depart;
 
     /**
-     * @var \DateTime
+     * @var string
      */
     private $date_arriver;
 

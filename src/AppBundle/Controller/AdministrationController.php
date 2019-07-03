@@ -177,8 +177,8 @@ class AdministrationController extends Controller
 
             $ligneEmprunt->setLieu_Arriver($lieuArriver->getLibelle());
             $ligneEmprunt->setLieu_Depart($lieuDepart->getLibelle());
-            //$ligneEmprunt->setDate_Depart($lieuEmpruntDepart->getDateEtHeure());
-            //$ligneEmprunt->setDate_Arriver($lieuEmpruntArriver->getDateEtHeure());
+            $ligneEmprunt->setDate_Depart($lieuEmpruntDepart->getDateEtHeure()->format('d-m-Y'));
+            $ligneEmprunt->setDate_Arriver($lieuEmpruntArriver->getDateEtHeure()->format('d-m-Y'));
 
             $listeLigneEmprunt->Add($ligneEmprunt);
         }
