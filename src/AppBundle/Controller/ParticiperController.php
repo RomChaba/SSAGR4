@@ -149,10 +149,6 @@ class ParticiperController extends Controller
         return JsonResponse::create($retour);
     }
 
-
-
-
-
     /**
      * @Route("/participer-passager/{empruntId}/{personneId}", name="participer_passager")
      */
@@ -184,8 +180,6 @@ class ParticiperController extends Controller
         return $this->redirectToRoute("detailEmprunt",["idemprunt"=>$empruntId]);
     }
 
-
-
     /**
      * @Route("/plus-participer-passager/{empruntId}/{personneId}", name="plus_participer_passager")
      */
@@ -195,12 +189,9 @@ class ParticiperController extends Controller
         $em = $this->getDoctrine()->getManager();
         $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$empruntId]);
 
-//        dump($emprunt);
-//        die();
 //        ***** RECUPERATION PERSONNE *****
         /** @var Personne $pers_co */
         $pers_co = $em->getRepository("AppBundle:Personne")->findOneById($personneId);
-//        dump($pers_co);
 
 
         /** @var Emprunt_Personne $item */
@@ -218,4 +209,38 @@ class ParticiperController extends Controller
 
     }
 
+    /**
+     * @Route("/rendre-cle/{empruntId}",name="rendre_cle")
+     */
+    public function rendreCle(Request $request, $empruntId)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Emprunt $emprunt */
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$empruntId]);
+
+
+        // Variables concernant l'email
+        $repoParametre = $this->getDoctrine()->getRepository("AppBundle:Parametre");
+        $destinataire = $repoParametre->findOneBy(['cle'=>'mail_contact']);
+        $destinataire = $destinataire->getValeur(); // Adresse email de l'administrateur
+
+
+        $sujet = 'Titre du message'; // Titre de l'email
+        $contenu = '<html><head><title>Clé</title></head><body>';
+        $contenu .= '<p>Bonjour, le voyage N°'.$emprunt->getId().' rend les clés.</p>';
+        $contenu .= '<p><strong>Arrivé</strong>: ' . $request->request->get("heureArrive") . '</p>';
+        $contenu .= '<p><strong>Message</strong>: ' . $request->request->get("messageArrive") . '</p>';
+        $contenu .= '</body></html>'; // Contenu du message de l'email
+
+        // Pour envoyer un email HTML, l'en-tête Content-type doit être défini
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // TODO tester une fois le site en ligne
+         mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
+
+
+
+    }
 }

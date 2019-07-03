@@ -24,14 +24,14 @@ class Cle_emprunt
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Emprunt",inversedBy="listeCle")
+     * @ORM\ManyToOne(targetEntity="Emprunt",inversedBy="listeCle",cascade={"persist"})
      */
     private $empruntId;
 
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Cle", inversedBy="listeEmprunt")
+     * @ORM\ManyToOne(targetEntity="Cle", inversedBy="listeEmprunt",cascade={"persist"})
      */
     private $cleId;
 
