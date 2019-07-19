@@ -240,7 +240,7 @@ class ParticiperController extends Controller
         // TODO tester une fois le site en ligne
          mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
 
-
+        return $this->redirectToRoute("detailEmprunt",["idemprunt"=>$empruntId]);
 
     }
 }

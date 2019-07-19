@@ -40,12 +40,18 @@ class AdministrationController extends Controller
 
         $listeLigneEmprunt = $this->construireLigneEmprunt($emprunts);
 
+        $listeEmpruntJson = array();
+
+        foreach ($emprunts as $emprunt) {
+            $listeEmpruntJson[] = $emprunt->empruntForCalendar();
+        }
         return $this->render(
             'Administration/administration.html.twig',
             array(
                 'personnes' => $personnnes,
                 'voitures' => $voitures,
-                'emprunts' => $listeLigneEmprunt
+                'emprunts' => $listeLigneEmprunt,
+                'empruntsJson' => json_encode($listeEmpruntJson)
             )
         );
     }

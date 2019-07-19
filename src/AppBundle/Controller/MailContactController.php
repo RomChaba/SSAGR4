@@ -59,7 +59,7 @@ class MailContactController extends Controller
                 $em->persist($parametreMailContact);
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('mailContact', 'Mail du contact bien enregistrée.');
-                dump($request->getSession()->getFlashBag());
+//                dump($request->getSession()->getFlashBag());
                 //die();
 
                 return $this->redirectToRoute("administration");

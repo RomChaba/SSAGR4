@@ -23,7 +23,7 @@
             <div class="form-group col-xs-12">
                 <label for="inputID" class="col-xs-12">{{ "personne"|trans }}</label>
 
-                <div class="col-xs-10 col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     {% for personne in emprunt.listePersonne %}
                         {#{{ dump(personne) }}#}
                         {% if personne.conducteur %}
@@ -127,13 +127,13 @@
             </div>
         </div>
         <div class="col-xs-12 btn-bas">
-            <div class="col-xs-4">
+            <div class="col-xs-12 col-sm-4">
                 <button type="button" class="btn btn-warning" data-toggle="modal"
                         data-target="#retardModal">{{ "detail_signal_prob"|trans }}</button>
             </div>
             {% for data in emprunt.listeLieux %}
                 {% if data.depart == true and date(data.dateEtHeure) < date() %}
-                    <div class="col-xs-4">
+                    <div class="col-xs-12 col-sm-4">
                         <button type="button" class="btn btn-default" data-toggle="modal"
                                 data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
                     </div>
@@ -149,7 +149,7 @@
 
                 {#{{ dump(personne) }}#}
                 {% if pers_co.id != personne.personneId.id %}
-                    <div class="col-xs-4">
+                    <div class="col-xs-12 col-sm-4">
                         {% set affichage = false %}
 
                         {% for pers in emprunt.listePersonne %}

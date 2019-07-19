@@ -365,7 +365,7 @@ class DemandeController extends Controller
         $this->leFormulaire->handleRequest($request);
 
         if ($this->leFormulaire->isSubmitted() && $this->leFormulaire->isValid()) {
-            dump($lEmprunt);
+//            dump($lEmprunt);
 //            $em = $this->getDoctrine()->getManager();
 //            $em->persist($lEmprunt);
 //            $em->flush();

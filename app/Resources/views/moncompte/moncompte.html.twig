@@ -10,7 +10,7 @@
         <h1> {{ "mon_compte"|trans }} </h1>
         {{ form_start(formulairePersonne) }}
 
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             {{ form_row(formulairePersonne.nom) }}
             {{ form_row(formulairePersonne.mail) }}
             {{ form_row(formulairePersonne.nouveauMotDePasse) }}
@@ -20,10 +20,10 @@
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             {{ form_row(formulairePersonne.prenom) }}
             {#<div class="col-xs-12">#}
-                {#<label>Adresse :</label>#}
-              {{ form_row(formulairePersonne.rue) }}
-                {{ form_row(formulairePersonne.cp) }}
-                {{ form_row(formulairePersonne.ville) }}
+            {#<label>Adresse :</label>#}
+            {{ form_row(formulairePersonne.rue) }}
+            {{ form_row(formulairePersonne.cp) }}
+            {{ form_row(formulairePersonne.ville) }}
 
 
             {#</div>#}
@@ -33,12 +33,87 @@
             </div>
 
         </div>
-
-
-
         {{ form_end(formulairePersonne) }}
     </div>
 
+    <div class="container">
+        <h2>{{ "histo_mes_voyage"|trans }}</h2>
+        <div class="table-responsive col-xs-12" style="background-color: white">
+            <table class="table table-hover" id="table_home">
+                <thead>
+                <tr>
+                    <th>{{ "personne"|trans }}</th>
+                    <th>{{ "date_depart"|trans }}</th>
+                    <th>{{ "lieu_depart"|trans }}</th>
+                    <th>{{ "date_arrivee"|trans }}</th>
+                    <th>{{ "lieu_arrivee"|trans }}</th>
+                    <th>{{ "is_conducteur"|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for emprunt in listeEmprunt %}
+                    {% set affichage = false %}
+
+
+                    {#{% for data in  %}#}
+                    {#{% endfor %}#}
+                    {% for pers in emprunt.listePersonne %}
+                        {% if app.session.get('userConnect') != null %}
+                            {% if app.session.get('userConnect').id == pers.personneId.id %}
+                                {% set affichage = true %}
+                            {% else %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if affichage == true %}
+                        <tr>
+                            {% for personne in emprunt.listePersonne %}
+                                {% if personne.conducteur %}
+                                    <td>{{ personne.personneId.prenom|default('Pierre') }} {{ personne.personneId.nom|default('Marc') }}</td>
+                                {% endif %}
+                            {% endfor %}
+                            {#<td>{{ emprunt.listePersonne.first.prenom|default('Pierre') }} {{ emprunt.listePersonne.listePersonne[0].nom|default('Marc') }}</td>#}
+                            {#<td>{{ emprunt.dateEmprunt.date|date("d/m/Y h:i", false)|default('04/04/2019 12:12') }}  </td>#}
+
+                            {% for data in emprunt.listeLieux %}
+                                {% if  data.depart == true %}
+                                    <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                                    <td>{{ data.lieuId.libelle }}</td>
+                                {% else %}
+                                    <td>{{ data.dateEtHeure|date("d/m/Y H:i", false) }}</td>
+                                    <td>{{ data.lieuId.libelle }}</td>
+                                {% endif %}
+                            {% endfor %}
+
+
+                            {#<td>{{ emprunt.listeLieux.listeLieux[1].libelle }}</td>#}
+
+                            {% for personne in emprunt.listePersonne %}
+                                {% if personne.conducteur and personne.personneId.id == app.session.get('userConnect').id %}
+                                    <td align="center" class="alert alert-success">
+                                        <span class="glyphicon glyphicon-ok">
+                                            <span style="display: none;">conducteur</span>
+                                        </span>
+                                    </td>
+                                {% elseif personne.personneId.id == app.session.get('userConnect').id %}
+                                    <td align="center" class="alert alert-danger">
+                                        <span class="glyphicon glyphicon-remove">
+                                            <span style="display: none;">passager</span>
+                                        </span>
+                                    </td>
+                                {% endif %}
+
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 
 
 {% endblock %}

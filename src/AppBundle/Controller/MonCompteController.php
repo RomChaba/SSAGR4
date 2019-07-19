@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emprunt;
+use AppBundle\Entity\Emprunt_Personne;
 use AppBundle\Entity\Personne;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,26 +22,14 @@ class MonCompteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var Personne $pers_co */
         $pers_co = $request->getSession()->get('userConnect');
-        //$personne2 = new Personne();
 
-//        $personne2->setRue($pers_co->getRue());
-//        $personne2->setMail($pers_co->getMail());
-//        $personne2->setMotDePasse($pers_co->getMotDePasse());
-//        $personne2->setNom($pers_co->getNom());
-//        $personne2->setPrenom($pers_co->getPrenom());
-//        $personne2->setTelephone($pers_co->getTelephone());
-//        $personne2->setMotDePasse($pers_co->getMotDePasse());
-//        $personne2->setPhoto($pers_co->getPhoto());
-//        $personne2->setPermis(false);
-//        $personne2->setActif(true);
-//        $personne2->setDateCreation(new DateTime());
-
-        $this->createFormulaire($pers_co); //On crée le formulaire
+        //On crée le formulaire
+        $this->createFormulaire($pers_co);
 
 
         $this->leFormulaire->handleRequest($request);
-
         // Si la requête est en POST
         if ($request->isMethod('POST')) {
             // On fait le lien Requête <-> Formulaire
@@ -63,15 +52,45 @@ class MonCompteController extends Controller
                 $request->getSession()->getFlashBag()->add('compte', 'Compte bien enregistré.');
                 $request->getSession()->set('userConnect', $pers_co);
 
-                return $this->render('moncompte/moncompte.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
+                // Récupréation de la liste de ses voyages
+
+
+
+                return $this->render(
+                    'moncompte/moncompte.html.twig',
+                    array(
+                        'formulairePersonne' => $this->leFormulaire->createView()
+                    )
+                );
             }
         }
 
-        return $this->render('moncompte/moncompte.html.twig', array('formulairePersonne' => $this->leFormulaire->createView()));
+
+        $listeEmpruntPersonne = $em->getRepository("AppBundle:Emprunt_Personne")->findBy(['personneId'=>$pers_co->getId()]);
+//        dump($listeEmpruntPersonne);
+
+        $listeEmprunt = null;
+        /** @var Emprunt_Personne $item  */
+        foreach ($listeEmpruntPersonne as $item) {
+            $listeEmprunt[] = $item->getEmpruntId();
+        }
+
+//        dump($listeEmprunt);
+
+
+
+        return $this->render(
+            'moncompte/moncompte.html.twig',
+            array(
+                'formulairePersonne' => $this->leFormulaire->createView(),
+                'listeEmprunt' => $listeEmprunt,
+
+            )
+        );
     }
 
-    private $leFormulaire = null;
 
+    private $leFormulaire = null;
     private function createFormulaire(Personne $personne)
     {
         $this->leFormulaire = $this->createFormBuilder($personne)

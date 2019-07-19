@@ -1,0 +1,306 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ "administration"|trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="row"><br/></div>
+    <div class="col-xs-10 col-sm-8 col-md-6 col-lg-6  col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-lg-offset-3">
+
+
+        {% for message in app.flashes('mailContact') %}
+            <div class="valid">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('voiture') %}
+            <div class="valid">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('personne') %}
+            <div class="valid">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+        <h1 align="center"> {{ "administration"|trans }} </h1>
+        <div class="col-xs-3 col-xs-offset-1"><a class="btn btn-default" href="{{ path("mailcontact") }}"
+                                                 data-toggle="tooltip" data-placement="top"
+                                                 title="Mettre à jour le mail des administrateurs">{{ "mail_contact"|trans }} </a>
+        </div>
+        <div class="col-xs-3 col-xs-offset-1"><a class="btn btn-default"
+                                                 href="{{ path("gestionpersonne", {id:0}) }}">{{ "creation_personne"|trans }}</a>
+        </div>
+        <div class="col-xs-3 col-xs-offset-1"><a class="btn btn-default"
+                                                 href="{{ path("gestionvoiture", {id:0}) }}">{{ "creation_voiture"|trans }}</a>
+        </div>
+
+        <div class="row"><br/></div>
+
+
+        <div id="welcome">
+            <h1>{{ "liste_de_personnes"|trans }}</h1>
+        </div>
+        <div class="row"><br/></div>
+        <div class="table-responsive">
+            <table class="table table-hover" id="table_personne">
+                <thead>
+                <tr>
+                    <th>{{ "nom"|trans }}</th>
+                    <th>{{ "prenom"|trans }}</th>
+                    <th>{{ "permis"|trans }}</th>
+                    <th>{{ "modifier_et_supprimer"|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for personne in personnes %}
+                    <tr>
+                        <td align="center">{{ personne.nom }}</td>
+                        <td align="center">{{ personne.prenom }}</td>
+                        {% if personne.permis == true %}
+
+                            <td align="center" class="alert alert-success"><span class="glyphicon glyphicon-ok">
+
+                                        </span></td>
+                        {% else %}
+                            <td align="center" class="alert alert-danger"><span class="glyphicon glyphicon-remove">
+
+                                        </span></td>
+                        {% endif %}
+                        <td align="center"><a class="btn btn-default"
+                                              href="{{ path("gestionpersonne", {id: personne.id} ) }}"><span
+                                        class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-default"
+                               href="{{ path("suppressionpersonne", {id: personne.id} ) }}"><span
+                                        class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row"></div>
+        <div id="welcome">
+            <h1>{{ "liste_de_voitures"|trans }}</h1>
+        </div>
+        <div class="row"><br/></div>
+        <div class="table-responsive">
+            <table class="table table-hover" id="table_voiture">
+                <thead>
+                <tr>
+                    <th align="center">{{ "libelle"|trans }}</th>
+                    <th align="center">{{ "immatriculation"|trans }}</th>
+                    <th align="center">{{ "couleur"|trans }}</th>
+                    <th align="center">{{ "modifier_et_supprimer"|trans }}</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for voiture in voitures %}
+                    <tr>
+                        <td align="center">{{ voiture.libelle }}</td>
+                        <td align="center">{{ voiture.immatriculation }}</td>
+                        <td align="center">{{ voiture.couleur }}</td>
+                        <td align="center"><a class="btn btn-default"
+                                              href="{{ path("gestionvoiture", {id: voiture.id} ) }}"><span
+                                        class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-default" href="{{ path("suppressionvoiture", {id: voiture.id} ) }}"><span
+                                        class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row"><br/></div>
+
+        {# Emprunts #}
+        <div id="welcome">
+            <h1>{{ "liste_demprunt"|trans }}</h1>
+        </div>
+        <div class="row"><br/></div>
+        <div class="table-responsive">
+            <table class="table table-hover" id="table_emprunt">
+                <thead>
+                <tr>
+                    <th align="center">{{ "conducteur"|trans }}</th>
+                    <th align="center">{{ "date_depart"|trans }}</th>
+                    <th align="center">{{ "date_arrivee"|trans }}</th>
+                    <th align="center">{{ "lieu_depart"|trans }}</th>
+                    <th align="center">{{ "lieu_arrive"|trans }}</th>
+                    <th align="center">{{ "supprimer"|trans }}</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for emprunt in emprunts %}
+                    <tr>
+                        <td align="center">{{ emprunt.conducteurName }}</td>
+                        <td align="center">{{ emprunt.date_depart }}</td>
+                        <td align="center">{{ emprunt.date_arriver }}</td>
+                        <td align="center">{{ emprunt.lieu_depart }}</td>
+                        <td align="center">{{ emprunt.lieu_arriver }}</td>
+                        <td align="center">
+                            <a class="btn btn-default"
+                               href="{{ path("suppressionemprunt", {id: emprunt.idEmprunt} ) }}"><span
+                                        class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container-fluid" style="background-color: white">
+            <link href='{{ asset("js/fullcalendar-4.2.0/packages/core/main.css") }}' rel='stylesheet'/>
+            <link href='{{ asset("js/fullcalendar-4.2.0/packages/daygrid/main.css") }}' rel='stylesheet'/>
+
+            <script src='{{ asset("js/fullcalendar-4.2.0/packages/core/main.js") }}'></script>
+            <script src='{{ asset("js/fullcalendar-4.2.0/packages/daygrid/main.js") }}'></script>
+            <script src='{{ asset("js/fullcalendar-4.2.0/packages/core/locales/fr.js") }}'></script>
+
+            <h2>CALENDRIER :</h2>
+            <script>
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    var calendarEl = document.getElementById('calendar');
+
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        plugins: ['dayGrid'],
+                        locale: 'fr',
+                        timeZone: 'UTC',
+                        events: {{ empruntsJson|raw }}
+                    });
+
+                    calendar.render();
+                    calendar.setOption('locale', 'fr');
+                });
+
+            </script>
+
+            <div id='calendar'></div>
+
+
+        </div>
+
+        </br></br></br></br></br></br></br>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $("#table_personne").DataTable({
+            language: {
+                processing: '{{ "traitement_en_cours"|trans }}',
+                search: '{{ "search"|trans }}',
+                lengthMenu: '{{ "afficher"|trans }} _MENU_ {{ "elements"|trans }}',
+                info: '{{ "affichage_de_element"|trans }} _START_ {{ "à"|trans }} _END_ {{ "sur"|trans }} _TOTAL_ {{ "elements"|trans }}',
+                infoEmpty: '{{ "affichage_de_element"|trans }} 0 {{ "à"|trans }} 0 {{ "sur"|trans }} 0 {{ "elements"|trans }}',
+                infoFiltered: '{{ "filtre_de"|trans }} _MAX_ {{ 'elements_au_total' }}',
+                infoPostFix: "",
+                loadingRecords: '{{ "chargement_en_cours"|trans }}',
+                zeroRecords: '{{ "aucun_element_afficher"|trans }}',
+                emptyTable: '{{ "no_donnees_a_afficher"|trans }}',
+                paginate: {
+                    first: '{{ "premier"|trans }}',
+                    previous: '{{ "previous"|trans }}',
+                    next: '{{ "next"|trans }}',
+                    last: '{{ "last"|trans }}'
+                },
+                aria: {
+                    sortAscending: '{{ "activer_tri_croissant"|trans }}',
+                    sortDescending: '{{ "activer_tri_decroissant"|trans }}',
+                }
+            }
+        });
+    </script>
+
+    <script>
+        $("#table_voiture").DataTable({
+            language: {
+                processing: '{{ "traitement_en_cours"|trans }}',
+                search: '{{ "search"|trans }}',
+                lengthMenu: '{{ "afficher"|trans }} _MENU_ {{ "elements"|trans }}',
+                info: '{{ "affichage_de_element"|trans }} _START_ {{ "à"|trans }} _END_ {{ "sur"|trans }} _TOTAL_ {{ "elements"|trans }}',
+                infoEmpty: '{{ "affichage_de_element"|trans }} 0 {{ "à"|trans }} 0 {{ "sur"|trans }} 0 {{ "elements"|trans }}',
+                infoFiltered: '{{ "filtre_de"|trans }} _MAX_ {{ 'elements_au_total' }}',
+                infoPostFix: "",
+                loadingRecords: '{{ "chargement_en_cours"|trans }}',
+                zeroRecords: '{{ "aucun_element_afficher"|trans }}',
+                emptyTable: '{{ "no_donnees_a_afficher"|trans }}',
+                paginate: {
+                    first: '{{ "premier"|trans }}',
+                    previous: '{{ "previous"|trans }}',
+                    next: '{{ "next"|trans }}',
+                    last: '{{ "last"|trans }}'
+                },
+                aria: {
+                    sortAscending: '{{ "activer_tri_croissant"|trans }}',
+                    sortDescending: '{{ "activer_tri_decroissant"|trans }}',
+                }
+            }
+        });
+    </script>
+
+    <script>
+        $("#table_emprunt").DataTable({
+            language: {
+                processing: '{{ "traitement_en_cours"|trans }}',
+                search: '{{ "search"|trans }}',
+                lengthMenu: '{{ "afficher"|trans }} _MENU_ {{ "elements"|trans }}',
+                info: '{{ "affichage_de_element"|trans }} _START_ {{ "à"|trans }} _END_ {{ "sur"|trans }} _TOTAL_ {{ "elements"|trans }}',
+                infoEmpty: '{{ "affichage_de_element"|trans }} 0 {{ "à"|trans }} 0 {{ "sur"|trans }} 0 {{ "elements"|trans }}',
+                infoFiltered: '{{ "filtre_de"|trans }} _MAX_ {{ 'elements_au_total' }}',
+                infoPostFix: "",
+                loadingRecords: '{{ "chargement_en_cours"|trans }}',
+                zeroRecords: '{{ "aucun_element_afficher"|trans }}',
+                emptyTable: '{{ "no_donnees_a_afficher"|trans }}',
+                paginate: {
+                    first: '{{ "premier"|trans }}',
+                    previous: '{{ "previous"|trans }}',
+                    next: '{{ "next"|trans }}',
+                    last: '{{ "last"|trans }}'
+                },
+                aria: {
+                    sortAscending: '{{ "activer_tri_croissant"|trans }}',
+                    sortDescending: '{{ "activer_tri_decroissant"|trans }}',
+                }
+            }
+        });
+    </script>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .valid {
+            color: #3c763d;
+            align-content: center
+        }
+
+        /*a:hover span, a:focus span{*/
+        /*transform:scale(1) rotate(0);*/
+        /*opacity:1;*/
+        /*}*/
+
+        /*a span{*/
+        /*transform:scale(0) rotate(-12deg);*/
+        /*transition:all .25s;*/
+        /*opacity:0;*/
+        /*position:absolute;*/
+        /*margin-top:23px;*/
+        /*margin-left:-35px;*/
+        /*color:#09c;*/
+        /*background:rgba(0,0,0,.9);*/
+        /*padding:15px;*/
+        /*border-radius:3px;*/
+        /*box-shadow:0 0 2px rgba(0,0,0,.5);*/
+        /*}*/
+
+    </style>
+{% endblock %}

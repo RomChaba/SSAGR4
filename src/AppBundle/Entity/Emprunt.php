@@ -175,6 +175,35 @@ class Emprunt
         }
     }
 
+    public function empruntForCalendar(){
+        $empruntJson=array();
+
+        $lieuxDepart = '';
+        $lieuxArrive = '';
+        $dateDepart = '';
+        $dateArrive = '';
+
+        /** @var Lieu_emprunt $listeLieux */
+        foreach ($this->getListeLieux() as $listeLieux) {
+
+            if ($listeLieux->getDepart()){
+                $lieuxDepart = $listeLieux->getLieuId()->getLibelle();
+                $dateDepart  = $listeLieux->getDateEtHeure()->format("Y-m-d\TH:i:sO");
+            }else{
+                $lieuxArrive = $listeLieux->getLieuId()->getLibelle();
+                $dateArrive  = $listeLieux->getDateEtHeure()->format("Y-m-d\TH:i:sO");
+            }
+
+        }
+
+
+        $empruntJson["id"]      = $this->getId();
+        $empruntJson["title"]   = $lieuxDepart." → ".$lieuxArrive;
+        $empruntJson["start"]   = $dateDepart;
+        $empruntJson["end"]     = $dateArrive;
+
+        return $empruntJson;
+    }
 
 
 }
