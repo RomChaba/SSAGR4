@@ -12,8 +12,8 @@
             background-color: lightgrey;
         }
 
-        .btn-bas > a {
-            /*margin-bottom: 1em;*/
+        .btn-bas > * {
+            margin-bottom: 0.5em;
         }
     </style>
 
@@ -118,7 +118,8 @@
                     {% for personne in emprunt.listePersonne %}
                         {#{{ dump(personne) }}#}
                         {% if personne.conducteur %}
-                            <p>{{ personne.personneId.nom }} {{ personne.personneId.prenom }} : {{ "personne"|trans }}</p>
+                            <p>{{ personne.personneId.nom }} {{ personne.personneId.prenom }}
+                                : {{ "personne"|trans }}</p>
                         {% else %}
                             <p>{{ personne.personneId.nom }} {{ personne.personneId.prenom }}</p>
                         {% endif %}
@@ -127,47 +128,45 @@
             </div>
         </div>
         <div class="col-xs-12 btn-bas">
-            <div class="col-xs-12 col-sm-4">
-                <button type="button" class="btn btn-warning" data-toggle="modal"
-                        data-target="#retardModal">{{ "detail_signal_prob"|trans }}</button>
-            </div>
+            <button type="button" class="btn btn-warning col-xs-12 col-sm-3" data-toggle="modal"
+                    data-target="#retardModal">
+                {{ "detail_signal_prob"|trans }}
+            </button>
             {% for data in emprunt.listeLieux %}
                 {% if data.depart == true and date(data.dateEtHeure) < date() %}
-                    <div class="col-xs-12 col-sm-4">
-                        <button type="button" class="btn btn-default" data-toggle="modal"
-                                data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
-                    </div>
+                    <button type="button" class="btn btn-default col-xs-12 col-sm-3 col-sm-offset-1" data-toggle="modal"
+                            data-target="#rend_cleModal">{{ "detail_rendre_cle"|trans }}</button>
                 {% endif %}
             {% endfor %}
 
 
-            <div class="col-xs-4">
+            {#<div class="col-xs-4">#}
 
-            </div>
+            {#</div>#}
 
             {% for personne in emprunt.listePersonne %}
 
                 {#{{ dump(personne) }}#}
                 {% if pers_co.id != personne.personneId.id %}
-                    <div class="col-xs-12 col-sm-4">
-                        {% set affichage = false %}
+                    {% set affichage = false %}
 
-                        {% for pers in emprunt.listePersonne %}
-                            {% if pers_co.id == pers.personneId.id %}
-                                {% set affichage = true %}
-                            {% endif %}
-                        {% endfor %}
-
-                        {% if affichage == true %}
-                            <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-danger">{{ "detail_plus_participer"|trans }}</a>
-                        {% else %}
-
-                            {% if emprunt.listePersonne|length < 6 %}
-                                <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}" class="btn btn-success">{{ "detail_participer"|trans }}</a>
-                            {% endif %}
+                    {% for pers in emprunt.listePersonne %}
+                        {% if pers_co.id == pers.personneId.id %}
+                            {% set affichage = true %}
                         {% endif %}
+                    {% endfor %}
 
-                    </div>
+                    {% if affichage == true %}
+                        <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}"
+                           class="btn btn-danger col-xs-12 col-sm-3 col-sm-offset-1">{{ "detail_plus_participer"|trans }}</a>
+                    {% else %}
+
+                        {% if emprunt.listePersonne|length < 6 %}
+                            <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}"
+                               class="btn btn-success col-xs-12 col-sm-3 col-sm-offset-1">{{ "detail_participer"|trans }}</a>
+                        {% endif %}
+                    {% endif %}
+
                 {% endif %}
             {% endfor %}
 
@@ -206,8 +205,6 @@
                                                value="{{ data.dateEtHeure|date("d/m/Y H:i", false) }}" readonly>
                                     {% endif %}
                                 {% endfor %}
-
-
 
 
                             </div>
@@ -294,7 +291,7 @@
 
     <script>
 
-            $("#retard_form").submit(function(e) {
+        $("#retard_form").submit(function (e) {
 
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -305,8 +302,7 @@
                 type: "POST",
                 url: url,
                 data: form.serialize(), // serializes the form's elements.
-                success: function(data)
-                {
+                success: function (data) {
                     obj = JSON.parse(data);
                     alert(obj); // show response from the php script.
 
@@ -315,7 +311,6 @@
 
 
         });
-
 
 
         $("#form_newSite").click(function () {

@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Emprunt;
@@ -13,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 //use Symfony\Component\Validator\Constraints\DateTime;
 class ParticiperController extends Controller
 {
@@ -40,27 +42,31 @@ class ParticiperController extends Controller
 
         /** @var Emprunt $emprunt */
         foreach ($listeEmprunt as $emprunt) {
-
+            $estIn = false;
             /** @var Emprunt_Personne $emp_pers */
             foreach ($emprunt->getListePersonne() as $emp_pers) {
-                if ($emp_pers->getPersonneId()->getId() != $pers_co->getId()){
-                    array_push($new_liste,$emprunt);
+                if ($emp_pers->getPersonneId()->getId() == $pers_co->getId()) {
+                    $estIn = true;
+
 
                 }
             }
+            if (!$estIn)array_push($new_liste, $emprunt);
         }
-        $lieu_emprunt = null;
+
+        $repoLieuEmprunt = $em->getRepository("AppBundle:Lieu_emprunt");
+        $lieu_emprunt = $repoLieuEmprunt->findAll();
 
         $listeLieu = $em->getRepository('AppBundle:Lieu')->findAll();
 //        dump($new_liste);
 //die();
         // replace this example code with whatever you need
         return $this->render('participer/participer.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'listeEmprunt'=> $new_liste,
-            'lieu_emprunt'=> $lieu_emprunt,
-            'listeLieu'=> $listeLieu,
-            'pers_co'=> $pers_co,
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+            'listeEmprunt' => $new_liste,
+            'lieu_emprunt' => $lieu_emprunt,
+            'listeLieu' => $listeLieu,
+            'pers_co' => $pers_co,
         ]);
     }
 
@@ -75,8 +81,7 @@ class ParticiperController extends Controller
 
 
         $em = $this->getDoctrine()->getManager();
-        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$idemprunt]);
-
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id" => $idemprunt]);
 
 
 //      ****** Recuperation de l'utilisateur connecté ******
@@ -91,12 +96,12 @@ class ParticiperController extends Controller
         $new_liste = array();
 
         /** @var Lieu_emprunt $lieu_emp */
-        foreach ($lieu_emprunt as $lieu_emp){
+        foreach ($lieu_emprunt as $lieu_emp) {
             if ($lieu_emp->getEmpruntId() == $emprunt->getId()) {
                 if ($lieu_emp->getDepart() == true) {
-                    $new_liste[0]=$lieu_emp;
+                    $new_liste[0] = $lieu_emp;
                 } else {
-                    $new_liste[1]=$lieu_emp;
+                    $new_liste[1] = $lieu_emp;
                 }
             }
         }
@@ -107,11 +112,11 @@ class ParticiperController extends Controller
         return $this->render(
             'participer/detail.html.twig',
             array(
-                "messageEnregistrement"=>"OKKKKKKK",
-                "pers_co"=>$pers_co,
-                "emprunt"=>$emprunt,
-                "lieu_emprunt"=>$new_liste,
-                "dateDuJour"=>$dateDuJour,
+                "messageEnregistrement" => "OKKKKKKK",
+                "pers_co" => $pers_co,
+                "emprunt" => $emprunt,
+                "lieu_emprunt" => $new_liste,
+                "dateDuJour" => $dateDuJour,
             )
         );
 
@@ -138,11 +143,10 @@ class ParticiperController extends Controller
         $emprunt = $repoEmprunt->findOneById($request->get("idEmprunt"));
 
 
-
         $retour = array(
-            "message"=>"RAS",
-            "ok"=>true,
-            "param"=>$request->request->all(),
+            "message" => "RAS",
+            "ok" => true,
+            "param" => $request->request->all(),
         );
 
 
@@ -152,18 +156,17 @@ class ParticiperController extends Controller
     /**
      * @Route("/participer-passager/{empruntId}/{personneId}", name="participer_passager")
      */
-    public function clickParticiperAction(Request $request,$empruntId,$personneId)
+    public function clickParticiperAction(Request $request, $empruntId, $personneId)
     {
         /** @var Emprunt $emprunt */
         $em = $this->getDoctrine()->getManager();
-        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$empruntId]);
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id" => $empruntId]);
 
 
 //        ***** RECUPERATION PERSONNE *****
 
         /** @var Personne $pers_co */
         $pers_co = $em->getRepository("AppBundle:Personne")->findOneById($personneId);
-
 
 
         $empruntPersonne = new Emprunt_Personne();
@@ -177,17 +180,17 @@ class ParticiperController extends Controller
         $em->persist($emprunt);
         $em->flush();
 
-        return $this->redirectToRoute("detailEmprunt",["idemprunt"=>$empruntId]);
+        return $this->redirectToRoute("detailEmprunt", ["idemprunt" => $empruntId]);
     }
 
     /**
      * @Route("/plus-participer-passager/{empruntId}/{personneId}", name="plus_participer_passager")
      */
-    public function plusParticiperAction(Request $request,$empruntId,$personneId)
+    public function plusParticiperAction(Request $request, $empruntId, $personneId)
     {
         /** @var Emprunt $emprunt */
         $em = $this->getDoctrine()->getManager();
-        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$empruntId]);
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id" => $empruntId]);
 
 //        ***** RECUPERATION PERSONNE *****
         /** @var Personne $pers_co */
@@ -196,7 +199,7 @@ class ParticiperController extends Controller
 
         /** @var Emprunt_Personne $item */
         foreach ($emprunt->getListePersonne() as $item) {
-            if ($pers_co->getId() == $item->getPersonneId()->getId()){
+            if ($pers_co->getId() == $item->getPersonneId()->getId()) {
                 $em->remove($item);
             }
         }
@@ -204,7 +207,7 @@ class ParticiperController extends Controller
 
         $em->refresh($emprunt);
 
-        return $this->redirectToRoute("detailEmprunt",["idemprunt"=>$empruntId]);
+        return $this->redirectToRoute("detailEmprunt", ["idemprunt" => $empruntId]);
 
 
     }
@@ -217,18 +220,18 @@ class ParticiperController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         /** @var Emprunt $emprunt */
-        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id"=>$empruntId]);
+        $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id" => $empruntId]);
 
 
         // Variables concernant l'email
         $repoParametre = $this->getDoctrine()->getRepository("AppBundle:Parametre");
-        $destinataire = $repoParametre->findOneBy(['cle'=>'mail_contact']);
+        $destinataire = $repoParametre->findOneBy(['cle' => 'mail_contact']);
         $destinataire = $destinataire->getValeur(); // Adresse email de l'administrateur
 
 
         $sujet = 'Titre du message'; // Titre de l'email
         $contenu = '<html><head><title>Clé</title></head><body>';
-        $contenu .= '<p>Bonjour, le voyage N°'.$emprunt->getId().' rend les clés.</p>';
+        $contenu .= '<p>Bonjour, le voyage N°' . $emprunt->getId() . ' rend les clés.</p>';
         $contenu .= '<p><strong>Arrivé</strong>: ' . $request->request->get("heureArrive") . '</p>';
         $contenu .= '<p><strong>Message</strong>: ' . $request->request->get("messageArrive") . '</p>';
         $contenu .= '</body></html>'; // Contenu du message de l'email
@@ -238,9 +241,9 @@ class ParticiperController extends Controller
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
         // TODO tester une fois le site en ligne
-         mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
+        mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
 
-        return $this->redirectToRoute("detailEmprunt",["idemprunt"=>$empruntId]);
+        return $this->redirectToRoute("detailEmprunt", ["idemprunt" => $empruntId]);
 
     }
 }

@@ -17,7 +17,8 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             {% for lieu in listeLieu %}
-                                <li onclick="search_depart('{{ lieu.libelle }}');"><a href="#">{{ lieu.libelle }}</a>
+                                <li onclick="search_depart('{{ lieu.libelle }}');">
+                                    <a href="#">{{ lieu.libelle }}</a>
                                 </li>
                             {% endfor %}
 
@@ -33,7 +34,8 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             {% for lieu in listeLieu %}
-                                <li onclick="search_arrive('{{ lieu.libelle }}');"><a href="#">{{ lieu.libelle }}</a>
+                                <li onclick="search_arrive('{{ lieu.libelle }}');">
+                                    <a href="#">{{ lieu.libelle }}</a>
                                 </li>
                             {% endfor %}
 
@@ -48,10 +50,13 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            {% set lastdate = "temp" %}
                             {% for data in lieu_emprunt %}
-                                {% if data.depart == true %}
-                                    <li onclick="search_date('{{ data.dateEtHeure|date("d/m/Y", false) }}')"><a
-                                                href="#">{{ data.dateEtHeure|date("d/m/Y", false) }}</a></li>
+                                {% if data.depart == true and lastdate != data.dateEtHeure|date("d/m/Y", false) %}
+                                    {% set lastdate = data.dateEtHeure|date("d/m/Y", false) %}
+                                    <li onclick="search_date('{{ data.dateEtHeure|date("d/m/Y", false) }}')">
+                                        <a href="#">{{ data.dateEtHeure|date("d/m/Y", false) }}</a>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
 
@@ -297,7 +302,8 @@
                     sortAscending: '{{ "activer_tri_croissant"|trans }}',
                     sortDescending: '{{ "activer_tri_decroissant"|trans }}',
                 }
-            }
+            },
+            responsive: true,
         });
 
         function search_depart(recherche) {
