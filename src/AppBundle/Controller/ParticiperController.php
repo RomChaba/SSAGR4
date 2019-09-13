@@ -229,7 +229,7 @@ class ParticiperController extends Controller
         $destinataire = $destinataire->getValeur(); // Adresse email de l'administrateur
 
 
-        $sujet = 'Titre du message'; // Titre de l'email
+        $sujet = 'Clé rendue'; // Titre de l'email
         $contenu = '<html><head><title>Clé</title></head><body>';
         $contenu .= '<p>Bonjour, le voyage N°' . $emprunt->getId() . ' rend les clés.</p>';
         $contenu .= '<p><strong>Arrivé</strong>: ' . $request->request->get("heureArrive") . '</p>';
@@ -241,7 +241,8 @@ class ParticiperController extends Controller
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
         // TODO tester une fois le site en ligne
-        mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
+        // Fonction principale qui envoi l'email
+        mail($destinataire, $sujet, $contenu, $headers);
 
         return $this->redirectToRoute("detailEmprunt", ["idemprunt" => $empruntId]);
 

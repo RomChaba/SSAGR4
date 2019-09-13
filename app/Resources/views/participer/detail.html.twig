@@ -19,9 +19,9 @@
 
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <form action="{{ path("DemandeForm") }}" method="post" role="form">
-            <legend>{{ "detail_covoit_titre"|trans }} </legend>
+            <legend>{{ "detail_covoit_titre"|trans }}</legend>
             <div class="form-group col-xs-12">
-                <label for="inputID" class="col-xs-12">{{ "personne"|trans }}</label>
+                <label for="inputID" class="col-xs-12">{{ "personne"|trans }}*</label>
 
                 <div class="col-xs-12 col-sm-6">
                     {% for personne in emprunt.listePersonne %}
@@ -33,8 +33,6 @@
                                    readonly>
                         {% endif %}
                     {% endfor %}
-
-
                 </div>
             </div>
             <div class="form-group col-xs-12">
@@ -42,7 +40,6 @@
                 <div class="col-xs-12 col-sm-6">
                     {% for data in emprunt.listeLieux %}
                         {% if data.depart == true %}
-                            dum
                             <input type="text" name="lieu_depart_1" id="lieu_depart_1" class="form-control"
                                    value="{{ data.lieuId.libelle }}" title="" readonly>
                         {% endif %}
@@ -209,9 +206,9 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="inputID" class="control-label">{{ "retard_estime"|trans }}</label>
+                                <label for="inputID" class="control-label">{{ "retard_estime"|trans }}*</label>
                                 <div>
-                                    <select name="retard_retard" id="inputID" class="form-control">
+                                    <select name="retard_retard" id="inputID" class="form-control" required>
                                         <option value="15">15 min</option>
                                         <option value="30">30 min</option>
                                         <option value="45">45 min</option>
@@ -225,9 +222,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="inputID" class="control-label">{{ "retard_cause"|trans }}</label>
+                                <label for="inputID" class="control-label">{{ "retard_cause"|trans }}*</label>
                                 <div>
-                                    <select name="retard_cause" id="inputID" class="form-control">
+                                    <select name="retard_cause" id="inputID" class="form-control" required>
                                         <option value="1">{{ "retard_embouteillage"|trans }}</option>
                                         <option value="2">{{ "retard_retard"|trans }}</option>
                                         <option value="3">{{ "retard_prob_voiture"|trans }}</option>
@@ -237,7 +234,8 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary">{{ "retard_btn_validation"|trans }}</button>
+                            <button type="submit"
+                                    class="btn btn-success">{{ "retard_btn_validation"|trans }}</button>
                         </form>
                     </div>
                 </div>
@@ -271,8 +269,9 @@
                                           placeholder="Message"></textarea>
                             </div>
                             <div class="form-group">
-                                <button type="submit"
-                                        class="btn btn-primary">{{ "retard_btn_validation"|trans }}</button>
+                                <button type="submit" class="btn btn-success">
+                                    {{ "retard_btn_validation"|trans }}
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -301,22 +300,27 @@
             $.ajax({
                 type: "POST",
                 url: url,
-                data: form.serialize(), // serializes the form's elements.
+                data: form.serialize(),
                 success: function (data) {
-                    obj = JSON.parse(data);
-                    alert(obj); // show response from the php script.
-
+                    console.log(data);
+                    console.log(data.message);
+                    if (data.param.retard_retard >= 15) {
+                        mess = data.param.retard_retard + ' minutes';
+                    } else if (data.param.retard_retard == 1) {
+                        mess = data.param.retard_retard + ' heure';
+                    } else {
+                        mess = data.param.retard_retard + ' heures';
+                    }
+                    alert(data.message + ' : Votre retard de ' + mess + ' a été pris en compte.');
                 }
             });
 
 
         });
 
-
         $("#form_newSite").click(function () {
             window.location = "{{ path("homepage") }}";
         });
-
 
         $("#aller_ret").change(function () {
 
@@ -330,6 +334,7 @@
                 $("#part_retour").fadeOut(100);
             }
         });
+
 
         $("#lieu_depart_1").change(function () {
             var lieu_arrive_1 = $("#lieu_arrive_1");
@@ -386,7 +391,7 @@
         $(document).ready(function () {
             var dateNow = new Date();
 
-            dateNow.getHours()
+            dateNow.getHours();
 
             if ($("#aller_ret").is(":checked")) {
                 $("#part_retour").fadeIn(100);
@@ -394,44 +399,7 @@
                 $("#part_retour").fadeOut(100);
             }
 
-//            $('#date_depart_1').datepicker({
-//                todayButton: new Date(),
-//                language: 'fr',
-//                minDate: new Date(),
-//                position: 'bottom left',
-//                onSelect: function (formattedDate, date, inst) {
-//                    $('#date_arrive_1').data('datepicker').update('minDate', date)
-//                }
-//            }).data('datepicker').selectDate(dateNow);
-
-
-//            $('#date_arrive_1').datepicker({
-//                todayButton: new Date(),
-//                language: 'fr',
-//                minDate: new Date(),
-//                position: 'bottom left',
-//                onSelect: function (formattedDate, date, inst) {
-//                    $('#date_depart_2').data('datepicker').update('minDate', date)
-//                }
-//
-//            });
-//            $('#date_depart_2').datepicker({
-//                todayButton: new Date(),
-//                language: 'fr',
-//                minDate: new Date(),
-//                onSelect: function (formattedDate, date, inst) {
-//
-//                    $('#date_arrive_2').data('datepicker').update('minDate', date)
-//                }
-//            });
-//            $('#date_arrive_2').datepicker({
-//                todayButton: new Date(),
-//                language: 'fr',
-//                minDate: new Date(),
-//            });
-//            $('#date_depart_1').datepicker().data('datepicker').selectDate(dateNow);
-
-        })
+        });
 
 
         function showDtPicker(num) {

@@ -85,7 +85,7 @@ class DemandeController extends Controller
         $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
         $repoVehicule = $this->getDoctrine()->getRepository("AppBundle:Vehicule");
         $repoLieu = $this->getDoctrine()->getRepository("AppBundle:Lieu");
-
+        $repoEmprunt = $this->getDoctrine()->getRepository("AppBundle:Emprunt");
 
         //recuperation du conducteur
         /** @var Personne $conducteur */
@@ -174,6 +174,37 @@ class DemandeController extends Controller
         array_push($liste_lieux_new, $lieuxEmpruntDepart);
 
         array_push($liste_lieux_new, $lieuxEmpruntArriver);
+
+        //Save de l'emprunt
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($emprunt);
+        $em->flush();
+
+//    Test si aller retour a ete coche
+        if ($request->get("aller_ret") == "on") {
+        // Inversion des lieux de depart et d'arrive
+            /** @var \DateTime $lieu_retour_dep */
+            $lieu_retour_dep = $lieu_arrive;
+            /** @var \DateTime $lieu_retour_arr */
+            $lieu_retour_arr = $lieu_depart;
+
+            // Modification des heures
+            $lieu_retour_dep->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
+            $lieu_retour_dep->setTime($request->get("h_depart_1"), $request->get("min_depart_1"));
+
+            $lieu_retour_arr->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
+            $lieu_retour_arr->setTime($request->get("h_depart_1"), $request->get("min_depart_1"));
+        // Création de la liste des lieux
+        // Ajout des lieux de l'aller dans la liste
+        // Creation du nouvel emprunt
+        // Recupertation des dates 1 pour le retour
+        // Recupertation des dates 2 pour le retour
+        }
+
+
+
+
 
         //Récupération de la liste des emprunts existant
         //TODO ENLEVER ET REMPLACER
