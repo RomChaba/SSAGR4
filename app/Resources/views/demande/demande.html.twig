@@ -345,7 +345,9 @@
         $("#lieu_depart_1").change(function () {
             var lieu_arrive_1 = $("#lieu_arrive_1");
             var lieu_depart_1 = $(this);
-            $("#lieu_depart_2").val(lieu_arrive_1.val());
+
+            $("#lieu_arrive_2").val(lieu_depart_1.val());
+
             if (lieu_arrive_1.val() === lieu_depart_1.val()) {
                 lieu_arrive_1.parent().addClass("has-error");
                 lieu_depart_1.parent().addClass("has-error");
@@ -358,7 +360,7 @@
         $("#lieu_arrive_1").change(function () {
             var lieu_arrive_1 = $(this);
             var lieu_depart_1 = $("#lieu_depart_1");
-            $("#lieu_arrive_2").val(lieu_arrive_1.val());
+            $("#lieu_depart_2").val(lieu_arrive_1.val());
             if (lieu_arrive_1.val() === lieu_depart_1.val()) {
                 lieu_arrive_1.parent().addClass("has-error");
                 lieu_depart_1.parent().addClass("has-error");
@@ -397,7 +399,10 @@
         $(document).ready(function () {
             var dateNow = new Date();
 
-            dateNow.getHours()
+            $("#lieu_depart_2").val($("#lieu_arrive_1").val()).attr("disabled", true);
+            $("#lieu_arrive_2").val($("#lieu_depart_1").val()).attr("disabled", true);
+
+            dateNow.getHours();
 
             if ($("#aller_ret").is(":checked")) {
                 $("#part_retour").fadeIn(100);
@@ -442,7 +447,7 @@
             });
 //            $('#date_depart_1').datepicker().data('datepicker').selectDate(dateNow);
 
-        })
+        });
 
 
         function showDtPicker(num) {
