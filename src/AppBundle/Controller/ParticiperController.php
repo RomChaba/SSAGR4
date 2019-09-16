@@ -11,6 +11,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -144,9 +145,10 @@ class ParticiperController extends Controller
 
 
         $retour = array(
-            "message" => "RAS",
-            "ok" => true,
-            "param" => $request->request->all(),
+            "status" => 200,
+            "mes" => "La demande a été prise en compte",
+            "data" => $request->request->all(),
+            "error" => false,
         );
 
 
@@ -218,6 +220,8 @@ class ParticiperController extends Controller
     public function rendreCle(Request $request, $empruntId)
     {
         $em = $this->getDoctrine()->getManager();
+        $error = false;
+        $status = 200;
 
         /** @var Emprunt $emprunt */
         $emprunt = $em->getRepository("AppBundle:Emprunt")->findOneBy(["id" => $empruntId]);
@@ -242,9 +246,25 @@ class ParticiperController extends Controller
 
         // TODO tester une fois le site en ligne
         // Fonction principale qui envoi l'email
-        mail($destinataire, $sujet, $contenu, $headers);
 
-        return $this->redirectToRoute("detailEmprunt", ["idemprunt" => $empruntId]);
+
+        if (@mail($destinataire, $sujet, $contenu, $headers)){
+            $ret_mail ="Message bien envoyé.";
+        }else{
+            $status = 304;
+            $ret_mail =false;
+            $error ="Erreur envoi du mail";
+        }
+
+        $mess = [
+          "status"=>$status,
+          "msg"=>$ret_mail,
+          "error"=>$error
+        ];
+
+        return JsonResponse::fromJsonString(json_encode($mess));
+
+//        return $this->redirectToRoute("detailEmprunt", ["idemprunt" => $empruntId]);
 
     }
 }

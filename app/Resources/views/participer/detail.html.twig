@@ -143,26 +143,33 @@
 
             {% for personne in emprunt.listePersonne %}
 
+
+
                 {#{{ dump(personne) }}#}
                 {% if pers_co.id != personne.personneId.id %}
-                    {% set affichage = false %}
+                    {% for data in emprunt.listeLieux %}
+                        {% if data.depart == false and date(data.dateEtHeure) > date() %}
+                            {% set affichage = false %}
 
-                    {% for pers in emprunt.listePersonne %}
-                        {% if pers_co.id == pers.personneId.id %}
-                            {% set affichage = true %}
+                            {% for pers in emprunt.listePersonne %}
+                                {% if pers_co.id == pers.personneId.id %}
+                                    {% set affichage = true %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if affichage == true %}
+                                <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}"
+                                   class="btn btn-danger col-xs-12 col-sm-3 col-sm-offset-1">{{ "detail_plus_participer"|trans }}</a>
+                            {% else %}
+
+                                {% if emprunt.listePersonne|length < 6 %}
+                                    <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}"
+                                       class="btn btn-success col-xs-12 col-sm-3 col-sm-offset-1">{{ "detail_participer"|trans }}</a>
+                                {% endif %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
 
-                    {% if affichage == true %}
-                        <a href="{{ path("plus_participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}"
-                           class="btn btn-danger col-xs-12 col-sm-3 col-sm-offset-1">{{ "detail_plus_participer"|trans }}</a>
-                    {% else %}
-
-                        {% if emprunt.listePersonne|length < 6 %}
-                            <a href="{{ path("participer_passager",{"empruntId":emprunt.id,"personneId":pers_co.id}) }}"
-                               class="btn btn-success col-xs-12 col-sm-3 col-sm-offset-1">{{ "detail_participer"|trans }}</a>
-                        {% endif %}
-                    {% endif %}
 
                 {% endif %}
             {% endfor %}
@@ -191,6 +198,9 @@
                         <h4 class="modal-title">{{ "retard_titre"|trans }}</h4>
                     </div>
                     <div class="modal-body">
+                        <div id="ret_ok" class="alert alert-success" role="alert" hidden></div>
+                        <div id="ret_nok" class="alert alert-warning" role="alert" hidden></div>
+                        <div id="ret_err" class="alert alert-danger" role="alert" hidden></div>
                         <form id="retard_form" action="{{ path("retard") }}" method="post" role="form">
                             <input type="hidden" name="idEmprunt" value="{{ emprunt.id }}">
                             <div class="form-group">
@@ -256,7 +266,10 @@
                         <h4 class="modal-title">{{ "rend_cle_titre"|trans }}</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ path("rendre_cle", {'empruntId':emprunt.id }) }}" method="post" role="form">
+                        <div id="rendre_cle_ok" class="alert alert-success" role="alert" hidden></div>
+                        <div id="rendre_cle_nok" class="alert alert-warning" role="alert" hidden></div>
+                        <div id="rendre_cle_err" class="alert alert-danger" role="alert" hidden></div>
+                        <form action="{{ path("rendre_cle", {'empruntId':emprunt.id }) }}" method="post" id="cle_form" role="form">
 
                             <div class="form-group">
                                 <label for="">{{ "rend_cle_rendu_le" }}</label>
@@ -302,123 +315,47 @@
                 url: url,
                 data: form.serialize(),
                 success: function (data) {
-                    console.log(data);
-                    console.log(data.message);
-                    if (data.param.retard_retard >= 15) {
-                        mess = data.param.retard_retard + ' minutes';
-                    } else if (data.param.retard_retard == 1) {
-                        mess = data.param.retard_retard + ' heure';
+                    if (data.data.retard_retard >= 15) {
+                        mess = data.data.retard_retard + ' minutes';
+                    } else if (data.data.retard_retard == 1) {
+                        mess = data.data.retard_retard + ' heure';
                     } else {
-                        mess = data.param.retard_retard + ' heures';
+                        mess = data.data.retard_retard + ' heures';
                     }
-                    alert(data.message + ' : Votre retard de ' + mess + ' a été pris en compte.');
+                    $("#ret_ok").show();
+                    $("#ret_ok").text(data.mes + ' : Retard de ' + mess);
                 }
             });
+        });
+        $("#cle_form").submit(function (e) {
 
+            e.preventDefault(); // avoid to execute the actual submit of the form.
 
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (data) {
+                    if (data.status == 200 ){
+                        $("#rendre_cle_ok").val(data.msg);
+                        $("#rendre_cle_ok").show();
+                    }else{
+                        console.log(data.error);
+                        $("#rendre_cle_err").text(data.error);
+                        $("#rendre_cle_err").show();
+                    }
+                }
+            });
         });
 
         $("#form_newSite").click(function () {
             window.location = "{{ path("homepage") }}";
         });
 
-        $("#aller_ret").change(function () {
-
-            if ($(this).is(":checked")) {
-                $("#part_retour").fadeIn(100);
-                $("#lieu_depart_2").val($("#lieu_depart_1").val()).attr("disabled", true);
-                $("#lieu_arrive_2").val($("#lieu_arrive_1").val()).attr("disabled", true);
-
-            } else {
-
-                $("#part_retour").fadeOut(100);
-            }
-        });
-
-
-        $("#lieu_depart_1").change(function () {
-            var lieu_arrive_1 = $("#lieu_arrive_1");
-            var lieu_depart_1 = $(this);
-            $("#lieu_depart_2").val($("#lieu_depart_1").val());
-            if (lieu_arrive_1.val() === lieu_depart_1.val()) {
-                lieu_arrive_1.parent().addClass("has-error");
-                lieu_depart_1.parent().addClass("has-error");
-            } else {
-                lieu_arrive_1.parent().removeClass("has-error");
-                lieu_depart_1.parent().removeClass("has-error");
-            }
-
-        });
-        $("#lieu_arrive_1").change(function () {
-            var lieu_arrive_1 = $(this);
-            var lieu_depart_1 = $("#lieu_depart_1");
-            $("#lieu_arrive_2").val($("#lieu_arrive_1").val());
-            if (lieu_arrive_1.val() === lieu_depart_1.val()) {
-                lieu_arrive_1.parent().addClass("has-error");
-                lieu_depart_1.parent().addClass("has-error");
-            } else {
-                lieu_arrive_1.parent().removeClass("has-error");
-                lieu_depart_1.parent().removeClass("has-error");
-            }
-
-        });
-        $("#lieu_depart_2").change(function () {
-            var lieu_arrive_2 = $("#lieu_arrive_2");
-            var lieu_depart_2 = $(this);
-            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
-                lieu_arrive_2.parent().addClass("has-error");
-                lieu_depart_2.parent().addClass("has-error");
-            } else {
-                lieu_arrive_2.parent().removeClass("has-error");
-                lieu_depart_2.parent().removeClass("has-error");
-            }
-
-        });
-        $("#lieu_arrive_2").change(function () {
-            var lieu_arrive_2 = $(this);
-            var lieu_depart_2 = $("#lieu_depart_2");
-            if (lieu_arrive_2.val() === lieu_depart_2.val()) {
-                lieu_arrive_2.parent().addClass("has-error");
-                lieu_depart_2.parent().addClass("has-error");
-            } else {
-                lieu_arrive_2.parent().removeClass("has-error");
-                lieu_depart_2.parent().removeClass("has-error");
-            }
-
-        });
-
-
-        $(document).ready(function () {
-            var dateNow = new Date();
-
-            dateNow.getHours();
-
-            if ($("#aller_ret").is(":checked")) {
-                $("#part_retour").fadeIn(100);
-            } else {
-                $("#part_retour").fadeOut(100);
-            }
-
-        });
-
-
-        function showDtPicker(num) {
-            switch (num) {
-                case 1:
-                    $('#date_depart_1').datepicker().data('datepicker').show();
-                    break;
-                case 2:
-                    $('#date_arrive_1').datepicker().data('datepicker').show();
-                    break;
-                case 3:
-                    $('#date_depart_2').datepicker().data('datepicker').show();
-                    break;
-                case 4:
-                    $('#date_arrive_2').datepicker().data('datepicker').show();
-                    break;
-            }
-        }
 
     </script>
-    <script src="{{ asset("js/datepicker.fr.js") }}"></script>
+    {#<script src="{{ asset("js/datepicker.fr.js") }}"></script>#}
 {% endblock %}
