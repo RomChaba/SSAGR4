@@ -1,4 +1,4 @@
-proposer_un_voyage: 'Voyage proposal'
+proposer_un_voyage: 'Create a voyage'
 participer_voyage: 'Take part to a voyage'
 connexion: Connection
 bonjour: Hello
@@ -6,7 +6,7 @@ mon_compte: 'My account'
 charte_conducteur: 'Driver charter'
 contact: Contact
 contraintes_legales: 'Legal constraints'
-propositions_de_voyage: 'Travel proposals'
+propositions_de_voyage: 'My travels'
 personne: Driver
 date: Date
 date_depart: 'Starting date'
@@ -43,7 +43,7 @@ creation_personne: 'Add a user'
 creation_voiture: 'Add a car'
 administration: Administration
 previous: Previous
-traitement_en_cours: __traitement_en_cours
+traitement_en_cours: "Current processing"
 search: 'Search :'
 afficher: 'Display '
 elements: ' elements'
@@ -97,6 +97,7 @@ retard_estime: 'Estimated delay'
 retard_cause: 'Reason for delay'
 retard_embouteillage: 'Traffic jam'
 retard_retard: Delay
+retard_heure_prevu : "Estimated time of arrival"
 retard_prob_voiture: 'Car problem'
 retard_autre: Other
 retard_btn_validation: Save
@@ -112,3 +113,70 @@ immatriculation: 'Car registration'
 couleur: Color
 connectez_vous: 'Please login'
 date_debut: 'Starting date'
+liste_demprunt: 'List of loans'
+urlsite: 'http://voyageenvoiture.ga'
+ssagr: SSAGR
+adressessagr: 'Registered office : Route de Petit Gâteau 44100 Nantes '
+partie1: '1 Website presentation'
+point_1_contleg1: 'Pursuant to Article 6 of Law No. 2004-575 of 21 June 2004 on confidence in the digital economy, users of the site are informed that'
+point_1_contleg2: 'the identity of the various stakeholders involved in its implementation and follow-up : '
+point_1_contleg3: 'Owner : '
+point_1_contleg4: 'Creator : '
+point_1_contleg5: 'Publishing manager : '
+point_1_contleg6: ' - ssagr@gmail.com'
+point_1_contleg7: 'The publication manager is a legal person.'
+point_1_contleg8: 'Webmaster : Samantha GIRAUDEAU - giraudeau.samantha@gmail.com'
+point_1_contleg9: 'Host : OVH'
+point_1_contleg10: 'Adress :  Euronantes immeuble Nouvelle Vague, 44000 Nantes'
+partie2: '2 General conditions of use of the site and the services offered'
+2utilisation_site: "The use of the site"
+implication: "implies the full and complete acceptance of the general conditions of use described below. These terms of use may be modified or supplemented at any time, the users of the site "
+invitation: "are therefore invited to consult them on a regular basis."
+site_accessible: "This site is normally accessible to users at any time. However, an interruption for technical maintenance purposes may be decided by "
+communiquer: ", who will then endeavour to inform users in advance of the dates and times of the intervention."
+le_site: "The site"
+mis_a_jour: "is updated regularly by the webmaster. Similarly, the legal notices may be modified at any time: they are nevertheless binding on the user, who is invited to refer to them as often as possible in order to become aware of them."
+partie3: "3 Description of services provided"
+information: "is to provide information about all the company's activities."
+ssagr_efforce: "strives to provide on the site"
+informations_precises: "as accurate information as possible. However, it cannot be held responsible for omissions, inaccuracies and deficiencies in the update, whether caused by itself or by third party partners who provide it with this information."
+toutes_infos : "All the information on the site"
+titre_indicatif: "are given for information only, and are subject to change. In addition, the information on the site"
+exaustif: "are not exhaustive. They are given subject to changes that have been made since they were put online."
+partie4: "4 Contractual limitations on technical data"
+point4: "The website cannot be held liable for any material damage related to the use of the website. In addition, the user of the site undertakes to access the site using recent, virus-free material and with a state-of-the-art browser."
+partie5: "5 Intellectual property and counterfeiting"
+proprietaire: "owns the intellectual property rights or holds the user rights to all elements accessible on the site, including texts, images, graphics, logos, icons, sounds, software."
+reproduction: "Any reproduction, representation, modification, publication, adaptation of all or part of the elements of the site, whatever the means or process used, is prohibited, except with the prior written authorisation of : "
+exploitation: "Any unauthorized use of the site or any of the elements it contains will be considered as constituting an infringement and prosecuted in accordance with the provisions of articles L.335-2 and following of the Intellectual Property Code."
+partie6: "6 Limitations of responsibility"
+responsable: "shall not be liable for any direct or indirect damage caused to the user's equipment when accessing the site"
+resultant: ", and resulting either from the use of equipment that does not meet the specifications indicated in point 4, or from the appearance of a bug or incompatibility."
+non_reponsable: "shall also not be liable for indirect damages (such as loss of market or opportunity) resulting from the use of the site"
+espace_interactif: "Interactive spaces (possibility to ask questions in the contact area) are available to users."
+droit_supprimer: "reserves the right to remove, without prior notice, any content deposited in this space that contravenes the legislation applicable in France, in particular the provisions relating to data protection. If applicable,"
+mettre_cause: "also reserves the right to hold the user liable in civil and/or criminal proceedings, in particular in the event of a racist, insulting, defamatory or pornographic message, regardless of the medium used (text, photography, etc.)"
+partie7: "7 Management of personal data"
+france: "In France, personal data are protected by Act No. 78-87 of 6 January 1978, Act No. 2004-801 of 6 August 2004, Article L. 226-13 of the Criminal Code and the European Directive of 24 October 1995."
+occas: "On the occasion of the use of the site"
+infos_recup: ", can be collected: the URL of the links through which the user accessed the site "
+fournisseur: ", the user's access provider, the user's Internet Protocol (IP) address."
+collec_infos: "In any event, SSAGR only collects personal information relating to the user for the purpose of certain services offered by the site"
+util_fournit: "The user shall provide this information in full knowledge of the facts, in particular when he/she enters it himself/herself. The user of the site is then informed of the obligation or not to provide this information."
+conformement: "In accordance with the provisions of Articles 38 and following of Law 78-17 of 6 January 1978 on data processing, files and freedoms, any user has the right to access, rectify and oppose personal data concerning him, by making a written and signed request, accompanied by a copy of the identity document with signature of the holder of the document, specifying the address to which the reply must be sent."
+no_info_perso: "No personal information of the site user"
+publier: "is published without the user's knowledge, exchanged, transferred, assigned or sold on any medium whatsoever to third parties. Only the assumption of the repurchase of "
+le_droit: " and its rights would allow the transmission of such information to the potential purchaser, who would in turn be bound by the same obligation to keep and modify the data with regard to the user of the site"
+donnees_sensibles: "Sensitive user data (surname, first name, address, password, identifier) is encrypted before being registered in the database. Databases are protected by the provisions of the law of 1 July 1998 transposing Directive 96/9 of 11 March 1996 on the legal protection of databases."
+partie8: "8 Applicable law and jurisdiction"
+litige: "Any dispute related to the use of the site"
+droit_francais: "is subject to French law. The competent courts of Paris shall have exclusive jurisdiction."
+partie9: "9 The main laws concerned"
+loi1: "Law n° 78-87 of 6 January 1978, notably amended by law n° 2004-801 of 6 August 2004 relating to data processing, files and freedoms."
+loi2: "Law No. 2004-575 of 21 June 2004 on confidence in the digital economy."
+partie10: "10 Glossary of terms"
+utilisateur_def: "User: Internet user connecting, using the above-mentioned site."
+info_perso_def: "Personal information: \"information that allows, in any form whatsoever, directly or indirectly, the identification of the natural persons to whom it applies\" (article 4 of law n° 78-17 of 6 January 1978)"
+histo_mes_voyage: "History of my travels"
+choisir: Choose
+ajouter_lieu: Add a place

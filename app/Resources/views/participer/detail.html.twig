@@ -204,7 +204,7 @@
                         <form id="retard_form" action="{{ path("retard") }}" method="post" role="form">
                             <input type="hidden" name="idEmprunt" value="{{ emprunt.id }}">
                             <div class="form-group">
-                                <label for="">{{ "retard_heure_prevu" }}</label>
+                                <label for="">{{ "retard_heure_prevu"|trans }}</label>
 
                                 {% for data in emprunt.listeLieux %}
                                     {% if  data.depart != true %}

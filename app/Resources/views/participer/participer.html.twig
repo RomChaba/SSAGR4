@@ -2,9 +2,9 @@
 
 {% block body %}
 <div id="wrapper">
-    <div id="container">
+    <div id="container-fluid">
         <div id="welcome">
-            <h1>Participer à un voyage :</h1>
+            <h1>{{ "participer_voyage"|trans }} :</h1>
         </div>
 
         <div class="col-xs-12" style="padding: 1em">
@@ -12,7 +12,7 @@
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Lieu départ
+                        {{ "lieu_depart"|trans }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -28,7 +28,7 @@
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Lieu arrivé
+                        {{ "lieu_arrivee"|trans }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -36,7 +36,6 @@
                             <li onclick="search_arrive('{{ lieu.libelle }}');"><a href="#">{{ lieu.libelle }}</a>
                             </li>
                         {% endfor %}
-
                     </ul>
                 </div>
             </div>
@@ -44,7 +43,7 @@
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Date départ
+                        {{ "date_debut"|trans }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -65,7 +64,7 @@
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Conducteur
+                        {{ "conducteur"|trans }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

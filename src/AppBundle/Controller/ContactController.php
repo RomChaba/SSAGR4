@@ -74,7 +74,7 @@ class ContactController extends Controller
                 array_push($tableauErreur, $erreur6);
             } else {
                 $params = [
-                    'secret'    => '6Ldk25sUAAAAAD0K7X8SaMMqUfQ6CJ75b4rkIl09',
+                    'secret'    => '6Lc2sbkUAAAAAM1GQxEZnIwXHP2bg6L9W535vnNm',
                     'response'  => $_POST['g-recaptcha-response']
                 ];
 
