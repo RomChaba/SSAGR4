@@ -40,9 +40,13 @@ class ConnexionController extends Controller
             $perso = $perso->setMail($_POST['username']);
 
             $repoPersonne = $this->getDoctrine()->getRepository("AppBundle:Personne");
-            $pers_co = $repoPersonne->findOneBy(['mail'=>$perso->getMailNoDecrypt(), 'motDePasse'=>$_POST['password']]);
+            /** @var Personne $pers_co */
+            $pers_co = $repoPersonne->findOneBy(['mail'=>$perso->getMailNoDecrypt()]);
 
-            if($pers_co != null) {
+//            dump($pers_co->_ENCRYPTE_DATA($pers_co->getMotDePasse()));
+//            die();
+
+            if($pers_co->testPassword($_POST['password'])) {
                 $request->getSession()->set('userConnect', $pers_co);
                 return $this->redirectToRoute('homepage');
             } else {

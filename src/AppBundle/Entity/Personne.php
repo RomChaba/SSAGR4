@@ -255,7 +255,7 @@ class Personne
      */
     public function setMotDePasse($motDePasse)
     {
-        $this->motDePasse = $motDePasse;
+        $this->motDePasse = $this->_ENCRYPTE_DATA($motDePasse);
 
         return $this;
     }
@@ -505,7 +505,7 @@ class Personne
     }
 
 
-    private function _ENCRYPTE_DATA($string)
+    public function _ENCRYPTE_DATA($string)
     {
         $encrypt_method = "AES-256-CBC";
         $secret_key = 'SSAGR4';
@@ -538,6 +538,15 @@ class Personne
 
 
         return openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+
+    public function testPassword($pwd)
+    {
+        if ($this->motDePasse == $this->_ENCRYPTE_DATA($pwd)) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
