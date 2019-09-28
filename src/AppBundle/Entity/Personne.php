@@ -415,7 +415,7 @@ class Personne
      */
     public function getRue()
     {
-        return $this->rue;
+        return $this->_DECRYPTE_DATA($this->rue);
     }
 
     /**
@@ -423,7 +423,7 @@ class Personne
      */
     public function setRue($rue)
     {
-        $this->rue = $rue;
+        $this->rue = $this->_ENCRYPTE_DATA($rue);
     }
 
     /**
@@ -431,23 +431,29 @@ class Personne
      */
     public function getCp()
     {
-        return $this->cp;
+        return $this->_DECRYPTE_DATA($this->cp);
     }
 
     /**
      * @param string $cp
      */
-    public function setCp($cp)
+    public function setCp($cp,$hash = false)
     {
-        $this->cp = $cp;
+        if (!$hash) {
+            $this->cp = $cp;
+        } else {
+            $this->cp = $this->_ENCRYPTE_DATA($cp);
+        }
     }
+
+
 
     /**
      * @return string
      */
     public function getVille()
     {
-        return $this->ville;
+        return $this->_DECRYPTE_DATA($this->ville);
     }
 
     /**
@@ -455,7 +461,7 @@ class Personne
      */
     public function setVille($ville)
     {
-        $this->ville = $ville;
+        $this->ville = $this->_ENCRYPTE_DATA($ville);
     }
 
     /**

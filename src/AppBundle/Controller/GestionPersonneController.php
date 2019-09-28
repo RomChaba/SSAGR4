@@ -57,7 +57,7 @@ class GestionPersonneController extends Controller
                 {
                     $personne1->setMotDePasse($personne1->getNouveauMotDePasse());
                 }
-
+                $personne1->setCp($personne1->getCp(),true);
                 $em->persist($personne1);
                 $em->flush();
 
