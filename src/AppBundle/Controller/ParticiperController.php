@@ -236,8 +236,10 @@ class ParticiperController extends Controller
         $sujet = 'Clé rendue'; // Titre de l'email
         $contenu = '<html><head><title>Clé</title></head><body>';
         $contenu .= '<p>Bonjour, le voyage N°' . $emprunt->getId() . ' rend les clés.</p>';
-        $contenu .= '<p><strong>Arrivé</strong>: ' . $request->request->get("heureArrive") . '</p>';
+        $contenu .= '<p><strong>Arrivée</strong>: ' . $request->request->get("heureArrive") . '</p>';
         $contenu .= '<p><strong>Message</strong>: ' . $request->request->get("messageArrive") . '</p>';
+        $contenu .= '<p></p>';
+        $contenu .= '<p><i>Mail Automatique merci de ne pas répondre a celui-ci.</i></p>';
         $contenu .= '</body></html>'; // Contenu du message de l'email
 
         // Pour envoyer un email HTML, l'en-tête Content-type doit être défini

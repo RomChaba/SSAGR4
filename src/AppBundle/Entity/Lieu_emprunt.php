@@ -31,7 +31,7 @@ class Lieu_emprunt
     /**
      * @var Lieu
      *
-     * @ORM\ManyToOne(targetEntity="Lieu", inversedBy="listeEmprunt",cascade={"remove","persist"})
+     * @ORM\ManyToOne(targetEntity="Lieu", inversedBy="listeEmprunt",cascade={"persist"})
      */
     private $lieuId;
 
