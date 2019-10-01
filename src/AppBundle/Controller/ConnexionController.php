@@ -27,7 +27,6 @@ class ConnexionController extends Controller
      */
     public function ConnexionAction(Request $request)
     {
-
         $pers_co = $request->getSession()->get('userConnect');
 
         if ($pers_co != null) {
@@ -43,18 +42,15 @@ class ConnexionController extends Controller
             /** @var Personne $pers_co */
             $pers_co = $repoPersonne->findOneBy(['mail'=>$perso->getMailNoDecrypt()]);
 
-
             if ($pers_co == null) {
-                return $this->render('connexion/connexion.html.twig');
+                return $this->redirectToRoute('connexion');
             }
-
-//            dump($pers_co->_ENCRYPTE_DATA($pers_co->getMotDePasse()));
 
             if($pers_co->testPassword($_POST['password'])) {
                 $request->getSession()->set('userConnect', $pers_co);
                 return $this->redirectToRoute('homepage');
             } else {
-                return $this->render('connexion/connexion.html.twig');
+                return $this->redirectToRoute('connexion');
             }
         }
 

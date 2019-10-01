@@ -185,11 +185,12 @@ class DemandeController extends Controller
         if ($request->get("aller_ret") == "on") {
         //  Recupertation des dates 1 pour le retour
 
-
+            $date_tempo = explode("/", $request->get("date_depart_2"));
             $lieu_retour_dep = new \DateTime();
             $lieu_retour_dep->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
             $lieu_retour_dep->setTime($request->get("h_depart_2"), $request->get("min_depart_2"));
         // Recupertation des dates 2 pour le retour
+            $date_tempo = explode("/", $request->get("date_arrive_2"));
             $lieu_retour_arr = new \DateTime();
             $lieu_retour_arr->setDate($date_tempo[2], $date_tempo[1], $date_tempo[0]);
             $lieu_retour_arr->setTime($request->get("h_arrive_2"), $request->get("min_arrive_2"));
