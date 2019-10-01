@@ -6,6 +6,7 @@ use AppBundle\Entity\Emprunt;
 use AppBundle\Entity\Emprunt_Personne;
 use AppBundle\Entity\Lieu_emprunt;
 use AppBundle\Entity\Personne;
+use AppBundle\Repository\EmpruntRepository;
 use AppBundle\Repository\PersonneRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -136,13 +137,18 @@ class ParticiperController extends Controller
 //        retard_retard
 //        retard_cause
 
-
+        $status = 200;
+        $error = null;
         //      ****** Recuperation de l'utilisateur connecté ******
         $repoEmprunt = $this->getDoctrine()->getRepository("AppBundle:Emprunt");
 
-        /** @var Personne $pers_co */
+        /** @var Emprunt $emprunt */
         $emprunt = $repoEmprunt->findOneById($request->get("idEmprunt"));
 
+        // Variables concernant l'email
+        $repoParametre = $this->getDoctrine()->getRepository("AppBundle:Parametre");
+        $destinataire = $repoParametre->findOneBy(['cle' => 'mail_contact']);
+        $destinataire = $destinataire->getValeur(); // Adresse email de l'administrateur
 
         $retour = array(
             "status" => 200,
@@ -150,6 +156,69 @@ class ParticiperController extends Controller
             "data" => $request->request->all(),
             "error" => false,
         );
+
+        $tps_ret = $request->request->get("retard_retard");
+        $cause_ret = $request->request->get("retard_cause");
+
+        if ($tps_ret > 5){
+            $tps_ret = $tps_ret.'min';
+        }else{
+            $tps_ret = $tps_ret.'h';
+        }
+
+
+        switch ($cause_ret) {
+            case 1:
+                $cause_ret_mess = 'Embouteillage';
+                break;
+            case 2:
+                $cause_ret_mess = 'Retard';
+                break;
+            case 3:
+                $cause_ret_mess = 'Problème sur la voiture';
+                break;
+            case 4:
+                $cause_ret_mess = 'Autre';
+                break;
+            default:
+                $cause_ret_mess = 'Erreur dans le choix de la cause du retard';
+                break;
+        }
+
+
+        $sujet = 'Retard emprunt'; // Titre de l'email
+        $contenu = '<html><head><title>Retard</title></head><body>';
+        $contenu .= '<p>Bonjour, le voyage N°' . $emprunt->getId() . ' annonce un retard.</p>';
+        $contenu .= '<p><strong>Heure d\'arrivée prévue</strong>: ' . $request->request->get("retard_date_prevu") . '</p>';
+        $contenu .= '<p><strong>Retard estimé</strong>: ' . $tps_ret . '</p>';
+        $contenu .= '<p><strong>Cause du retard</strong>: ' . $cause_ret_mess . '</p>';
+        $contenu .= '<p></p>';
+        $contenu .= '<p><i>Mail Automatique merci de ne pas répondre a celui-ci.</i></p>';
+        $contenu .= '</body></html>'; // Contenu du message de l'email
+
+        // Pour envoyer un email HTML, l'en-tête Content-type doit être défini
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'From: retard@voyageenvoiture.ga' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // TODO tester une fois le site en ligne
+        // Fonction principale qui envoi l'email
+
+
+        if (@mail($destinataire, $sujet, $contenu, $headers)){
+            $ret_mail ="Message bien envoyé.";
+        }else{
+            $status = 304;
+            $ret_mail =false;
+            $error ="Erreur envoi du mail";
+        }
+
+        $mess = [
+            "status"=>$status,
+            "msg"=>$ret_mail,
+            "error"=>$error
+        ];
+
 
 
         return JsonResponse::create($retour);
@@ -244,6 +313,7 @@ class ParticiperController extends Controller
 
         // Pour envoyer un email HTML, l'en-tête Content-type doit être défini
         $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'From: rendrecle@voyageenvoiture.ga' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
         // TODO tester une fois le site en ligne

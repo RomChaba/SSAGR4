@@ -218,7 +218,7 @@
                             <div class="form-group">
                                 <label for="inputID" class="control-label">{{ "retard_estime"|trans }}*</label>
                                 <div>
-                                    <select name="retard_retard" id="inputID" class="form-control" required>
+                                    <select name="retard_retard" id="retard_retard" class="form-control" required>
                                         <option value="15">15 min</option>
                                         <option value="30">30 min</option>
                                         <option value="45">45 min</option>
@@ -234,7 +234,7 @@
                             <div class="form-group">
                                 <label for="inputID" class="control-label">{{ "retard_cause"|trans }}*</label>
                                 <div>
-                                    <select name="retard_cause" id="inputID" class="form-control" required>
+                                    <select name="retard_cause" id="retard_cause" class="form-control" required>
                                         <option value="1">{{ "retard_embouteillage"|trans }}</option>
                                         <option value="2">{{ "retard_retard"|trans }}</option>
                                         <option value="3">{{ "retard_prob_voiture"|trans }}</option>
@@ -340,7 +340,7 @@
                 data: form.serialize(),
                 success: function (data) {
                     if (data.status == 200 ){
-                        $("#rendre_cle_ok").val(data.msg);
+                        $("#rendre_cle_ok").text(data.msg);
                         $("#rendre_cle_ok").show();
                     }else{
                         console.log(data.error);
