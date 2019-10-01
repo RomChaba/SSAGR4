@@ -34,18 +34,18 @@ class ContactController extends Controller
             // Code PHP pour traiter l'envoi de l'email
 
             $nombreErreur = 0; // Variable qui compte le nombre d'erreur
-            $erreur = "Désolé, il y a eu des erreurs. Veuillez vérifier vos données."; // Variable du(des) message(s) d'erreur(s)
+            $erreur = "Oups, il y a eu des erreurs. Veuillez examiner vos informations."; // Variable du(des) message(s) d'erreur(s)
             $tableauErreur = array();
 
             // Définit toutes les erreurs possibles
             if (!isset($_POST['email'])) { // Si la variable "email" du formulaire n'existe pas (il y a un problème)
                 $nombreErreur++; // On incrémente la variable qui compte les erreurs
-                $erreur1 = 'Il y a un problème avec la variable "email".';
+                $erreur1 = 'Quelque chose ne va pas avec la variable "email".';
                 array_push($tableauErreur, $erreur1);
             } else { // Sinon, cela signifie que la variable existe (c'est normal)
                 if (empty($_POST['email'])) { // Si la variable est vide
                     $nombreErreur++; // On incrémente la variable qui compte les erreurs
-                    $erreur2 = 'Vous avez oublié de donner votre email.';
+                    $erreur2 = 'Oubli de mail...';
                     array_push($tableauErreur, $erreur2);
                 } else {
                     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
@@ -58,7 +58,7 @@ class ContactController extends Controller
 
             if (!isset($_POST['message'])) {
                 $nombreErreur++;
-                $erreur4 = '<p>Il y a un problème avec la variable "message".</p>';
+                $erreur4 = '<p>Quelque chose ne va pas avec la variable "message".</p>';
             } else {
                 if (empty($_POST['message'])) {
                     $nombreErreur++;
@@ -70,7 +70,7 @@ class ContactController extends Controller
             /** TEST */
             if (!isset($_POST['g-recaptcha-response'])) {
                 $nombreErreur++;
-                $erreur6 = 'Il y a un problème avec la variable "captcha".';
+                $erreur6 = 'Quelque chose ne va pas avec la variable "captcha".';
                 array_push($tableauErreur, $erreur6);
             } else {
                 $params = [
@@ -133,7 +133,7 @@ class ContactController extends Controller
                 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
                 // TODO tester une fois le site en ligne
-                // mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
+                mail($destinataire, $sujet, $contenu, $headers); // Fonction principale qui envoi l'email
 
                 return $this->render('Contact/contact.html.twig', array('messageOk' => 'message_envoye')); //On envoie à la vue... une vue générée par le constructeur de formulaire.
             } else {
