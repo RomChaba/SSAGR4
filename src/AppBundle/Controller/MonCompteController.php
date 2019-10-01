@@ -28,6 +28,15 @@ class MonCompteController extends Controller
         //On crée le formulaire
         $this->createFormulaire($pers_co);
 
+        $listeEmpruntPersonne = $em->getRepository("AppBundle:Emprunt_Personne")->findBy(['personneId'=>$pers_co->getId()]);
+//        dump($listeEmpruntPersonne);
+
+        $listeEmprunt = null;
+        /** @var Emprunt_Personne $item  */
+        foreach ($listeEmpruntPersonne as $item) {
+            $listeEmprunt[] = $item->getEmpruntId();
+        }
+
 
         $this->leFormulaire->handleRequest($request);
         // Si la requête est en POST
@@ -59,21 +68,15 @@ class MonCompteController extends Controller
                 return $this->render(
                     'moncompte/moncompte.html.twig',
                     array(
-                        'formulairePersonne' => $this->leFormulaire->createView()
+                        'formulairePersonne' => $this->leFormulaire->createView(),
+                        'listeEmprunt' => $listeEmprunt,
                     )
                 );
             }
         }
 
 
-        $listeEmpruntPersonne = $em->getRepository("AppBundle:Emprunt_Personne")->findBy(['personneId'=>$pers_co->getId()]);
-//        dump($listeEmpruntPersonne);
 
-        $listeEmprunt = null;
-        /** @var Emprunt_Personne $item  */
-        foreach ($listeEmpruntPersonne as $item) {
-            $listeEmprunt[] = $item->getEmpruntId();
-        }
 
 //        dump($listeEmprunt);
 

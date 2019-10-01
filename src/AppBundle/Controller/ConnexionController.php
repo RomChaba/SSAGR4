@@ -43,8 +43,12 @@ class ConnexionController extends Controller
             /** @var Personne $pers_co */
             $pers_co = $repoPersonne->findOneBy(['mail'=>$perso->getMailNoDecrypt()]);
 
+
+            if ($pers_co == null) {
+                return $this->render('connexion/connexion.html.twig');
+            }
+
 //            dump($pers_co->_ENCRYPTE_DATA($pers_co->getMotDePasse()));
-//            die();
 
             if($pers_co->testPassword($_POST['password'])) {
                 $request->getSession()->set('userConnect', $pers_co);
